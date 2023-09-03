@@ -16,3 +16,5 @@ steps:
 # This will make sure the image gets stored in the container registry
 images:
   - 'gcr.io/$PROJECT_ID/arcs-front'
+
+logsBucket: "gs://arcs-front-logs"
