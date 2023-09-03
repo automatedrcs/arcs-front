@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     // Replace this URL with your Cloud Run back-end service URL
-    fetch("https://arcs-back-service-ctl3t7ldeq-uc.a.run.app")
+    fetch("https://arcs-back-service-ctl3t7ldeq-uc.a.run.app/api/data")
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
