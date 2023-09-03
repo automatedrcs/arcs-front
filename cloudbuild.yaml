@@ -1,48 +1,18 @@
-
-Certainly! Setting up cloudbuild.yaml and Dockerfile for a React app requires defining how you will build the React app and then serve it, often with a simple HTTP server like Nginx.
-
-Here's a guide to set them up:
-
-1. Dockerfile
-Create a Dockerfile in the root of your arcs-front project:
-
-Dockerfile
-Copy code
-# Stage 1: Build the React application
-FROM node:14 AS build
-
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . ./
-RUN npm run build
-
-# Stage 2: Serve the React application from Nginx
-FROM nginx:alpine
-
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-In this Dockerfile:
-
-The first stage installs the node packages and builds the React app.
-The second stage serves the built app using Nginx.
-2. cloudbuild.yaml
-Here's a basic cloudbuild.yaml file to build and push the Docker image:
-
-yaml
-Copy code
 steps:
   # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/arcs-front', '.']
+    args: 
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/arcs-front'
+      - '.'
 
   # Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/arcs-front']
+    args: 
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/arcs-front'
 
 # This will make sure the image gets stored in the container registry
 images:
   - 'gcr.io/$PROJECT_ID/arcs-front'
-logsBucket: "gs://arcs-front-logs"
