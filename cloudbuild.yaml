@@ -13,7 +13,10 @@ steps:
       - 'push'
       - 'gcr.io/$PROJECT_ID/arcs-front'
 
-# This will make sure the image gets stored in the container registry
+  # Deploy the image to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['run', 'deploy', 'arcs-front-service', '--image', 'gcr.io/$PROJECT_ID/arcs-front', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+
 images:
   - 'gcr.io/$PROJECT_ID/arcs-front'
 
