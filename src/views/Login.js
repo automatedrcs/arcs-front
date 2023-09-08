@@ -47,4 +47,25 @@ function Login() {
     );
 }
 
+/* 
+When the user logs in successfully, save a JWT token either in an httpOnly cookie 
+(more secure against XSS attacks) 
+or in the local storage 
+(less secure, but easier to manage).
+
+Example using local storage
+
+    localStorage.setItem("token", YOUR_JWT_TOKEN);
+
+For any request to your backend where authentication is required, attach the token:
+
+    const token = localStorage.getItem("token");
+
+    fetch("YOUR_BACKEND_API_ENDPOINT", {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+*/
 export default Login;
