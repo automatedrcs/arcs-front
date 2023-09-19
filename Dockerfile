@@ -1,4 +1,4 @@
-# Stage 1: Build the Remix application
+# Stage 1: Build the React Remix application
 FROM node:18 AS build
 
 WORKDIR /app
@@ -7,16 +7,17 @@ RUN npm install
 COPY . ./
 RUN npm run build
 
-# Stage 2: Serve the Remix application with Nginx
-FROM nginx:alpine
+# Stage 2: Serve the Remix application statically
+FROM node:18
+
+WORKDIR /app
+
+# Install serve
+RUN npm install -g serve
 
 # Copy the built assets from the build stage
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/build ./build
 
-# Define the port
 EXPOSE 8080
 
-# Use a basic nginx.conf 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["serve", "-s", "build", "-l", "8080"]
