@@ -1,21 +1,26 @@
----
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const backendUrl = import.meta.env.API_URL;
+const apiUrl = import.meta.env.API_URL;
 
-const fetchData = async () => {
+interface DataResponse {
+    message: string;
+    data: {
+        example_key: string;
+    };
+}
+
+const fetchData = async (): Promise<DataResponse | null> => {
     try {
-        const response = await fetch(`${backendUrl}/test/api/data`);
-        return response.json();
+        const response = await fetch(`${apiUrl}/test/api/data`);
+        return response.json() as unknown as DataResponse;
     } catch (error) {
         console.error('Failed to fetch data:', error);
         return null;
     }
 };
 
-
-const TestData = () => {
-    const [data, setData] = useState(null);
+const TestData: React.FC = () => {
+    const [data, setData] = useState<DataResponse | null>(null);
 
     useEffect(() => {
         fetchData().then(fetchedData => {
