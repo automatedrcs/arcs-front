@@ -20,7 +20,7 @@ steps:
   - '--platform'
   - 'managed'
   - '--vpc-connector'
-  - 'arcs-vpc'
+  - 'vpc-connector'
   - '--allow-unauthenticated'
 
 images:
