@@ -1,0 +1,40 @@
+---
+import { useState, useEffect } from 'react';
+
+const fetchData = async () => {
+    try {
+        const response = await fetch('https://arcs-back-service-ctl3t7ldeq-uc.a.run.app/test/api/data');
+        return response.json();
+    } catch (error) {
+        console.error('Failed to fetch data:', error);
+        return null;
+    }
+};
+
+const TestData = () => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetchData().then(fetchedData => {
+            if (fetchedData) {
+                setData(fetchedData);
+            }
+        });
+    }, []);
+
+    return (
+        <div>
+            <h2>Test Data from FastAPI</h2>
+            {data ? (
+                <div>
+                    <p>{data.message}</p>
+                    <p>Example Key: {data.data.example_key}</p>
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
+    );
+};
+
+export default TestData;
