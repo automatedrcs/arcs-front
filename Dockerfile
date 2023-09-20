@@ -1,26 +1,20 @@
-# Stage 1: Build the React Remix application
-FROM node:18 AS build
+# Use the official Node.js runtime as the base image
+FROM node:18-slim
 
-WORKDIR /app
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
-COPY . ./
+
+# Copy local code to the container
+COPY . .
+
+# Build the Next.js app
 RUN npm run build
 
-# Stage 2: Serve the Remix application as a Node.js app
-FROM node:18
-
-WORKDIR /app
-
-# Copy package.json and the built assets from the build stage
-COPY package*.json ./
-COPY --from=build /app/build ./build
-
-# You can install production-only dependencies here
-RUN npm ci --only=production
-
-# Expose the port your app runs on
-EXPOSE 3000
-
-# Start the Remix server
-CMD ["npm", "start"]
+# Run the application on port 8080
+CMD ["npm", "start", "-p", "8080"]
