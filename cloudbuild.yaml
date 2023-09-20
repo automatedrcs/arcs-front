@@ -25,3 +25,5 @@ steps:
 
 images:
 - 'gcr.io/$PROJECT_ID/arcs-front'
+
+logsBucket: "gs://arcs-front-logs"
