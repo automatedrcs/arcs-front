@@ -10,8 +10,6 @@ export default function DataPage() {
         const apiUrl = process.env.API_URL;
         const response = await fetch(`${apiUrl}/test/api/data`);
         
-        console.log(await response.text());
-        
         const result = await response.json();
 
         if (response.ok) {
