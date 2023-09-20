@@ -12,7 +12,7 @@ steps:
   args:
   - 'run'
   - 'deploy'
-  - 'arcs-front'
+  - 'arcs-front-service'
   - '--image'
   - 'gcr.io/$PROJECT_ID/arcs-front'
   - '--region'
