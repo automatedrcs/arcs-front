@@ -20,6 +20,6 @@ COPY --from=build-stage /usr/src/app/public /usr/share/nginx/html
 # Copy the nginx configuration file (if you have any custom settings)
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 8080
+EXPOSE ${PORT}
 
 CMD ["nginx", "-g", "daemon off;"]
