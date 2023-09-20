@@ -17,4 +17,4 @@ COPY . .
 RUN npm run build
 
 # Run the application on port 8080
-CMD ["npm", "start", "-p", "8080"]
+CMD ["npm", "start"]
