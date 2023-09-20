@@ -10,6 +10,8 @@ export default function DataPage() {
       try {
         // Change the fetch URL to match your FastAPI route
         const response = await fetch('/test/api/data');
+        console.log(await response.text());
+        
         const result = await response.json();
 
         if (response.ok) {
