@@ -1,4 +1,3 @@
-// pages/data.js
 import { useEffect, useState } from 'react';
 
 export default function DataPage() {
@@ -8,8 +7,9 @@ export default function DataPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // Change the fetch URL to match your FastAPI route
-        const response = await fetch('/test/api/data');
+        const apiUrl = process.env.API_URL;
+        const response = await fetch(`${apiUrl}/test/api/data`);
+        
         console.log(await response.text());
         
         const result = await response.json();
@@ -35,4 +35,3 @@ export default function DataPage() {
     </div>
   );
 }
-
