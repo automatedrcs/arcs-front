@@ -30,7 +30,7 @@ const TestData: React.FC = () => {
         });
     }, []);
 
-    return ("
+    return (
         <div>
             <h2>Test Data from FastAPI</h2>
             {data ? (
@@ -42,7 +42,7 @@ const TestData: React.FC = () => {
                 <p>Loading...</p>
             )}
         </div>
-    ");
+    );
 };
 
 export default TestData;
