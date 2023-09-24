@@ -3,6 +3,8 @@ FROM node:18-slim AS build-stage
 
 WORKDIR /usr/src/app
 
+COPY .env ./
+
 COPY package*.json ./
 
 RUN npm install

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const apiUrl = import.meta.env.API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface DataResponse {
     message: string;
@@ -11,6 +11,7 @@ interface DataResponse {
 
 const fetchData = async (): Promise<DataResponse | null> => {
     try {
+        console.log("API URL:", apiUrl);
         const response = await fetch(`${apiUrl}/test/api/data`);
         return response.json() as unknown as DataResponse;
     } catch (error) {
@@ -23,6 +24,7 @@ const TestData: React.FC = () => {
     const [data, setData] = useState<DataResponse | null>(null);
 
     useEffect(() => {
+        console.log("Fetching data...");
         fetchData().then(fetchedData => {
             if (fetchedData) {
                 setData(fetchedData);
@@ -41,6 +43,7 @@ const TestData: React.FC = () => {
             ) : (
                 <p>Loading...</p>
             )}
+            <button onClick={() => fetchData().then(d => setData(d))}>Fetch Data</button>
         </div>
     );
 };
