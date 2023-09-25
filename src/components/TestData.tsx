@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = process.env.VITE_API_URL;
 
 interface DataResponse {
     message: string;
