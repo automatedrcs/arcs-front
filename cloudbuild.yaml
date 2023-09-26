@@ -18,10 +18,6 @@ steps:
   - '--region'
   - 'us-central1' 
   - '--platform'
-  - 'managed'
-  - '--vpc-connector'
-  - 'vpc-connector'
-  - '--allow-unauthenticated'
 
 images:
 - 'gcr.io/$PROJECT_ID/arcs-front'

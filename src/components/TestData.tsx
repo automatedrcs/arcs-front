@@ -12,7 +12,7 @@ interface DataResponse {
 const fetchData = async (): Promise<DataResponse | null> => {
     try {
         console.log("API URL:", apiUrl);
-        const response = await fetch(`${apiUrl}/test/api/data`);
+        const response = await fetch(`${apiUrl}/test/api/database`);
         return response.json() as unknown as DataResponse;
     } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -33,17 +33,17 @@ const TestData: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Test Data from FastAPI</h2>
+        <div className="test-container">
+            <h2>Database Connection Test</h2>
             {data ? (
-                <div>
+                <div className="data-display">
                     <p>{data.message}</p>
                     <p>Example Key: {data.data.example_key}</p>
                 </div>
             ) : (
                 <p>Loading...</p>
             )}
-            <button onClick={() => fetchData().then(d => setData(d))}>Fetch Data</button>
+            <button onClick={() => fetchData().then(d => setData(d))} className="fetch-button">Test Connection</button>
         </div>
     );
 };
