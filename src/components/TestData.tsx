@@ -12,7 +12,7 @@ interface DataResponse {
 const fetchData = async (): Promise<DataResponse | null> => {
     try {
         console.log("API URL:", apiUrl);
-        const response = await fetch(`${apiUrl}/test/api/database`);
+        const response = await fetch(`https://arcs-back-service-ctl3t7ldeq-uc.a.run.app/test/api/database`);
         return response.json() as unknown as DataResponse;
     } catch (error) {
         console.error('Failed to fetch data:', error);
