@@ -1,28 +1,24 @@
-# Build output
-/dist
-
-# Generated types
-/.astro
-
-# Dependencies
-/node_modules
-
 # Logs
-*debug.log*
-*error.log*
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# OS-specific files
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-*.swp      # Vim swap files
-*.swo      # Vim swap files
-*~         # Temporary files
-
-# Editor and IDE files
-.vscode/
-.idea/
-*.iml
-
-# Environment files
-.env
-.env.local
-.env.*.local
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
