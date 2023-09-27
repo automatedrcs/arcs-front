@@ -1,15 +1,23 @@
-FROM node:18
+# Build stage
+FROM node:18-slim AS build-stage
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 
-RUN npm ci
-COPY . ./
+RUN npm install
 
+COPY . .
+
+# Build the Vite+React app
 RUN npm run build
 
-FROM nginx:alpine
+# Production stage with Nginx
+FROM nginx:alpine AS production-stage
 
-COPY --from=0 /app/dist /usr/share/nginx/html
+# Copy the built app
+COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]
