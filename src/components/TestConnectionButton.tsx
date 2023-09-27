@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { apiUrl } from '../config';
 import { JSONObject } from '../types/jsonTypes';
-import { useApiUrl } from '../contexts/ApiUrlContext';
 
 // Define a type for your API response
 interface ApiResponse {
@@ -12,12 +12,10 @@ interface ApiResponse {
 }
 
 function TestConnectionButton() {
-    const apiUrl = useApiUrl();
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
+    console.log("API URL: ", apiUrl);
     const handleButtonClick = async () => {
-        console.log("API URL: ", apiUrl);
-        if (!apiUrl) return;
         try {
             const response = await fetch(apiUrl + "/test/api/connection-test");
             const data: ApiResponse = await response.json();
