@@ -17,6 +17,7 @@ function TestConnectionButton() {
 
     const handleButtonClick = async () => {
         try {
+            console.log("API URL: ", apiUrl);
             const response = await fetch(apiUrl + "/test/api/connection-test");
             const data: ApiResponse = await response.json();
             setApiResponse(data);
