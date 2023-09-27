@@ -16,7 +16,7 @@ export const ApiUrlProvider: React.FC<ApiUrlProviderProps> = ({ children }) => {
 
   useEffect(() => {
     async function fetchSecret() {
-      const url = await getSecret("API_URL_SECRET");
+      const url = await getSecret("API_URL");
       setApiUrl(url);
     }
     
