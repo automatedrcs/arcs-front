@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 
 import './App.css'
-import TestConnectionButton from './components/TestConnectionButton';
-
-
 function App() {
   const [count, setCount] = useState(0)
 
