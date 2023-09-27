@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const apiUrl = process.env.VITE_API_URL;
+const apiUrl = "https://arcs-back-service-ctl3t7ldeq-uc.a.run.app"//process.env.VITE_API_URL;
 
 interface DataResponse {
     message: string;
