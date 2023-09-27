@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { JSONObject } from '../types/jsonTypes';
-
-const apiUrl = import.meta.env.VITE_API_URL;
+import { useApiUrl } from '../contexts/ApiUrlContext';
 
 // Define a type for your API response
 interface ApiResponse {
@@ -13,11 +12,13 @@ interface ApiResponse {
 }
 
 function TestConnectionButton() {
+    const apiUrl = useApiUrl();
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
     const handleButtonClick = async () => {
+        console.log("API URL: ", apiUrl);
+        if (!apiUrl) return;
         try {
-            console.log("API URL: ", apiUrl);
             const response = await fetch(apiUrl + "/test/api/connection-test");
             const data: ApiResponse = await response.json();
             setApiResponse(data);
