@@ -19,6 +19,7 @@ function TestConnectionButton() {
         try {
             const response = await fetch(apiUrl + "/test/api/connection-test");
             const data: ApiResponse = await response.json();
+            console.log("data, ", data);
             setApiResponse(data);
         } catch (error) {
             console.error("Error fetching the API:", error);
