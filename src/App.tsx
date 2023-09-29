@@ -1,29 +1,28 @@
-import { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/Login/LoginPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
+import Navbar from './components/Navbar/Navbar';
+import TestConnectionButton from './components/Test/TestConnectionButton';
+import './App.css';
 
-import './App.css'
-import TestConnectionButton from './components/TestConnectionButton';
-
-
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
   return (
     <div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Router>
+        <div>
+          <Navbar /> {/* <-- Use the Navbar component here */}
+
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            {/* ... other routes ... */}
+          </Routes>
+        </div>
+      </Router>
+      
       <TestConnectionButton />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
