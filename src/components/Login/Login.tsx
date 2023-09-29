@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import "./Login.css";
 
 interface LoginProps {
   onLogin: (token: string) => void;
