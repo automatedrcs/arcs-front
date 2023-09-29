@@ -14,7 +14,6 @@ interface ApiResponse {
 function TestConnectionButton() {
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
-    console.log("API URL: ", apiUrl);
     const handleButtonClick = async () => {
         try {
             const response = await fetch(apiUrl + "/test/api/connection-test");

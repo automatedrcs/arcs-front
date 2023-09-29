@@ -1,0 +1,24 @@
+/* Navbar.css */
+
+/* Navbar background color */
+.navbar {
+    background-color: #c8e5f1;
+    padding: 1rem 2rem; /* Padding to give some space around the navbar */
+    display: flex;      /* To line up items horizontally */
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Vertically align items in the middle */
+}
+
+/* Link/Button styles */
+.navbar a {
+    color: #426885;      /* Color for the links */
+    text-decoration: none; /* Remove underline */
+    padding: 0.5rem 1rem;  /* Some padding around links to make them look like buttons */
+    border-radius: 4px;   /* Rounded corners for the button look */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.navbar a:hover {
+    background-color: #426885; /* Link color for hover background */
+    color: #c8e5f1;            /* Navbar background color for hover text */
+}
