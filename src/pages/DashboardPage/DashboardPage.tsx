@@ -5,7 +5,7 @@ import './DashboardPage.css';
 
 const DashboardPage: React.FC = () => {
   return (
-    <div className="dashboard">
+    <div className="dashboard-page">
       <h1>Welcome to the Dashboard</h1>
       <p>This is your dashboard, from here you can manage your application's main features.</p>
       

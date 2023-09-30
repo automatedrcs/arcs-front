@@ -22,6 +22,6 @@
 
     "esModuleInterop": true
   },
-  "include": ["src", "src/pages/Dashboard/Dashboard/Dashboard.tsx"],
+  "include": ["src", "src/pages/DashboardPage/Dashboard/Dashboard.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
