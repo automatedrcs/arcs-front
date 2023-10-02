@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
 import "./Login.css";
-import { apiUrl } from '../../config';
+import { apiUrl } from '../config';
 
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../contexts/UserContext';
 
 interface LoginProps {
   onLogin: (token: string) => void;

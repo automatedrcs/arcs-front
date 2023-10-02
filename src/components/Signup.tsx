@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Signup.css";
-import { apiUrl } from '../../config';
+import { apiUrl } from '../config';
 
 interface SignupProps {
   onSignup: () => void;
