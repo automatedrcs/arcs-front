@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Login from '../components/Login/';
-import Signup from '../components/Signup/';
+import Login from '../components/Login';
+import Signup from '../components/Signup';
 import './EntryPage.css';
 
 const EntryPage: React.FC = () => {
