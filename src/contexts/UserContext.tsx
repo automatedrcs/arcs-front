@@ -3,7 +3,10 @@ import { createContext, ReactNode, useState, useEffect } from 'react';
 interface UserContextProps {
     userUUID: string | null;
     organizationId: string | null;
+    calendarData: GoogleCalendarData | null;
+    accessToken: string; // Add this
     setUserData: (userUUID: string, organizationId: string) => void;
+    setCalendarData: (data: GoogleCalendarData) => void;
     logout: () => void;
 }
 
@@ -16,14 +19,16 @@ interface UserProviderProps {
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [userUUID, setUserUUID] = useState<string | null>(null);
     const [organizationId, setOrganizationId] = useState<string | null>(null);
+    const [calendarData, setCalendarData] = useState<GoogleCalendarData | null>(null);
+    const [accessToken, setAccessToken] = useState<string>(""); // Create a new state for accessToken
 
     useEffect(() => {
         const token = localStorage.getItem('jwt');
         if (token) {
-            // Validate the token and populate userUUID and organizationId
-            // This is a placeholder logic, replace with actual logic as needed.
-            setUserUUID('someUUID');
-            setOrganizationId('someOrgId');
+            setAccessToken(token); 
+            // TODO: Fetch user details from backend based on token
+            setUserUUID('someUUID'); // Placeholder logic
+            setOrganizationId('someOrgId'); // Placeholder logic
         }
     }, []);
 
@@ -39,8 +44,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ userUUID, organizationId, setUserData, logout }}>
+        <UserContext.Provider value={{ userUUID, organizationId, calendarData, accessToken, setUserData, setCalendarData, logout }}>
             {children}
         </UserContext.Provider>
     );
+};
+
+export type GoogleCalendarData = {
+    items: GoogleCalendarEvent[];
+};
+
+export type GoogleCalendarEvent = {
+    // ... appropriate fields for an event
 };
