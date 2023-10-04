@@ -1,23 +1,24 @@
+// EntryPage.tsx
+
 import React, { useState } from 'react';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
+import OrganizationRegistration from '../components/OrganizationRegistration'; // Import the new component
 import { useNavigate } from 'react-router-dom';
 import './EntryPage.css';
 
 const EntryPage: React.FC = () => {
   console.log("Rendering EntryPage");
 
-  const [showLogin, setShowLogin] = useState(true);
+  const [showSection, setShowSection] = useState('login'); // using string for better scalability
   const navigate = useNavigate();
 
   const handleLogin = (token: string) => {
-    // Handle post-login logic here
     console.log("Logged in with token:", token);
     navigate('/dashboard');
   };
 
   const handleSignup = () => {
-    // Handle post-signup logic here
     console.log("Successfully signed up!");
   };
 
@@ -25,13 +26,16 @@ const EntryPage: React.FC = () => {
     <div className="entry-page">
       <h2>ARCS</h2>
       <div className="toggle-container">
-        <button onClick={() => setShowLogin(true)} className={showLogin ? 'active' : ''}>Login</button>
-        <button onClick={() => setShowLogin(false)} className={!showLogin ? 'active' : ''}>Signup</button>
+        <button onClick={() => setShowSection('login')} className={showSection === 'login' ? 'active' : ''}>Login</button>
+        <button onClick={() => setShowSection('signup')} className={showSection === 'signup' ? 'active' : ''}>Signup</button>
+        <button onClick={() => setShowSection('org')} className={showSection === 'org' ? 'active' : ''}>Register Organization</button> {/* Add button for organization registration */}
       </div>
-      {showLogin ? (
+      {showSection === 'login' ? (
         <Login onLogin={handleLogin} />
-      ) : (
+      ) : showSection === 'signup' ? (
         <Signup onSignup={handleSignup} />
+      ) : (
+        <OrganizationRegistration /> // Render the new component
       )}
     </div>
   );

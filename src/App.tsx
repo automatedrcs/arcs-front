@@ -4,6 +4,7 @@ import { UserProvider, UserContext } from './contexts/UserContext';
 import { apiUrl } from './config';
 import EntryPage from './pages/EntryPage';
 import DashboardPage from './pages/DashboardPage';
+import EmailVerificationPage from './pages/EmailVerificationPage';
 import Navbar from './components/Navbar';
 import TestConnectionButton from './components/TestConnectionButton';
 import './App.css';
@@ -70,6 +71,7 @@ const AppContent: React.FC = () => {
       <Routes>
         <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" /> : <EntryPage />} />
         <Route path="/entry" element={isLoggedIn ? <Navigate to="/dashboard" /> : <EntryPage />} />
+        <Route path="/verify/:token" element={<EmailVerificationPage />} />
         <Route path="/dashboard" element={!isLoggedIn ? <Navigate to="/entry" /> : <DashboardPage />} />
       </Routes>
       <TestConnectionButton />
