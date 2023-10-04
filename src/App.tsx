@@ -68,8 +68,9 @@ const AppContent: React.FC = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
-        <Route path="/entry" element={isLoggedIn ? <Navigate to="/dashboard" /> : <EntryPage />} />
-        <Route path="/dashboard" element={!isLoggedIn ? <Navigate to="/entry" /> : <DashboardPage />} />
+       
+    <Route path="/entry" element={<EntryPage />} />
+    <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
       <TestConnectionButton />
     </>
