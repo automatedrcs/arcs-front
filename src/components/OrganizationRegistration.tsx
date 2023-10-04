@@ -1,22 +1,34 @@
 // OrganizationRegistration.tsx
 import React, { useState } from 'react';
-import axios from 'axios'; // assuming you use axios for HTTP requests
+import axios from 'axios';
+import { AxiosError } from '../types/axiosTypes';
 
 const OrganizationRegistration: React.FC = () => {
   const [orgName, setOrgName] = useState('');
-  const [data, setData] = useState(''); // for simplicity, using a string here; adapt as required
+  const [orgEmail, setOrgEmail] = useState('');
   const [message, setMessage] = useState('');
 
   const handleRegister = async () => {
     try {
       const response = await axios.post('/organization/', {
         name: orgName,
-        data: data
+        data: { email: orgEmail }
       });
       setMessage('Organization registered successfully!');
-      console.log("response data: ", response);
+      console.log("response data: ", response.data);
     } catch (error) {
-      setMessage('Error registering organization.');
+      const axiosError = error as AxiosError;
+
+      if (axiosError && axiosError.response && typeof axiosError.response.data === 'string') {
+        setMessage(axiosError.response.data);
+        console.error("Error registering organization: ", axiosError.response.data);
+      } else if (error instanceof Error) {
+        console.error("Error registering organization: ", error.message);
+        setMessage('Error registering organization.');
+      } else {
+        console.error("An unknown error occurred.");
+        setMessage('Error registering organization.');
+      }
     }
   };
 
@@ -30,10 +42,10 @@ const OrganizationRegistration: React.FC = () => {
         onChange={(e) => setOrgName(e.target.value)}
       />
       <input
-        type="text"
-        placeholder="Organization Data"
-        value={data}
-        onChange={(e) => setData(e.target.value)}
+        type="email"
+        placeholder="Organization Email"
+        value={orgEmail}
+        onChange={(e) => setOrgEmail(e.target.value)}
       />
       <button onClick={handleRegister}>Register</button>
       {message && <div>{message}</div>}
