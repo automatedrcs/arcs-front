@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface UserContextProps {
     userUUID: string | null;
@@ -26,8 +27,20 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('jwt');
         if (token) {
-            setAccessToken(token); 
-            // TODO: Fetch user details from backend based on token
+            setAccessToken(token);  
+            // Fetch user details from backend based on token
+            axios.get('/user/', {  // assuming "/user/me" is the endpoint to get user details
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                const { userUUID, organizationId } = response.data;
+                setUserUUID(userUUID);
+                setOrganizationId(organizationId);
+            }).catch(error => {
+                console.error('Error fetching user details:', error);
+                // Optionally, handle the error. Maybe remove the token if it's invalid.
+            });
             setUserUUID('someUUID'); // Placeholder logic
             setOrganizationId('someOrgId'); // Placeholder logic
         }
