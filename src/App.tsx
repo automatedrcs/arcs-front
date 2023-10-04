@@ -27,15 +27,15 @@ const AppContent: React.FC = () => {
 
   const handleAuthCallback = useCallback(async (code: string) => {
     try {
-      console.log("Start callback");
+      console.log("handleAuthCallback called with code:", code);
       const response = await fetch(`${apiUrl}/authentication/google/callback`, {
           method: 'POST',
           body: JSON.stringify({ code }),
           headers: { 'Content-Type': 'application/json' },
       });
       const data = await response.json();
+      console.log("Received data from callback:", data);
       if (data.error) {
-        // Handle error (possibly show a notification or redirect)
         console.error(data.message);
         return;
       }
@@ -55,7 +55,12 @@ const AppContent: React.FC = () => {
     if (location.pathname === "/auth/callback") {
       const params = new URLSearchParams(location.search);
       const code = params.get('code');
-      if (code) handleAuthCallback(code);
+      if (code) {
+        console.log("Executing authentication callback...");
+        handleAuthCallback(code);
+      } else {
+        console.log("Code not found in /auth/callback URL");
+      }
     }
   }, [location, handleAuthCallback]);
 

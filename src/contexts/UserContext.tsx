@@ -25,11 +25,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [accessToken, setAccessToken] = useState<string>(""); // Create a new state for accessToken
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt');
+        const token = localStorage.getItem('jwt') || accessToken; // <-- Modified here
         if (token) {
             setAccessToken(token);  
             // Fetch user details from backend based on token
-            axios.get('/user/me', {  // assuming "/user/me" is the endpoint to get user details
+            axios.get('/user/me', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -37,29 +37,34 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 const { userUUID, organizationId } = response.data;
                 setUserUUID(userUUID);
                 setOrganizationId(organizationId);
+                console.log('User details fetched:', response.data);
             }).catch(error => {
                 console.error('Error fetching user details:', error);
-                // Optionally, handle the error. Maybe remove the token if it's invalid.
+                // Removing the token if it's invalid
+                localStorage.removeItem('jwt');
+                setAccessToken(""); // <-- Clear accessToken if there's an error
             });
         }
-    }, []);
+    }, [accessToken]);
 
     const setUserData = (userUUID: string, organizationId: string) => {
+        console.log('Setting user data:', userUUID, organizationId);
         setUserUUID(userUUID);
         setOrganizationId(organizationId);
     };
 
     const logout = () => {
+        console.log('User logging out');
         setUserUUID(null);
         setOrganizationId(null);
         localStorage.removeItem('jwt');
+        setAccessToken("");
     };
 
     return (
-        <UserContext.Provider value={{ userUUID, organizationId, calendarData, accessToken, setUserData, setCalendarData, logout, setAccessToken }}> {/* <-- Add setAccessToken here */}
+        <UserContext.Provider value={{ userUUID, organizationId, calendarData, accessToken, setUserData, setCalendarData, logout, setAccessToken }}>
             {children}
         </UserContext.Provider>
-
     );
 };
 
