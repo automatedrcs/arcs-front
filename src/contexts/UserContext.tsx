@@ -4,8 +4,9 @@ interface UserContextProps {
     userUUID: string | null;
     organizationId: string | null;
     calendarData: GoogleCalendarData | null;
-    accessToken: string; // Add this
+    accessToken: string;
     setUserData: (userUUID: string, organizationId: string) => void;
+    setAccessToken: (token: string) => void;
     setCalendarData: (data: GoogleCalendarData) => void;
     logout: () => void;
 }
@@ -44,9 +45,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ userUUID, organizationId, calendarData, accessToken, setUserData, setCalendarData, logout }}>
+        <UserContext.Provider value={{ userUUID, organizationId, calendarData, accessToken, setUserData, setCalendarData, logout, setAccessToken }}> {/* <-- Add setAccessToken here */}
             {children}
         </UserContext.Provider>
+
     );
 };
 

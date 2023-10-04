@@ -11,7 +11,7 @@ const LogoutButton: React.FC = () => {
   const handleLogout = async () => {
       userContext?.logout?.();
 
-      navigate("/login");
+      navigate("/entry");
   };
 
   return <button onClick={handleLogout}>Logout</button>;

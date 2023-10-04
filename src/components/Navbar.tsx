@@ -12,8 +12,6 @@ const Navbar: React.FC = () => {
   return (
       <nav className="navbar">
           {isLoggedIn && <Link to="/dashboard">Dashboard</Link>}
-          {!isLoggedIn && <Link to="/login">Login</Link>}
-          {!isLoggedIn && <Link to="/signup">Signup</Link>}
           {isLoggedIn && <LogoutButton />}
       </nav>
   );

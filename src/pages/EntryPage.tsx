@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
+import { useNavigate } from 'react-router-dom';
 import './EntryPage.css';
 
 const EntryPage: React.FC = () => {
   const [showLogin, setShowLogin] = useState(true);
+  const navigate = useNavigate();
 
   const handleLogin = (token: string) => {
     // Handle post-login logic here
     console.log("Logged in with token:", token);
+    navigate('/dashboard');
   };
 
   const handleSignup = () => {

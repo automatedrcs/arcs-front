@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Login.css";
 import { apiUrl } from '../config';
 
@@ -16,6 +17,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -34,7 +36,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 onLogin(data.access_token);
                 if (userContext) {
                     userContext.setUserData(data.id, data.organization_id);
+                    userContext.setAccessToken(data.access_token);
                 }
+                navigate('/dashboard');
             } else {
                 setError(data.error || 'Failed to login');
             }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import "./Signup.css";
+import { useNavigate } from 'react-router-dom';
 import { apiUrl } from '../config';
+import "./Signup.css";
 
 interface SignupProps {
   onSignup: () => void;
@@ -12,6 +13,7 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -22,10 +24,10 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password })
-            });
-        
+            });           
             if (response.ok) {
                 onSignup();
+                navigate('/entry'); // Redirect to entry page after signup
             } else {
                 const data = await response.json();
                 setError(data.error || 'Failed to sign up');

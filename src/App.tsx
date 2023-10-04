@@ -38,8 +38,11 @@ const AppContent: React.FC = () => {
         return;
       }
       context?.setUserData(data.user.userUUID, data.user.organizationId);
+      if (data.token) {
+        localStorage.setItem('jwt', data.token);
+        context?.setAccessToken(data.token); // add this line
+      }      
       context?.setCalendarData(data.items);
-      localStorage.setItem('jwt', data.token);
     } catch (error) {
       console.error('Error during authentication:', error);
       // Handle error (possibly show a notification or redirect)
