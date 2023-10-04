@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { AxiosError } from '../types/axiosTypes';
+import { apiUrl } from '../config';
 
 const OrganizationRegistration: React.FC = () => {
   const [orgName, setOrgName] = useState('');
@@ -10,7 +11,7 @@ const OrganizationRegistration: React.FC = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('/organization/', {
+      const response = await axios.post(`${apiUrl}/organization/`, {
         name: orgName,
         data: { email: orgEmail }
       });
