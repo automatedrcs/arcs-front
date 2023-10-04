@@ -21,11 +21,13 @@ const App: React.FC = () => {
 const AppContent: React.FC = () => {
   const context = useContext(UserContext);
   const isLoggedIn = Boolean(context?.userUUID);
+  console.log("Beginning isLoggedIn:", isLoggedIn);
   const location = useLocation();
   const showNavbar = location.pathname !== "/entry";
 
   const handleAuthCallback = useCallback(async (code: string) => {
     try {
+      console.log("Start callback");
       const response = await fetch(`${apiUrl}/authentication/google/callback`, {
           method: 'POST',
           body: JSON.stringify({ code }),
@@ -40,14 +42,14 @@ const AppContent: React.FC = () => {
       context?.setUserData(data.user.userUUID, data.user.organizationId);
       if (data.token) {
         localStorage.setItem('jwt', data.token);
-        context?.setAccessToken(data.token); // add this line
+        context?.setAccessToken(data.token);
       }      
       context?.setCalendarData(data.items);
     } catch (error) {
       console.error('Error during authentication:', error);
-      // Handle error (possibly show a notification or redirect)
     }
   }, [context]);
+  console.log("after callback isLoggedIn:", isLoggedIn);
 
   useEffect(() => {
     if (location.pathname === "/auth/callback") {

@@ -4,6 +4,8 @@ import './DashboardPage.css';
 import { UserContext } from '../contexts/UserContext';
 
 const DashboardPage: React.FC = () => {
+  console.log("Rendering DashboardPage");
+
   const context = useContext(UserContext);
 
   return (

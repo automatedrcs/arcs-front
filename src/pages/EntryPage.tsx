@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import './EntryPage.css';
 
 const EntryPage: React.FC = () => {
+  console.log("Rendering EntryPage");
+
   const [showLogin, setShowLogin] = useState(true);
   const navigate = useNavigate();
 
