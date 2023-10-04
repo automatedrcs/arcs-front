@@ -20,7 +20,7 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
         setLoading(true);
         
         try {
-            const response = await fetch(apiUrl + '/signup', {
+            const response = await fetch(apiUrl + '/user/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password })
