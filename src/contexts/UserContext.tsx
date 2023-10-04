@@ -29,7 +29,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         if (token) {
             setAccessToken(token);  
             // Fetch user details from backend based on token
-            axios.get('/user/', {  // assuming "/user/me" is the endpoint to get user details
+            axios.get('/user/me', {  // assuming "/user/me" is the endpoint to get user details
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -41,8 +41,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 console.error('Error fetching user details:', error);
                 // Optionally, handle the error. Maybe remove the token if it's invalid.
             });
-            setUserUUID('someUUID'); // Placeholder logic
-            setOrganizationId('someOrgId'); // Placeholder logic
         }
     }, []);
 
