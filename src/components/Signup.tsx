@@ -14,6 +14,7 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
+    const [orgEmail, setOrgEmail] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,7 +24,7 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
             const response = await fetch(apiUrl + '/user/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password })
+                body: JSON.stringify({ username, email, password, organization_email: orgEmail})
             });           
             if (response.ok) {
                 onSignup();
@@ -69,6 +70,15 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Organization Email:</label>
+                    <input
+                        type="email"
+                        value={orgEmail}
+                        onChange={(e) => setOrgEmail(e.target.value)}
                         required
                     />
                 </div>
