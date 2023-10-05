@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiUrl } from '../config';
 
 interface UserContextProps {
     userUUID: string | null;
@@ -25,27 +25,33 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [accessToken, setAccessToken] = useState<string>(""); // Create a new state for accessToken
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt') || accessToken; // <-- Modified here
+        const token = localStorage.getItem('jwt') || accessToken;
         if (token) {
-            setAccessToken(token);  
-            // Fetch user details from backend based on token
-            axios.get('/user/me', {
+            setAccessToken(token);
+            
+            fetch(apiUrl + '/user/me', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
-            }).then(response => {
-                const { userUUID, organizationId } = response.data;
+            })
+            .then(response => {
+                if(!response.ok) throw new Error('Error fetching user details.');
+                return response.json();
+            })
+            .then(data => {
+                const { userUUID, organizationId } = data;
                 setUserUUID(userUUID);
                 setOrganizationId(organizationId);
-                console.log('User details fetched:', response.data);
-            }).catch(error => {
+                console.log('User details fetched:', data);
+            })
+            .catch(error => {
                 console.error('Error fetching user details:', error);
-                // Removing the token if it's invalid
                 localStorage.removeItem('jwt');
-                setAccessToken(""); // <-- Clear accessToken if there's an error
+                setAccessToken("");
             });
         }
     }, [accessToken]);
+    
 
     const setUserData = (userUUID: string, organizationId: string) => {
         console.log('Setting user data:', userUUID, organizationId);

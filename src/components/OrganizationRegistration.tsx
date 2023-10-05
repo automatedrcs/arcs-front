@@ -9,7 +9,7 @@ const OrganizationRegistration: React.FC = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch(`${apiUrl}/organization/`, {
+      const response = await fetch(apiUrl + "/organization", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: orgName, data: { email: orgEmail } })
