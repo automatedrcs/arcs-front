@@ -1,7 +1,5 @@
 // OrganizationRegistration.tsx
 import React, { useState } from 'react';
-import axios from 'axios';
-import { AxiosError } from '../types/axiosTypes';
 import { apiUrl } from '../config';
 
 const OrganizationRegistration: React.FC = () => {
@@ -11,25 +9,23 @@ const OrganizationRegistration: React.FC = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/organization/`, {
-        name: orgName,
-        data: { email: orgEmail }
+      const response = await fetch(`${apiUrl}/organization/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: orgName, data: { email: orgEmail } })
       });
-      setMessage('Organization registered successfully!');
-      console.log("response data: ", response.data);
-    } catch (error) {
-      const axiosError = error as AxiosError;
-
-      if (axiosError && axiosError.response && typeof axiosError.response.data === 'string') {
-        setMessage(axiosError.response.data);
-        console.error("Error registering organization: ", axiosError.response.data);
-      } else if (error instanceof Error) {
-        console.error("Error registering organization: ", error.message);
-        setMessage('Error registering organization.');
+      
+      if (response.ok) {
+        const data = await response.json();
+        setMessage('Organization registered successfully!');
+        console.log("response data: ", data);
       } else {
-        console.error("An unknown error occurred.");
-        setMessage('Error registering organization.');
+        const errorData = await response.json();
+        setMessage(errorData.error || 'Error registering organization.');
       }
+    } catch (err) {
+      console.error("Error registering organization: ", err);
+      setMessage('An error occurred while registering the organization.');
     }
   };
 
