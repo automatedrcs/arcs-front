@@ -29,7 +29,7 @@ const AppContent: React.FC = () => {
   const handleAuthCallback = useCallback(async (code: string) => {
     try {
       console.log("handleAuthCallback called with code:", code);
-      const response = await fetch(`${apiUrl}/authentication/google/callback`, {
+      const response = await fetch(apiUrl + "/authentication/google/callback", {
           method: 'POST',
           body: JSON.stringify({ code }),
           headers: { 'Content-Type': 'application/json' },
