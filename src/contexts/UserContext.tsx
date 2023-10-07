@@ -1,22 +1,11 @@
-import { createContext, ReactNode, useState, useEffect } from 'react';
-import { apiUrl } from '../config';
+// contexts/UserContext.tsx
 
-interface UserContextProps {
-    userUUID: string | null;
-    organizationId: string | null;
-    calendarData: GoogleCalendarData | null;
-    accessToken: string;
-    setUserData: (userUUID: string, organizationId: string) => void;
-    setAccessToken: (token: string) => void;
-    setCalendarData: (data: GoogleCalendarData) => void;
-    logout: () => void;
-}
+import { createContext, useState, useEffect } from 'react';
+import { apiUrl } from '../config';
+import { GoogleCalendarData } from '../types/GoogleTypes';
+import { UserContextProps, UserProviderProps } from '../types/UserTypes';
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined);
-
-interface UserProviderProps {
-    children: ReactNode;
-}
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [userUUID, setUserUUID] = useState<string | null>(null);
@@ -72,12 +61,4 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             {children}
         </UserContext.Provider>
     );
-};
-
-export type GoogleCalendarData = {
-    items: GoogleCalendarEvent[];
-};
-
-export type GoogleCalendarEvent = {
-    // ... appropriate fields for an event
 };

@@ -1,26 +1,15 @@
 // components/GoogleCalendarWeekly.tsx
 
 import React, { useState, useEffect } from 'react';
+import { CalendarEvent, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
+import ConnectGoogleCalendarButton from './ConnectGoogleCalendarButton';
+import { apiUrl } from '../config';
 
-type CalendarEvent = {
-    id: string;
-    summary: string;
-    start: {
-      dateTime: string;
-    };
-    end: {
-      dateTime: string;
-    };
-};
-
-interface GoogleCalendarWeeklyProps {
-  accessToken: string;
-  weekStartDate: Date;
-  onChangeWeek: (newDate: Date) => void;
-}
 
 const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ accessToken, weekStartDate, onChangeWeek }) => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
   
   useEffect(() => {
     if (accessToken) {
@@ -52,7 +41,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ accessToken
     })
     .catch(error => {
       console.error('Failed to fetch Google Calendar data:', error);
+      setError("Failed to load calendar data");
     });
+  
   };
 
   const handlePreviousWeek = () => {
@@ -69,18 +60,27 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ accessToken
 
   return (
     <div className="google-calendar-weekly">
-      <div className="week-navigation">
-        <button onClick={handlePreviousWeek}>Previous</button>
-        <span>{weekStartDate.toLocaleDateString()} - {new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span>
-        <button onClick={handleNextWeek}>Next</button>
-      </div>
-      {events.map(event => (
-        <div key={event.id} className="event">
-            <h4>{event.summary}</h4>
-            <p>Start: {event.start.dateTime}</p>
-            <p>End: {event.end.dateTime}</p>
-        </div>
-      ))}
+    {error ? (
+          <>
+              <p>{error}</p>
+              <ConnectGoogleCalendarButton authURL={apiUrl + "/authentication/google/login"} />
+          </>
+      ) : (
+        <>
+          <div className="week-navigation">
+            <button onClick={handlePreviousWeek}>Previous</button>
+            <span>{weekStartDate.toLocaleDateString()} - {new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span>
+            <button onClick={handleNextWeek}>Next</button>
+          </div>
+          {events.map(event => (
+            <div key={event.id} className="event">
+                <h4>{event.summary}</h4>
+                <p>Start: {event.start.dateTime}</p>
+                <p>End: {event.end.dateTime}</p>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };

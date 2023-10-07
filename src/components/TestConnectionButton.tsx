@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { apiUrl } from '../config';
-import { JSONObject } from '../types/jsonTypes';
+import { JSONObject } from '../types/JsonTypes';
 
 // Define a type for your API response
 interface ApiResponse {

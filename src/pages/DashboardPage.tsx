@@ -1,3 +1,5 @@
+//pages/DashboardPage.tsx
+
 import React, { useContext, useState } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
 import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';

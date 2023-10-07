@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { apiUrl } from '../config';
-import { JSONObject } from '../types/jsonTypes';
-
+import { JSONObject } from '../types/JsonTypes';
 import { UserContext } from '../contexts/UserContext';
 
 interface Notification {
