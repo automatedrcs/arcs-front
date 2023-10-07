@@ -1,4 +1,4 @@
-// types/jsonTypes.ts
+// types/JsonTypes.ts
 
 export type JSONValue = string | number | boolean | null | JSONObject | JSONArray;
 

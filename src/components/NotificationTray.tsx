@@ -5,10 +5,9 @@ import { JSONObject } from '../types/JsonTypes';
 import { UserContext } from '../contexts/UserContext';
 
 interface Notification {
-    id: string; // adjust the type if needed
+    id: string;
     type: string;
-    data: JSONObject; // you might want to specify a more detailed type here
-    // add other fields if necessary
+    data: JSONObject;
   }
   
 function NotificationTray() {
