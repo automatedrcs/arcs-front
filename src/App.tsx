@@ -1,9 +1,8 @@
 // App.tsx
 
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { UserProvider, UserContext } from './contexts/UserContext';
-import { apiUrl } from './config';
 import EntryPage from './pages/EntryPage';
 import DashboardPage from './pages/DashboardPage';
 import Navbar from './components/Navbar';
