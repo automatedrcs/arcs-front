@@ -2,7 +2,6 @@
 
 import { createContext, useState, useEffect } from 'react';
 import { apiUrl } from '../config';
-import { GoogleCalendarData } from '../types/GoogleTypes';
 import { UserContextProps, UserProviderProps } from '../types/UserTypes';
 
 export const UserContext = createContext<UserContextProps | undefined>(undefined);
@@ -10,8 +9,7 @@ export const UserContext = createContext<UserContextProps | undefined>(undefined
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [userUUID, setUserUUID] = useState<string | null>(null);
     const [organizationId, setOrganizationId] = useState<string | null>(null);
-    const [calendarData, setCalendarData] = useState<GoogleCalendarData | null>(null);
-    const [accessToken, setAccessToken] = useState<string>(""); // Create a new state for accessToken
+    const [accessToken, setAccessToken] = useState<string>("");
 
     useEffect(() => {
         const token = localStorage.getItem('jwt') || accessToken;
@@ -57,7 +55,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ userUUID, organizationId, calendarData, accessToken, setUserData, setCalendarData, logout, setAccessToken }}>
+        <UserContext.Provider value={{ userUUID, organizationId, accessToken, setUserData, setCalendarData, logout, setAccessToken }}>
             {children}
         </UserContext.Provider>
     );
