@@ -31,6 +31,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             .catch(error => {
                 localStorage.removeItem('jwt');
                 setAccessToken("");
+                console.log(error.message);
             });
         }
     }, [accessToken]);
