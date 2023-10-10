@@ -9,45 +9,56 @@ export const UserContext = createContext<UserContextProps | undefined>(undefined
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [userUUID, setUserUUID] = useState<string | null>(null);
     const [organizationId, setOrganizationId] = useState<string | null>(null);
-    const [accessToken, setAccessToken] = useState<string>("");
+    const [accessToken, setAccessToken] = useState<string>(localStorage.getItem('jwt') || "");
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt') || accessToken;
+        const token = accessToken;
         if (token) {
-            setAccessToken(token);
-            
             fetch(apiUrl + '/user/me', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
             .then(response => {
-                if(!response.ok) throw new Error('Error fetching user details.');
+                if (!response.ok) throw new Error('Error fetching user details.');
                 return response.json();
             })
             .then(data => {
                 const { userUUID, organizationId } = data;
                 setUserUUID(userUUID);
                 setOrganizationId(organizationId);
-                console.log('User details fetched:', data);
             })
             .catch(error => {
-                console.error('Error fetching user details:', error);
                 localStorage.removeItem('jwt');
                 setAccessToken("");
             });
         }
     }, [accessToken]);
     
-
     const setUserData = (userUUID: string, organizationId: string) => {
-        console.log('Setting user data:', userUUID, organizationId);
         setUserUUID(userUUID);
         setOrganizationId(organizationId);
     };
 
+    const refreshToken = async () => {
+        try {
+            const response = await fetch(apiUrl + '/user/token/refresh', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            const data = await response.json();
+            if (data.access_token) {
+                setAccessToken(data.access_token);
+                localStorage.setItem('jwt', data.access_token);
+            } else {
+                throw new Error("Failed to refresh token.");
+            }
+        } catch (error) {
+            logout();
+        }
+    };    
+
     const logout = () => {
-        console.log('User logging out');
         setUserUUID(null);
         setOrganizationId(null);
         localStorage.removeItem('jwt');
@@ -55,7 +66,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ userUUID, organizationId, accessToken, setUserData, logout, setAccessToken }}>
+        <UserContext.Provider value={{ userUUID, organizationId, accessToken, setUserData, logout, setAccessToken, refreshToken }}>
             {children}
         </UserContext.Provider>
     );

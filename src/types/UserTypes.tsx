@@ -8,6 +8,7 @@ export interface UserContextProps {
     setUserData: (userUUID: string, organizationId: string) => void;
     setAccessToken: (token: string) => void;
     logout: () => void;
+    refreshToken: () => Promise<void>;
 }
 
 
