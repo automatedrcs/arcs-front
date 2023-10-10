@@ -31,9 +31,9 @@ const AppContent: React.FC = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" /> : <EntryPage />} />
+        <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/entry" element={<EntryPage />} />
-        <Route path="/dashboard" element={isLoggedIn ? <DashboardPage /> : <Navigate to="/entry" />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="*" element={<ProtectedRoute />} />
       </Routes>
       <TestConnectionButton />
