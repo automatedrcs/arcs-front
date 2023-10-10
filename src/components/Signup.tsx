@@ -1,13 +1,10 @@
+// components/Signup.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiUrl } from '../config';
 import "./Signup.css";
 
-interface SignupProps {
-  onSignup: () => void;
-}
-
-const Signup: React.FC<SignupProps> = ({ onSignup }) => {
+const Signup: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -27,7 +24,6 @@ const Signup: React.FC<SignupProps> = ({ onSignup }) => {
                 body: JSON.stringify({ username, email, password, organization_email: orgEmail})
             });           
             if (response.ok) {
-                onSignup();
                 navigate('/entry'); // Redirect to entry page after signup
             } else {
                 const data = await response.json();
