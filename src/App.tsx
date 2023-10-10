@@ -6,7 +6,7 @@ import { UserProvider } from './contexts/UserContext';
 import EntryPage from './pages/EntryPage';
 import DashboardPage from './pages/DashboardPage';
 import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
+import RequireLogin from './components/RequireLogin';
 import TestConnectionButton from './components/TestConnectionButton';
 
 import './App.css';
@@ -29,14 +29,19 @@ const AppContent: React.FC = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/entry" element={<EntryPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<ProtectedRoute />} />
+
+        {/* Routes Requiring Authentication */}
+        <Route path="/" element={<RequireLogin><Navigate to="/dashboard" /></RequireLogin>} />
+        <Route path="/dashboard" element={<RequireLogin><DashboardPage /></RequireLogin>} />
+
+        {/* Catch All Route */}
+        <Route path="*" element={<Navigate to="/entry" />} />
       </Routes>
       <TestConnectionButton />
     </>
   );
 };
+
 
 export default App;
