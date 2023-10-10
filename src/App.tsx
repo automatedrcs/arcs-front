@@ -29,10 +29,10 @@ const AppContent: React.FC = () => {
     <>
       {showNavbar && <Navbar />}
       <Routes>
+        <Route path="*" element={<ProtectedRoute />} />
         <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/entry" element={<EntryPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<ProtectedRoute />} />
       </Routes>
       <TestConnectionButton />
     </>
