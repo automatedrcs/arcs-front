@@ -1,9 +1,12 @@
+// components/GoogleLogin.tsx
+
 import React from 'react';
+import { apiUrl } from '../config';
 
 const GoogleLogin: React.FC = () => {
   const handleLogin = () => {
     // Redirect to your backend's Google login endpoint
-    window.location.href = "/authentication/google/login";
+    window.location.href = apiUrl + "/authentication/google/login";
   };
 
   return (

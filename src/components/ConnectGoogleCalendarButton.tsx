@@ -1,13 +1,10 @@
 // components/ConnectGoogleCalendarButton.tsx
 import React from 'react';
+import { apiUrl } from '../config';
 
-interface Props {
-    authURL: string; // URL to your backend endpoint that redirects to Google OAuth
-}
-
-const ConnectGoogleCalendarButton: React.FC<Props> = ({ authURL }) => {
+const ConnectGoogleCalendarButton: React.FC = () => {
     return (
-        <button onClick={() => window.location.href = authURL}>
+        <button onClick={() => window.location.href = apiUrl + "/authentication/google/login"}>
             Connect Google Calendar
         </button>
     );

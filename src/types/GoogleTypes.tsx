@@ -13,7 +13,8 @@ export type CalendarEvent = {
 export interface GoogleCalendarWeeklyProps {
     accessToken: string;
     weekStartDate: Date;
-    onChangeWeek: (newDate: Date) => void;
+    onChangeWeek: (date: Date) => void;
+    onError: () => void; 
 }  
 
 export type GoogleCalendarData = {
