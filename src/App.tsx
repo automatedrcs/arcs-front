@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
-import { UserProvider, UserContext } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext';
 import EntryPage from './pages/EntryPage';
 import DashboardPage from './pages/DashboardPage';
 import Navbar from './components/Navbar';
