@@ -35,7 +35,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             if (data && data.access_token) {
                 onLogin(data.access_token);
                 if (userContext) {
-                    userContext.setUserData(data.id, data.organization_id);
+                    userContext.setUserData(data.userUUID, data.organizationId);  // use the correct keys
                     userContext.setAccessToken(data.access_token);
                 }
                 navigate('/dashboard');
