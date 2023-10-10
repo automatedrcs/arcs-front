@@ -7,11 +7,7 @@ import { apiUrl } from '../config';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 
-interface LoginProps {
-  onLogin: (token: string) => void;
-}
-
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC = () => {
     const userContext = useContext(UserContext);
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -32,11 +28,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         
             const data = await response.json();
         
-            if (data && data.access_token) {
-                onLogin(data.access_token);
+            if (data && data.message === "Logged in successfully") {
                 if (userContext) {
                     userContext.setUserData(data.userUUID, data.organizationId);  // use the correct keys
-                    userContext.setAccessToken(data.access_token);
                 }
                 navigate('/dashboard');
             } else {

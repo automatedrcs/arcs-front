@@ -12,12 +12,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [accessToken, setAccessToken] = useState<string>(localStorage.getItem('jwt') || "");
 
     useEffect(() => {
-        const token = accessToken;
-        if (token) {
+        if (accessToken) {
             fetch(apiUrl + '/user/me', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                credentials: 'include'  // Use cookies for authentication
             })
             .then(response => {
                 if (!response.ok) throw new Error('Error fetching user details.');
@@ -50,24 +47,23 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             const data = await response.json();
             if (data.access_token) {
                 setAccessToken(data.access_token);
-                localStorage.setItem('jwt', data.access_token);
             } else {
                 throw new Error("Failed to refresh token.");
             }
         } catch (error) {
             logout();
         }
-    };    
-
+    };
+    
     const logout = () => {
         setUserUUID(null);
         setOrganizationId(null);
-        localStorage.removeItem('jwt');
         setAccessToken("");
     };
+    
 
     return (
-        <UserContext.Provider value={{ userUUID, organizationId, accessToken, setUserData, logout, setAccessToken, refreshToken }}>
+        <UserContext.Provider value={{ userUUID, organizationId, accessToken, setAccessToken, setUserData, refreshToken, logout }}>
             {children}
         </UserContext.Provider>
     );
