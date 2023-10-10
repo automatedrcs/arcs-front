@@ -1,6 +1,6 @@
 // App.tsx
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { UserProvider, UserContext } from './contexts/UserContext';
 import EntryPage from './pages/EntryPage';
@@ -22,8 +22,6 @@ const App: React.FC = () => {
 };
 
 const AppContent: React.FC = () => {
-  const context = useContext(UserContext);
-  const isLoggedIn = Boolean(context?.userUUID);
   const location = useLocation();
   const showNavbar = location.pathname !== "/entry";
 
