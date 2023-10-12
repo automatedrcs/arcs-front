@@ -1,3 +1,5 @@
+// components/TestConnectionButton.tsx
+
 import { useState } from 'react';
 import { apiUrl } from '../config';
 import { JSONObject } from '../types/JsonTypes';
