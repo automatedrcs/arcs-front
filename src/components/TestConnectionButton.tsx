@@ -12,6 +12,10 @@ interface ApiResponse {
     };
 }
 
+interface ApiErrorResponse {
+    detail: string;
+}
+
 function TestConnectionButton() {
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
     const userContext = useContext(UserContext);
@@ -25,11 +29,21 @@ function TestConnectionButton() {
     const handleButtonClick = async () => {
         try {
             const response = await fetch(apiUrl + "/test/api/connection-test", {
-                headers: headers  // Use the headers variable
+                headers: headers
             });
-            const data: ApiResponse = await response.json();
-            console.log("data, ", data);
-            setApiResponse(data);
+            const data = await response.json();
+    
+            if (response.ok) {
+                // If the response is within the 200-299 range
+                const apiData: ApiResponse = data;
+                setApiResponse(apiData);
+            } else {
+                // If the response has an error status
+                const errorData: ApiErrorResponse = data;
+                console.error("API returned an error:", errorData.detail);
+                setApiResponse({ message: errorData.detail || "Unknown server error" });
+            }
+    
         } catch (error) {
             console.error("Error fetching the API:", error);
             setApiResponse({ message: "Failed to connect to the API." });
