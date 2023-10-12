@@ -1,8 +1,7 @@
-// components/TestConnectionButton.tsx
-
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { apiUrl } from '../config';
 import { JSONObject } from '../types/JsonTypes';
+import { UserContext } from '../contexts/UserContext.tsx';
 
 // Define a type for your API response
 interface ApiResponse {
@@ -15,10 +14,19 @@ interface ApiResponse {
 
 function TestConnectionButton() {
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
+    const userContext = useContext(UserContext);
+
+    let headers: { [key: string]: string } = {};  // Explicitly define the type of headers object
+
+    if (userContext && userContext.userUUID) {
+        headers['X-User-UUID'] = userContext.userUUID;
+    }
 
     const handleButtonClick = async () => {
         try {
-            const response = await fetch(apiUrl + "/test/api/connection-test");
+            const response = await fetch(apiUrl + "/test/api/connection-test", {
+                headers: headers  // Use the headers variable
+            });
             const data: ApiResponse = await response.json();
             console.log("data, ", data);
             setApiResponse(data);
