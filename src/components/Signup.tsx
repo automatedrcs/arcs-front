@@ -24,7 +24,7 @@ const Signup: React.FC = () => {
                 body: JSON.stringify({ username, email, password, organization_email: orgEmail})
             });           
             if (response.ok) {
-                navigate('/entry'); // Redirect to entry page after signup
+                navigate('/'); // Redirect to entry page after signup
             } else {
                 const data = await response.json();
                 setError(data.error || 'Failed to sign up');
