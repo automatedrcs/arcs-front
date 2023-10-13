@@ -30,6 +30,11 @@ function TestConnectionButton() {
 
     const handleButtonClick = async () => {
         try {
+            if (!headers['user-uuid']) {
+                setErrorMessage("User UUID is missing. Please log in or provide a valid UUID.");
+                return;
+            }
+
             const response = await fetch(apiUrl + "/test/api/connection-test", {
                 headers: headers
             });
@@ -39,11 +44,14 @@ function TestConnectionButton() {
                 setApiResponse(data);
                 setErrorMessage(null); // Clear any previous errors
             } else {
-                const errorData: ApiErrorResponse = data;
-                console.error("API returned an error:", errorData.detail);
-                setErrorMessage(errorData.detail || "Unknown server error");
-            }
-    
+                if (data && data[0] && data[0].type === "value_error.missing" && data[0].loc.includes("user-uuid")) {
+                    setErrorMessage("User UUID is missing. Please log in or provide a valid UUID.");
+                } else {
+                    const errorData: ApiErrorResponse = data;
+                    console.error("API returned an error:", errorData.detail);
+                    setErrorMessage(errorData.detail || "Unknown server error");
+                }
+            }           
         } catch (error) {
             console.error("Error fetching the API:", error);
             setErrorMessage("Failed to connect to the API.");
