@@ -19,12 +19,13 @@ interface ApiErrorResponse {
 
 function TestConnectionButton() {
     const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);  // Added state for error message
     const userContext = useContext(UserContext);
 
-    let headers: { [key: string]: string } = {};  // Explicitly define the type of headers object
+    let headers: { [key: string]: string } = {};
 
     if (userContext && userContext.userUUID) {
-        headers['user_uuid'] = userContext.userUUID;
+        headers['user-uuid'] = userContext.userUUID; // Corrected header name
     }
 
     const handleButtonClick = async () => {
@@ -35,19 +36,17 @@ function TestConnectionButton() {
             const data = await response.json();
     
             if (response.ok) {
-                // If the response is within the 200-299 range
-                const apiData: ApiResponse = data;
-                setApiResponse(apiData);
+                setApiResponse(data);
+                setErrorMessage(null); // Clear any previous errors
             } else {
-                // If the response has an error status
                 const errorData: ApiErrorResponse = data;
                 console.error("API returned an error:", errorData.detail);
-                setApiResponse({ message: errorData.detail || "Unknown server error" });
+                setErrorMessage(errorData.detail || "Unknown server error");
             }
     
         } catch (error) {
             console.error("Error fetching the API:", error);
-            setApiResponse({ message: "Failed to connect to the API." });
+            setErrorMessage("Failed to connect to the API.");
         }
     };
 
@@ -58,6 +57,7 @@ function TestConnectionButton() {
                 <p>{apiResponse.message}</p>
                 {apiResponse.data && <pre>{JSON.stringify(apiResponse.data, null, 2)}</pre>}
             </div>}
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}  {/* Display the error message */}
         </div>
     );
 }
