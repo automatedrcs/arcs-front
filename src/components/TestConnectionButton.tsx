@@ -1,3 +1,4 @@
+// components/TestConnectionButton.tsx
 import { useState, useContext } from 'react';
 import { apiUrl } from '../config';
 import { JSONObject } from '../types/JsonTypes';
@@ -23,7 +24,7 @@ function TestConnectionButton() {
     let headers: { [key: string]: string } = {};  // Explicitly define the type of headers object
 
     if (userContext && userContext.userUUID) {
-        headers['X-User-UUID'] = userContext.userUUID;
+        headers['user_uuid'] = userContext.userUUID;
     }
 
     const handleButtonClick = async () => {
