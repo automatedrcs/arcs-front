@@ -15,6 +15,7 @@ const Signup: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log("Submit button clicked!");
         setLoading(true);
 
         try {
