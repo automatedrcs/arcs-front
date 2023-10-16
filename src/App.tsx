@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'r
 import { UserProvider } from './contexts/UserContext';
 import EntryPage from './pages/EntryPage';
 import DashboardPage from './pages/DashboardPage';
+import AuthenticationSuccessPage from './pages/AuthenticationSuccessPage';
+import AuthenticationErrorPage from './pages/AuthenticationErrorPage';
 import Navbar from './components/Navbar';
 import RequireLogin from './components/RequireLogin';
 import TestConnectionButton from './components/TestConnectionButton';
@@ -30,6 +32,10 @@ const AppContent: React.FC = () => {
       {showNavbar && <Navbar />}
       <Routes>
         <Route path="/entry" element={<EntryPage />} />
+        
+        {/* Success and Error Routes */}
+        <Route path="/authentication-success" element={<AuthenticationSuccessPage />} />
+        <Route path="/authentication-error" element={<AuthenticationErrorPage />} />
 
         {/* Routes Requiring Authentication */}
         <Route path="/" element={<RequireLogin><Navigate to="/dashboard" /></RequireLogin>} />
