@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
+import ConnectGoogleCalendarButton from './ConnectGoogleCalendarButton'; // Import this component for use
 
 const DashboardPage: React.FC = () => {
     const userContext = useContext(UserContext);
@@ -21,9 +22,9 @@ const DashboardPage: React.FC = () => {
     const fetchUserCalendarEvents = (token: string, userId: string, startDate: Date) => {
         const endDate = new Date(startDate);
         endDate.setDate(endDate.getDate() + 6);
-        
+
         const calendarApiEndpoint = `${apiUrl}/events/user?user_id=${userId}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
-        
+
         fetch(calendarApiEndpoint, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -43,6 +44,10 @@ const DashboardPage: React.FC = () => {
             });
     };
 
+    const handleGoogleAccessTokenError = () => {
+        setGoogleAccessToken(null);
+    };
+
     return (
         <div className="dashboard-page">
             <h1>Welcome to the Dashboard</h1>
@@ -53,9 +58,10 @@ const DashboardPage: React.FC = () => {
                     accessToken={googleAccessToken}
                     weekStartDate={currentWeekStartDate}
                     onChangeWeek={setCurrentWeekStartDate}
+                    onError={handleGoogleAccessTokenError}
                 /> 
                 :
-                <p>Unable to connect to Google Calendar</p>
+                <ConnectGoogleCalendarButton />
             )}
         </div>
     );
