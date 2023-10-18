@@ -1,26 +1,35 @@
+// types/GoogleTypes.tsx
 
 export type CalendarEvent = {
-    id: string;
-    summary: string;
-    start: {
-      dateTime: string;
-    };
-    end: {
-      dateTime: string;
-    };
+  id: string;
+  summary: string;
+  start: {
+    dateTime: string;
+  };
+  end: {
+    dateTime: string;
+  };
 };
 
 export interface GoogleCalendarWeeklyProps {
-    accessToken: string;
-    weekStartDate: Date;
-    onChangeWeek: (date: Date) => void;
-    onError: () => void; 
-}  
+  events: GoogleCalendarEvent[];
+  weekStartDate: Date;
+  onChangeWeek: (date: Date) => void;
+  onError?: () => void;  // Made this optional as it wasn't used yet
+}
 
 export type GoogleCalendarData = {
-    items: GoogleCalendarEvent[];
+  items: GoogleCalendarEvent[];
 };
 
 export type GoogleCalendarEvent = {
-    // ... appropriate fields for an event
+  id: string;
+  summary: string;
+  start: {
+    dateTime: string;
+  };
+  end: {
+    dateTime: string;
+  };
+  // Add other required fields if any.
 };
