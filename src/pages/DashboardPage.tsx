@@ -1,27 +1,34 @@
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
-import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
 
 const DashboardPage: React.FC = () => {
-    console.log("Rendering DashboardPage");
-
     const userContext = useContext(UserContext);
     const appAccessToken = userContext?.accessToken;
+    const userUUID = userContext?.userUUID;
 
     const [currentWeekStartDate, setCurrentWeekStartDate] = useState(new Date());
     const [googleAccessToken, setGoogleAccessToken] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        if (appAccessToken) {
-            setIsLoading(true);
-            fetch(`${apiUrl}/getGoogleAccessToken`, {
-                headers: {
-                    'Authorization': `Bearer ${appAccessToken}`
-                }
-            })
+        if (appAccessToken && userUUID) {
+            fetchUserCalendarEvents(appAccessToken, userUUID, currentWeekStartDate);
+        }
+    }, [appAccessToken, userUUID, currentWeekStartDate]);
+
+    const fetchUserCalendarEvents = (token: string, userId: string, startDate: Date) => {
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 6);
+        
+        const calendarApiEndpoint = `${apiUrl}/events/user?user_id=${userId}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
+        
+        fetch(calendarApiEndpoint, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => {
                 if (!response.ok) throw new Error('Error fetching Google access token.');
                 return response.json();
@@ -34,11 +41,6 @@ const DashboardPage: React.FC = () => {
                 setIsLoading(false);
                 console.log(error.message);
             });
-        }
-    }, [appAccessToken]);
-
-    const handleGoogleAccessTokenError = () => {
-        setGoogleAccessToken(null);
     };
 
     return (
@@ -51,10 +53,9 @@ const DashboardPage: React.FC = () => {
                     accessToken={googleAccessToken}
                     weekStartDate={currentWeekStartDate}
                     onChangeWeek={setCurrentWeekStartDate}
-                    onError={handleGoogleAccessTokenError}
                 /> 
-                : 
-                <ConnectGoogleCalendarButton />
+                :
+                <p>Unable to connect to Google Calendar</p>
             )}
         </div>
     );
