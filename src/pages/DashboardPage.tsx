@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
-import ConnectGoogleCalendarButton from './ConnectGoogleCalendarButton'; // Import this component for use
+import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton'; // Import this component for use
 
 const DashboardPage: React.FC = () => {
     const userContext = useContext(UserContext);
