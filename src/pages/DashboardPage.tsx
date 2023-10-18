@@ -16,10 +16,11 @@ const DashboardPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
+        console.log("in useEffect, appAccessToken: ", appAccessToken);
         if (appAccessToken && userUUID) {
             fetchUserCalendarEvents(appAccessToken, userUUID, currentWeekStartDate);
         }
-    }, [appAccessToken, userUUID, currentWeekStartDate]);
+    }, [appAccessToken, userUUID, currentWeekStartDate]);    
 
     const fetchUserCalendarEvents = (token: string, userId: string, startDate: Date) => {
         const endDate = new Date(startDate);

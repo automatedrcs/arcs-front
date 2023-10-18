@@ -21,10 +21,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 return response.json();
             })
             .then(data => {
+                console.log('User data:', data);
                 const { userUUID, organizationId } = data;
                 setUserUUID(userUUID);
                 setOrganizationId(organizationId);
-            })
+            })            
             .catch(error => {
                 localStorage.removeItem('jwt');
                 setAccessToken("");
