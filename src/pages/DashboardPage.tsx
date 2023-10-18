@@ -1,3 +1,5 @@
+// pages/DashboardPage.tsx
+
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
 import { apiUrl } from '../config';
@@ -24,24 +26,28 @@ const DashboardPage: React.FC = () => {
         endDate.setDate(endDate.getDate() + 6);
         const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
 
+
         fetch(calendarApiEndpoint, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
         .then(response => {
+            console.log('Fetching calendar events response:', response.status);
             if (!response.ok) throw new Error('Error fetching Google calendar events.');
             return response.json();
         })
         .then(data => {
+            console.log('Calendar events data:', data);
             setCalendarEvents(data);
             setIsLoading(false);
         })
         .catch(error => {
+            console.log('Error fetching calendar events:', error.message);
             setIsLoading(false);
-            console.error(error.message);
         });
     };
+    
 
     return (
         <div className="dashboard-page">

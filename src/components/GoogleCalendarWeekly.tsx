@@ -1,3 +1,5 @@
+// components/GoogleCalendarWeekly.tsx
+
 import React from 'react';
 import { GoogleCalendarEvent, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
 
