@@ -16,20 +16,17 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ accessToken
         const endDate = new Date(startDate);
         endDate.setDate(endDate.getDate() + 6);
         
-        const calendarApiEndpoint = `${apiUrl}/calendar/v3/calendars/primary/events?timeMin=${startDate.toISOString()}&timeMax=${endDate.toISOString()}`;
+        // This is the change. You're calling your backend's API, not Google's.
+        const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${token}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
         
-        fetch(calendarApiEndpoint, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        fetch(calendarApiEndpoint)
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
             })
             .then(calendarData => {
-                if (calendarData.items && Array.isArray(calendarData.items)) {
-                    setEvents(calendarData.items);
+                if (calendarData && Array.isArray(calendarData)) {
+                    setEvents(calendarData);
                 }
             })
             .catch(error => {
