@@ -1,7 +1,6 @@
 /* DashboardPage.css */
 
 .dashboard-page {
-    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
@@ -22,9 +21,6 @@
 
 .dashboard-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     gap: 1rem;
+    width: 100%;
 }
-

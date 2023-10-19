@@ -1,3 +1,5 @@
+/* App.css */
+
 /* Reset default margin and padding */
 html, body {
   margin: 0;
@@ -10,6 +12,7 @@ html, body {
 /* Ensure the root element spans the full viewport */
 #root {
   margin: 0 auto;
+  margin-top: 60px;  /* Add margin to the top */
   padding: 2rem;
   text-align: center;
   min-height: 100%;
