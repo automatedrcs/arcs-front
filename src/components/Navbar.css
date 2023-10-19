@@ -3,22 +3,27 @@
 /* Navbar background color */
 .navbar {
     background-color: #c8e5f1;
-    padding: 1rem 2rem; /* Padding to give some space around the navbar */
-    display: flex;      /* To line up items horizontally */
-    justify-content: space-between; /* Distribute space between items */
-    align-items: center; /* Vertically align items in the middle */
+    padding: 0.5rem 2rem; /* Reduce vertical padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Attach the navbar to the top */
+    top: 0; /* Stick to the top of the screen */
+    width: 100%; /* Full width */
+    z-index: 999; /* Ensure it appears above other content */
 }
 
 /* Link/Button styles */
 .navbar a {
-    color: #426885;      /* Color for the links */
-    text-decoration: none; /* Remove underline */
-    padding: 0.5rem 1rem;  /* Some padding around links to make them look like buttons */
-    border-radius: 4px;   /* Rounded corners for the button look */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    color: #426885;
+    text-decoration: none;
+    padding: 0.3rem 1rem; /* Reduce padding */
+    font-size: 14px; /* Reduce font size */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .navbar a:hover {
-    background-color: #426885; /* Link color for hover background */
-    color: #c8e5f1;            /* Navbar background color for hover text */
+    background-color: #426885;
+    color: #c8e5f1;
 }

@@ -27,12 +27,10 @@ const DashboardPage: React.FC = () => {
         const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
         fetch(calendarApiEndpoint)
         .then(response => {
-            console.log('Fetching calendar events response:', response.status);
             if (!response.ok) throw new Error('Error fetching Google calendar events.');
             return response.json();
         })
         .then(data => {
-            console.log('Calendar events data:', data);
             setCalendarEvents(data);
             setIsLoading(false);
         })
@@ -45,8 +43,6 @@ const DashboardPage: React.FC = () => {
 
     return (
         <div className="dashboard-page">
-            <h1>Welcome to the Dashboard</h1>
-            <p>This is your dashboard, from here you can manage your application's main features.</p>
             {isLoading ? <p>Loading...</p> : (
                 calendarEvents ? 
                 <GoogleCalendarWeekly 
