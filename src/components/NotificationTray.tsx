@@ -4,7 +4,7 @@ function NotificationTray() {
 
     return (
         <div className="notification-tray">
-            <h2>Notification Tray</h2>
+            <h2>Notifications</h2>
             <div>
                 {/* Removed the onClick handlers since they were setting filterType */}
                 <button>Scheduled</button>

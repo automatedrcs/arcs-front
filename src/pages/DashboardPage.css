@@ -1,29 +1,32 @@
+/* DashboardPage.css */
+
 .dashboard-page {
-    padding: 20px;
-    max-width: 1400px; /* Adjust according to your preference */
-    margin: 0 auto;
+    width: 100vw; 
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .dashboard-content {
+    flex-grow: 1;
     display: flex;
     gap: 20px;
     justify-content: space-between;
 }
 
 .notification-tray {
-    flex-basis: 300px;  /* Smartphone dimension width */
-    background-color: #e5f2ff;  /* Ice blue for NotificationTray */
-    padding: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-height: 600px; /* Adjust for best viewport experience */
-    flex: 1 1 25%;
+    flex-basis: 25%;
+    background-color: #A9E3FF;  /* Ice blue for NotificationTray */
+    overflow-y: auto; /* To scroll if content exceeds the max-height */
 }
 
 .google-calendar-weekly {
-    flex-grow: 1;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    flex: 1 1 75%;
+    flex-grow: 3; /* Takes the remaining space */
+    overflow-y: auto; /* To scroll if content exceeds the max-height */
+    background-color: #F6F9FC; /* Slightly different background for differentiation */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Seven days of the week */
+    gap: 10px; /* Gap between the grid items */
 }

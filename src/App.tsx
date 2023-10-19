@@ -43,7 +43,6 @@ const AppContent: React.FC = () => {
         {/* Catch All Route */}
         <Route path="*" element={<Navigate to="/entry" />} />
       </Routes>
-      <TestConnectionButton />
     </>
   );
 };
