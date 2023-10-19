@@ -9,7 +9,6 @@ import AuthenticationSuccessPage from './pages/AuthenticationSuccessPage';
 import AuthenticationErrorPage from './pages/AuthenticationErrorPage';
 import Navbar from './components/Navbar';
 import RequireLogin from './components/RequireLogin';
-import TestConnectionButton from './components/TestConnectionButton';
 import './App.css';
 
 const App: React.FC = () => {
