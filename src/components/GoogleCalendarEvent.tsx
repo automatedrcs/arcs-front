@@ -1,3 +1,5 @@
+// components/GoogleCalendarEvent.tsx
+
 import React from 'react';
 import { GoogleCalendarEventData } from '../types/GoogleTypes';
 

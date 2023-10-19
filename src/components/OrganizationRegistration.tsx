@@ -1,4 +1,5 @@
-// OrganizationRegistration.tsx
+// components/OrganizationRegistration.tsx
+
 import React, { useState } from 'react';
 import { apiUrl } from '../config';
 

@@ -1,4 +1,4 @@
-
+// components/NotificationTray.tsx
 function NotificationTray() {
     // Removed filterType and setFilterType
 
