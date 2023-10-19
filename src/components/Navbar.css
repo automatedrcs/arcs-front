@@ -3,17 +3,13 @@
 /* Navbar background color */
 .navbar {
     background-color: #c8e5f1;
-    padding: 0.5rem 0; /* Reduce vertical padding */
+    padding: 0.25rem 0; /* Further reduce vertical padding for thinner appearance */
     display: flex;
     justify-content: center; /* Center the content */
     align-items: center;
-    position: fixed; /* Attach the navbar to the top */
-    top: 0; /* Stick to the top of the screen */
     width: 100%; /* Full width */
     z-index: 999; /* Ensure it appears above other content */
     box-sizing: border-box;
-    left: 0;
-    right: 0;
 }
 
 .navbar-content {
@@ -29,8 +25,8 @@
 .navbar a {
     color: #426885;
     text-decoration: none;
-    padding: 0.3rem 1rem; /* Reduce padding */
-    font-size: 14px; /* Reduce font size */
+    padding: 0.2rem 0.8rem; /* Further reduce padding for a sleeker look */
+    font-size: 14px; /* Maintain reduced font size */
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
