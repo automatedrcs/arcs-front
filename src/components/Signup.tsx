@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiUrl } from '../config';
-import './Signup.css';
 
 const Signup: React.FC = () => {
     const [username, setUsername] = useState<string>('');

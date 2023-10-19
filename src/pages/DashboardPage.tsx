@@ -6,6 +6,7 @@ import NotificationTray from '../components/NotificationTray'; // import Notific
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
 import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';
+import './DashboardPage.css';
 
 const DashboardPage: React.FC = () => {
     const userContext = useContext(UserContext);
