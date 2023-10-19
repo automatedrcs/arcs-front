@@ -12,17 +12,17 @@ export type CalendarEvent = {
 };
 
 export interface GoogleCalendarWeeklyProps {
-  events: GoogleCalendarEvent[];
+  events: GoogleCalendarEventData[];
   weekStartDate: Date;
   onChangeWeek: (date: Date) => void;
   onError?: () => void;  // Made this optional as it wasn't used yet
 }
 
 export type GoogleCalendarData = {
-  items: GoogleCalendarEvent[];
+  items: GoogleCalendarEventData[];
 };
 
-export type GoogleCalendarEvent = {
+export type GoogleCalendarEventData = {
   id: string;
   summary: string;
   start: {

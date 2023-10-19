@@ -1,5 +1,6 @@
 import React from 'react';
-import { GoogleCalendarEvent, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
+import EventComponent from './GoogleCalendarEvent';
+import { GoogleCalendarEventData, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
 import './GoogleCalendarWeekly.css';
 
 const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, weekStartDate, onChangeWeek }) => {
@@ -15,7 +16,6 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
         onChangeWeek(newStartDate);
     };
 
-    // Days of the week labels
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
@@ -31,27 +31,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         {day}
                     </div>
                 ))}
-                {events.map((event: GoogleCalendarEvent) => {
-                    const eventStartTime = new Date(event.start.dateTime);
-                    const eventEndTime = new Date(event.end.dateTime);
-                    const eventStartMinutes = eventStartTime.getHours() * 60 + eventStartTime.getMinutes();
-                    const eventEndMinutes = eventEndTime.getHours() * 60 + eventEndTime.getMinutes();
-                    const minutesInADay = 24 * 60;
-                    
-                    return (
-                        <div
-                            key={event.id}
-                            className="event"
-                            style={{
-                                top: `${(eventStartMinutes / minutesInADay) * 100}%`,
-                                height: `${((eventEndMinutes - eventStartMinutes) / minutesInADay) * 100}%`,
-                                gridColumn: `${daysOfWeek.indexOf(eventStartTime.toLocaleDateString('en-US', { weekday: 'short' })) + 1}`,
-                            }}
-                        >
-                            {event.summary}
-                        </div>
-                    );                    
-                })}
+                {events.map((event: GoogleCalendarEventData) => (
+                    <EventComponent key={event.id} {...event} />
+                ))}
             </div>
         </div>
     );
