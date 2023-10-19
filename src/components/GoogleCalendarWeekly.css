@@ -4,11 +4,12 @@
 .google-calendar-weekly {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 320px); /* Subtracting approximate width of a smartphone */
+    width: 100%; /* Use 100% width to fill the available space */
+    max-height: 600px; /* Set a reasonable maximum height for scrollability */
+    overflow-y: auto; /* Enable vertical scrolling */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
     background-color: #f9f9f9;
-    overflow: hidden;
     margin-right: 20px; /* Some space between the calendar and the other component */
 }
 
@@ -20,6 +21,7 @@
     background-color: #426885; /* Updated background color */
     padding: 1rem;
     border-bottom: 1px solid #e0e0e0;
+    color: #fff; /* Text color for week navigation */
 }
 
 .week-navigation button {
@@ -37,41 +39,35 @@
     color: #fff; /* Updated button text color on hover */
 }
 
-/* Event items */
-.event {
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    padding: 1rem;
-    background-color: #fff; /* Added background color for events */
-    margin-bottom: 10px; /* Adjust spacing between events */
-}
-
-.event h4 {
-    color: #426885;
-    margin-bottom: 0.5rem;
-}
-
-.event p {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-    color: #777;
-}
-
-/* Grid for days and times (you can adjust this further for your layout) */
+/* Grid for days and times */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
-    grid-gap: 10px; /* Adjust the gap between grid items */
+    grid-template-rows: repeat(24, 1fr); /* 24 rows for hours of the day */
+    grid-gap: 1px; /* Adjust the gap between grid items */
     margin-top: 20px; /* Spacing between navigation and grid */
+    background-color: #fff; /* Background color for the grid */
 }
 
 .grid-item {
-    background-color: #f8f8f8; /* Background color for grid cells */
     border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    padding: 10px;
     text-align: center;
     color: #333; /* Text color for grid items */
+    padding: 5px;
+}
+
+/* Event items */
+.event {
+    position: absolute;
+    background-color: #426885; /* Event block background color */
+    color: #fff; /* Text color for event block */
+    border: 1px solid #426885; /* Event block border color */
+    border-radius: 4px;
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 /* Responsive design - You can adjust this further for specific breakpoints */
