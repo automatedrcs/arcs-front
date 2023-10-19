@@ -1,5 +1,8 @@
+css
+
 /* GoogleCalendarWeekly.css */
 
+/* Calendar container */
 .google-calendar-weekly {
     display: flex;
     flex-direction: column;
@@ -11,6 +14,7 @@
     margin-right: 20px; /* Some space between the calendar and the other component */
 }
 
+/* Week navigation */
 .week-navigation {
     display: flex;
     justify-content: space-between;
@@ -34,6 +38,7 @@
     background-color: #335467;
 }
 
+/* Event items */
 .event {
     border-bottom: 1px solid #e0e0e0;
     padding: 1rem;
@@ -57,7 +62,7 @@
     color: #777;
 }
 
-/* Responsive design - You can adjust this further for specific break points */
+/* Responsive design - You can adjust this further for specific breakpoints */
 @media (max-width: 1024px) {
     .google-calendar-weekly {
         width: 100%;

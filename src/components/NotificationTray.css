@@ -1,0 +1,33 @@
+/* Notification Tray */
+.notification-tray {
+    width: 320px; /* Dimensions of a smartphone */
+    background-color: #b7dfec;
+    padding: 20px;
+    border-radius: 8px;
+    margin-right: 20px; /* Some space between the calendar and the notification tray */
+}
+
+.notification-tray h2 {
+    color: #0b81ae;
+}
+
+.toggle-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.notification-tray button {
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #0b3558;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.notification-tray button:hover,
+.notification-tray button.active {
+    background-color: #065a82;
+}

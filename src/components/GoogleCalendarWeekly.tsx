@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { GoogleCalendarEvent, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
+import './GoogleCalendarWeekly.css'
 
 const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, weekStartDate, onChangeWeek }) => {
     const handlePreviousWeek = () => {
