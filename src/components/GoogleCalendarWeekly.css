@@ -1,5 +1,3 @@
-css
-
 /* GoogleCalendarWeekly.css */
 
 /* Calendar container */
@@ -19,14 +17,14 @@ css
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #c8e5f1;
+    background-color: #426885; /* Updated background color */
     padding: 1rem;
     border-bottom: 1px solid #e0e0e0;
 }
 
 .week-navigation button {
-    background-color: #426885;
-    color: #c8e5f1;
+    background-color: #fff; /* Updated button background color */
+    color: #426885; /* Updated button text color */
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -36,19 +34,16 @@ css
 
 .week-navigation button:hover {
     background-color: #335467;
+    color: #fff; /* Updated button text color on hover */
 }
 
 /* Event items */
 .event {
-    border-bottom: 1px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.event:last-child {
-    border-bottom: none;
+    background-color: #fff; /* Added background color for events */
+    margin-bottom: 10px; /* Adjust spacing between events */
 }
 
 .event h4 {
@@ -60,6 +55,23 @@ css
     margin: 0.25rem 0;
     font-size: 0.9rem;
     color: #777;
+}
+
+/* Grid for days and times (you can adjust this further for your layout) */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    grid-gap: 10px; /* Adjust the gap between grid items */
+    margin-top: 20px; /* Spacing between navigation and grid */
+}
+
+.grid-item {
+    background-color: #f8f8f8; /* Background color for grid cells */
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    color: #333; /* Text color for grid items */
 }
 
 /* Responsive design - You can adjust this further for specific breakpoints */
