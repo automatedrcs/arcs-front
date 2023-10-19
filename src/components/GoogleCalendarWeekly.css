@@ -1,0 +1,65 @@
+/* GoogleCalendarWeekly.css */
+
+.google-calendar-weekly {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 320px); /* Subtracting approximate width of a smartphone */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    background-color: #f9f9f9;
+    overflow: hidden;
+    margin-right: 20px; /* Some space between the calendar and the other component */
+}
+
+.week-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #c8e5f1;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.week-navigation button {
+    background-color: #426885;
+    color: #c8e5f1;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.week-navigation button:hover {
+    background-color: #335467;
+}
+
+.event {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event:last-child {
+    border-bottom: none;
+}
+
+.event h4 {
+    color: #426885;
+    margin-bottom: 0.5rem;
+}
+
+.event p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Responsive design - You can adjust this further for specific break points */
+@media (max-width: 1024px) {
+    .google-calendar-weekly {
+        width: 100%;
+    }
+}

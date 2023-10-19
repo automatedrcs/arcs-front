@@ -1,0 +1,20 @@
+/* DashboardPage.css */
+
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem; /* Space between items */
+    background-color: #f4f6f8; /* Slight grey background for the whole dashboard */
+}
+
+.dashboard-page h1 {
+    color: #426885;
+}
+
+.dashboard-page p {
+    color: #777;
+    max-width: 800px;
+    text-align: center;
+}
