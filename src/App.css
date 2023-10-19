@@ -1,8 +1,6 @@
-/* App.css */
-
 #root {
-  /* Remove margin: 0 auto; this centers the root and may be causing the restricted width. */
-  padding: 2rem 0;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
 }
 
