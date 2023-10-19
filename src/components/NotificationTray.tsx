@@ -3,7 +3,7 @@ function NotificationTray() {
     // Removed filterType and setFilterType
 
     return (
-        <div>
+        <div className="notification-tray">
             <h2>Notification Tray</h2>
             <div>
                 {/* Removed the onClick handlers since they were setting filterType */}

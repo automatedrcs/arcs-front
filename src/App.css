@@ -1,9 +1,11 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f7f9;  /* Neutral background for mage concept */
-  color: #333;
   margin: 0;
   padding: 0;
+  height: 100vh; /* view height - makes the body take the full height of the viewport */
+  width: 100vw; /* view width - makes the body take the full width of the viewport */
+  display: flex;
+  align-items: center; /* centers children vertically */
+  justify-content: center; /* centers children horizontally */
 }
 
 h2 {
@@ -30,7 +32,7 @@ button.active {
 }
 
 .navbar {
-  height: 50px; /* making the navbar thinner */
+  height: 30px; /* making the navbar thinner */
   background-color: #0070ff;
   display: flex;
   align-items: center;

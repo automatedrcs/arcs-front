@@ -10,7 +10,7 @@
     justify-content: space-between;
 }
 
-.NotificationTray {
+.notification-tray {
     flex-basis: 300px;  /* Smartphone dimension width */
     background-color: #e5f2ff;  /* Ice blue for NotificationTray */
     padding: 10px;
@@ -20,7 +20,7 @@
     flex: 1 1 25%;
 }
 
-.GoogleCalendarWeekly {
+.google-calendar-weekly {
     flex-grow: 1;
     background-color: #fff;
     padding: 10px;
