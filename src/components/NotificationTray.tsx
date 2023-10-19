@@ -1,16 +1,16 @@
-import { useState } from 'react';
 
 function NotificationTray() {
-    const [filterType, setFilterType] = useState('');
+    // Removed filterType and setFilterType
 
     return (
         <div>
             <h2>Notification Tray</h2>
             <div>
-                <button onClick={() => setFilterType('scheduled')}>Scheduled</button>
-                <button onClick={() => setFilterType('reschedule')}>Reschedule</button>
-                <button onClick={() => setFilterType('pending')}>Pending</button>
-                <button onClick={() => setFilterType('')}>All</button>
+                {/* Removed the onClick handlers since they were setting filterType */}
+                <button>Scheduled</button>
+                <button>Reschedule</button>
+                <button>Pending</button>
+                <button>All</button>
             </div>
             <ul>
                 {/* This is just a placeholder for the empty tray */}
