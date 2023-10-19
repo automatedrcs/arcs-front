@@ -3,14 +3,26 @@
 /* Navbar background color */
 .navbar {
     background-color: #c8e5f1;
-    padding: 0.5rem 2rem; /* Reduce vertical padding */
+    padding: 0.5rem 0; /* Reduce vertical padding */
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the content */
     align-items: center;
     position: fixed; /* Attach the navbar to the top */
     top: 0; /* Stick to the top of the screen */
     width: 100%; /* Full width */
     z-index: 999; /* Ensure it appears above other content */
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* You can adjust this value based on your design */
+    padding: 0 2rem;
 }
 
 /* Link/Button styles */
@@ -26,4 +38,7 @@
 .navbar a:hover {
     background-color: #426885;
     color: #c8e5f1;
+}
+.navbar a, .navbar button {
+    flex-shrink: 0; /* Prevent the items from shrinking */
 }
