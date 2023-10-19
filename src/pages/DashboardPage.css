@@ -5,8 +5,8 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    gap: 1rem; /* Space between items */
-    background-color: #f4f6f8; /* Slight grey background for the whole dashboard */
+    gap: 1rem;
+    background-color: #f4f6f8;
 }
 
 .dashboard-page h1 {
@@ -18,3 +18,12 @@
     max-width: 800px;
     text-align: center;
 }
+
+.dashboard-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+

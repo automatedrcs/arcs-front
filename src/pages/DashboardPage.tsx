@@ -2,6 +2,7 @@
 
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
+import NotificationTray from '../components/NotificationTray'; // import NotificationTray component
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
 import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';
@@ -40,21 +41,24 @@ const DashboardPage: React.FC = () => {
         });
     };
     
-
     return (
         <div className="dashboard-page">
             {isLoading ? <p>Loading...</p> : (
-                calendarEvents ? 
-                <GoogleCalendarWeekly 
-                    events={calendarEvents}
-                    weekStartDate={currentWeekStartDate}
-                    onChangeWeek={setCurrentWeekStartDate}
-                /> 
-                :
-                <ConnectGoogleCalendarButton />
+                <div className="dashboard-content"> {/* Wrapping div for the calendar and notification tray */}
+                    {calendarEvents ? 
+                    <GoogleCalendarWeekly 
+                        events={calendarEvents}
+                        weekStartDate={currentWeekStartDate}
+                        onChangeWeek={setCurrentWeekStartDate}
+                    /> 
+                    :
+                    <ConnectGoogleCalendarButton />
+                    }
+                    <NotificationTray /> {/* NotificationTray component */}
+                </div>
             )}
         </div>
     );
-};
+}
 
 export default DashboardPage;

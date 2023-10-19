@@ -1,10 +1,10 @@
 /* Notification Tray */
 .notification-tray {
-    width: 320px; /* Dimensions of a smartphone */
-    background-color: #b7dfec;
+    width: 30%; /* Adjust the width as per your requirements */
     padding: 20px;
     border-radius: 8px;
-    margin-right: 20px; /* Some space between the calendar and the notification tray */
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .notification-tray h2 {
