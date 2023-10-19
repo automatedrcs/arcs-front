@@ -5,6 +5,7 @@
     border-radius: 8px;
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
 .notification-tray h2 {
@@ -17,7 +18,6 @@
 }
 
 .notification-tray button {
-    flex: 1;
     padding: 10px;
     cursor: pointer;
     border: none;
