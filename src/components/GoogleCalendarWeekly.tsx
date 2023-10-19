@@ -28,7 +28,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (
-                    <div key={index} className="grid-item">
+                    <div key={index} className="grid-item-day">
                         {day}
                     </div>
                 ))}

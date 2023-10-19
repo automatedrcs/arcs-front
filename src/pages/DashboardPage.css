@@ -18,15 +18,39 @@
 
 .notification-tray {
     flex-basis: 25%;
-    background-color: #A9E3FF;  /* Ice blue for NotificationTray */
+    background-color: #D0ECFF;  /* Ice blue for NotificationTray */
     overflow-y: auto; /* To scroll if content exceeds the max-height */
 }
 
 .google-calendar-weekly {
     flex-grow: 3; /* Takes the remaining space */
     overflow-y: auto; /* To scroll if content exceeds the max-height */
-    background-color: #F6F9FC; /* Slightly different background for differentiation */
+    background-color: #D0ECFF; /* Slightly different background for differentiation */
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* Seven days of the week */
-    gap: 10px; /* Gap between the grid items */
+    grid-template-rows: auto 1fr; /* Added this to split the calendar into navigation and main grid sections */
+    gap: 10px; 
+}
+
+.week-navigation {
+    grid-column: span 7; /* Makes sure the week navigation spans across all columns */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #f0f0f0; /* You can change this to any color you want */
+    border-bottom: 1px solid #d0d0d0; /* Adds a subtle line below the navigation */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 10px;
+}
+
+.event {
+    background-color: #0077CC; /* Example color for the events, adjust as needed */
+    padding: 5px;
+    border-radius: 5px; /* Rounded corners for events */
+    overflow: hidden; /* In case the content is too much */
+    text-overflow: ellipsis; /* Cut off the text with ... if it overflows */
 }
