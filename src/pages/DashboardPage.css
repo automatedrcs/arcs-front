@@ -20,7 +20,6 @@
 .google-calendar-weekly {
     flex: 1;
     flex-grow: 1;
-    overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -30,7 +29,6 @@
     border-bottom: 5px solid #D0ECFF;
     box-sizing: border-box;
     padding: 0;
-    overflow: hidden;
 }
 
 .google-calendar-weekly::-webkit-scrollbar {
@@ -71,10 +69,11 @@
     gap: 1px;
     grid-auto-rows: 30px;
     position: relative;
-    width: 100%; /* Ensures full width */
-    height: 100%; /* Ensures full height */
-    overflow-y: auto; /* Makes it scrollable */
+    width: calc(100% - 10px); /* Removing gap width */
+    overflow-y: auto; 
     justify-items: stretch;
+    margin: 0;
+    padding: 0;
 }
 
 .grid-container::-webkit-scrollbar {
