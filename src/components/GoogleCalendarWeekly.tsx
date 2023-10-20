@@ -22,9 +22,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     return (
         <div className="google-calendar-weekly">
             <div className="week-navigation">
-                <button onClick={handlePreviousWeek}>&larr;</button> {/* Replace with left arrow */}
+                <button onClick={handlePreviousWeek}>&larr;</button>
                 <span>{weekStartDate.toLocaleDateString()} - {new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span>
-                <button onClick={handleNextWeek}>&rarr;</button> {/* Replace with right arrow */}
+                <button onClick={handleNextWeek}>&rarr;</button>
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (
@@ -33,9 +33,12 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                     </div>
                 ))}
                 {Array.from({ length: 48 }).map((_, index) => (
-                    <div className="half-hour-label" key={index}>
-                        {index % 2 === 0 ? `${Math.floor(index/2)}:00` : `${Math.floor(index/2)}:30`}
-                    </div>
+                    <>
+                        <div className="half-hour-label" key={index}>
+                            {index % 2 === 0 ? `${Math.floor(index/2)}:00` : `${Math.floor(index/2)}:30`}
+                        </div>
+                        <div className="tick-line" style={{top: `${index * 30}px`}}></div> {/* Add the tick line */}
+                    </>
                 ))}
                 {events.map((event: GoogleCalendarEventData) => (
                     <EventComponent key={event.id} {...event} />

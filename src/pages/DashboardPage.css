@@ -2,12 +2,12 @@
 
 .dashboard-page {
     width: 100vw;
-    height: calc(100vh - 50px); /* Accounting for navbar's height */
+    height: calc(100vh - 50px);
     margin: 0;
     padding: 0;
     display: flex;
     background-color: #f0f0f0;
-    overflow: hidden; /* Prevents potential double scrollbars */
+    overflow: hidden;
 }
 
 .dashboard-content {
@@ -16,13 +16,14 @@
 }
 
 .google-calendar-weekly {
-    flex-grow: 1;
+    flex-grow: 1; /* take up the remaining space */
     overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 10px; /* This will ensure padding between the navigation buttons and the grid */
+    gap: 10px;
     border: 5px solid #D0ECFF;
+    box-sizing: border-box; /* makes sure the border is inside the calendar's container */
 }
 
 .week-navigation {
@@ -46,14 +47,32 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* Use fractions to ensure it fills its parent's width */
+    grid-template-columns: 30px repeat(7, 1fr); /* Add space for the half-hour labels */
     gap: 1px; /* Minor gap between cells */
     grid-auto-rows: 30px;
+    position: relative;
 }
 
 .grid-container .grid-item-day {
     text-align: center;
-    grid-row: span 48;
+    grid-row: 1 / span 48;
+    grid-column-start: 2; /* Adjust to start after the half-hour label column */
+}
+
+.half-hour-label {
+    color: gray;
+    font-size: 10px; /* Make the font tiny */
+    text-align: right;
+    padding-right: 5px; /* Little space to right-align within the label box */
+}
+
+.tick-line {
+    position: absolute;
+    left: 30px; /* Start after the label column */
+    width: calc(100% - 30px); /* Take the full width minus the label column */
+    height: 1px; /* Height of the line */
+    background-color: gray;
+    opacity: 0.5; /* Make the line greyed out */
 }
 
 .event {
@@ -67,12 +86,12 @@
 }
 
 .notification-tray {
+    width: 200px; /* fixed width of the tray */
+    height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px; /* Added padding on all sides */
+    padding: 10px;
+    box-sizing: border-box; /* ensures the padding and scroll are inside the 200px */
 }
 
 .notification-tray button {
@@ -84,15 +103,10 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
-    margin: 10px 0; /* Adjusted for equidistant spacing */
-}
-
-.notification-tray button:hover {
-    background-color: rgba(0, 119, 204, 0.1);
+    margin: 2.5px 0; /* Half of the desired padding for equidistant spacing */
 }
 
 .notification-tray h2 {
     text-align: center;
     margin-bottom: 10px;
     color: black;
-}
