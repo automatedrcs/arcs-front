@@ -1,13 +1,13 @@
 /* DashboardPage.css */
+
 .dashboard-page {
     width: 100vw;
-    height: calc(100vh - 50px); /* Subtract the navbar's height */
+    height: calc(100vh - 50px); /* Accounting for navbar's height */
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
     background-color: #f0f0f0;
-    overflow: hidden; /* Prevents double scrollbars */
+    overflow: hidden; /* Prevents potential double scrollbars */
 }
 
 .dashboard-content {
@@ -22,7 +22,7 @@
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 10px;
-    border: 5px solid #D0ECFF; /* Added border to all sides */
+    border: 5px solid #D0ECFF;
 }
 
 .week-navigation {
@@ -36,18 +36,17 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    /* Calculated for a 30px height for each half-hour slot. */
-    grid-auto-rows: 30px; 
+    /* Removed any gaps to ensure the grid fits perfectly */
+    grid-template-columns: repeat(7, calc((100% - 5px) / 7)); /* minus 5px to account for the total grid gap */
+    gap: 1px; /* Introducing a minor gap between cells for visual clarity */
+    grid-auto-rows: 30px; /* This sets each grid row to 30px height */
 }
 
 .grid-container .grid-item-day {
     text-align: center;
-    grid-row: span 48; /* 24 hours * 2 half-hour slots = 48 */
+    grid-row: span 48; /* This ensures each day label spans the entire day */
 }
 
-/* Added labels for half-hour intervals */
 .grid-container .half-hour-label {
     font-size: 10px;
     text-align: right;
@@ -60,48 +59,36 @@
     background-color: #0077CC;
     padding: 5px;
     border-radius: 5px;
-    font-size: 12px; /* Adjusted to fit longer event titles */
+    font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 30px; /* This height fits in the half-hourly intervals */
+    height: 30px;
 }
 
-
 .notification-tray {
-    flex-basis: 240px; /* Adjusted to make it more like a sidebar */
+    flex-basis: 200px; /* This sets a fixed width for the sidebar */
     background-color: #f0f0f0;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px; /* Added some padding for aesthetic */
+    padding: 5px;
 }
 
-/* Notification tray button styles */
 .notification-tray button {
     display: inline-block;
-    width: 30px; /* Adjusted width */
-    height: 30px; /* Adjusted height */
+    width: 30px;
+    height: 30px;
     background-color: #0077CC;
     color: darkgray;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: 2px;
+    font-size: 7px;
 }
 
 .notification-tray button:hover {
     background-color: rgba(0, 119, 204, 0.1);
-}
-
-.notification-tray button span {
-    font-size: 7px; /* Adjusted font size for smaller button dimensions */
-    text-align: center;
-    line-height: 30px; /* Adjusted for vertical centering */
-    max-width: 30px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .notification-tray h2 {
