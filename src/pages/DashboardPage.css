@@ -1,8 +1,9 @@
 /* DashboardPage.css */
 
 .dashboard-page {
+    display: flex;
+    height: 100%;
     width: 100vw;
-    height: calc(100vh - 50px);
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -16,7 +17,7 @@
 }
 
 .google-calendar-weekly {
-    flex: 1; /* Allow it to grow and fill available space */
+    flex-grow: 1;
     overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
@@ -103,7 +104,7 @@
 
 .notification-tray {
     flex-shrink: 0;
-    width: 265px;
+    width: 240px;
     height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
