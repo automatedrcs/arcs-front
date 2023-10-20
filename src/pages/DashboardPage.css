@@ -1,7 +1,7 @@
 /* DashboardPage.css */
 
 .dashboard-page {
-    width: 100vw; 
+    width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
@@ -12,45 +12,79 @@
 .dashboard-content {
     flex-grow: 1;
     display: flex;
-    gap: 20px;
-    justify-content: space-between;
+    border-left: 5px solid #D0ECFF;
+    border-right: 5px solid #D0ECFF;
 }
 
 .notification-tray {
-    flex-basis: 25%;
-    background-color: #D0ECFF;  /* Ice blue for NotificationTray */
-    overflow-y: auto; /* To scroll if content exceeds the max-height */
+    flex-basis: calc(25% - 10px);  /* Adjusted for the borders */
+    background-color: #f0f0f0;
+    overflow-y: auto;
+    border-right: 5px solid #D0ECFF;
 }
 
 .google-calendar-weekly {
-    flex-grow: 3; /* Takes the remaining space */
-    overflow-y: auto; /* To scroll if content exceeds the max-height */
-    background-color: #D0ECFF; /* Slightly different background for differentiation */
+    flex-grow: 1;  /* Ensures it takes up the rest of the space */
+    padding-left: 10px;  /* Added padding */
+    overflow-y: auto;
+    background-color: #f0f0f0;
     display: grid;
-    grid-template-rows: auto 1fr; /* Added this to split the calendar into navigation and main grid sections */
-    gap: 10px; 
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    border-left: 5px solid #D0ECFF;
 }
 
 .week-navigation {
-    grid-column: span 7; /* Makes sure the week navigation spans across all columns */
+    grid-column: span 7;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    background-color: #f0f0f0; /* You can change this to any color you want */
-    border-bottom: 1px solid #d0d0d0; /* Adds a subtle line below the navigation */
+    background-color: #D0ECFF;
+    border-bottom: 1px solid #d0d0d0;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); 
+    grid-template-columns: repeat(7, 1fr);
     gap: 10px;
 }
 
+.grid-container .grid-item-day {
+    text-align: center;  /* Centered day labels */
+}
+
 .event {
-    background-color: #0077CC; /* Example color for the events, adjust as needed */
+    background-color: #0077CC;
     padding: 5px;
-    border-radius: 5px; /* Rounded corners for events */
-    overflow: hidden; /* In case the content is too much */
-    text-overflow: ellipsis; /* Cut off the text with ... if it overflows */
+    border-radius: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Notification tray button styles */
+.notification-tray button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.notification-tray button:hover {
+    background-color: rgba(0, 119, 204, 0.1); /* Light blue background on hover */
+}
+
+.notification-tray button span {
+    font-size: 10px;  /* Adjust this as necessary */
+    margin-top: 5px;
+}
+
+.notification-tray h2 {
+    text-align: center;
+    margin-bottom: 10px;
 }
