@@ -12,7 +12,9 @@
 .dashboard-content {
     display: flex;
     height: 100%;
+    justify-content: flex-start; /* This ensures content is aligned to the left */
 }
+
 
 .google-calendar-weekly {
     width: calc(100% - 265px); /* Minor adjustment to fit inside the parent */
@@ -89,13 +91,15 @@
 }
 
 .notification-tray {
-    position: absolute;
-    width: 260px;  /* changed width */
+    width: 260px;
     height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
     padding: 5px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Horizontally center children */
 }
 
 .notification-tray button {
@@ -107,11 +111,10 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
-    margin: 5px;  /* updated margin */
-    display: inline-block;  /* Display buttons side by side */
+    margin: 5px;  
+    display: inline-block;
     text-align: center;
 }
-
 
 .notification-tray h2 {
     text-align: center;
