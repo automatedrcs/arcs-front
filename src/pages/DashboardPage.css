@@ -11,22 +11,20 @@
 }
 
 .dashboard-content {
-    flex: 1;
     display: flex;
     height: 100%;
     overflow: hidden;
 }
 
 .google-calendar-weekly {
-    flex: 1;
-    flex-grow: 1;
+    flex: 1;  /* This will make it take the entire space minus the notification-tray width */
     background-color: #f0f0f0;
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 10px;
     border-left: 5px solid #D0ECFF;
     border-right: 5px solid #D0ECFF;
     border-bottom: 5px solid #D0ECFF;
+    overflow-y: auto;  /* Make it scrollable */
     box-sizing: border-box;
     padding: 0;
 }
@@ -51,7 +49,7 @@
     align-items: center;
     background-color: #D0ECFF;
     border-bottom: 1px solid #d0d0d0;
-    padding: 10px 0; /* Added to provide the same padding on top */
+    padding: 10px 0;
 }
 
 .week-navigation button {
@@ -66,14 +64,10 @@
 .grid-container {
     display: grid;
     grid-template-columns: 30px repeat(7, 1fr);
-    gap: 1px;
     grid-auto-rows: 30px;
-    position: relative;
-    width: calc(100% - 10px); /* Removing gap width */
+    width: 100%;  /* Make sure it takes up the entire width of its parent */
     overflow-y: auto; 
-    justify-items: stretch;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
 }
 
 .grid-container::-webkit-scrollbar {
@@ -124,14 +118,15 @@
 }
 
 .notification-tray {
-    flex-shrink: 0;
+    flex-shrink: 0;  /* Prevents the notification tray from shrinking */
+    flex-grow: 0;  /* Prevents the notification tray from growing */
     width: 240px;
     height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
+    flex-direction: column;
     align-items: center; 
 }
 
