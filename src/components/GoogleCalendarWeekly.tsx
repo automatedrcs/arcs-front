@@ -22,9 +22,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     return (
         <div className="google-calendar-weekly">
             <div className="week-navigation">
-                <button onClick={handlePreviousWeek}>Previous</button>
+                <button onClick={handlePreviousWeek}>&larr;</button> {/* Replace with left arrow */}
                 <span>{weekStartDate.toLocaleDateString()} - {new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span>
-                <button onClick={handleNextWeek}>Next</button>
+                <button onClick={handleNextWeek}>&rarr;</button> {/* Replace with right arrow */}
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (

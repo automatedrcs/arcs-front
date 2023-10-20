@@ -34,6 +34,15 @@
     border-bottom: 1px solid #d0d0d0;
 }
 
+.week-navigation button {
+    width: 100px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* This can be adjusted if necessary */
+    transition: background-color 0.3s;
+}
+
 .grid-container {
     display: grid;
     /* Removed any gaps to ensure the grid fits perfectly */
@@ -47,12 +56,11 @@
     grid-row: span 48; /* This ensures each day label spans the entire day */
 }
 
-.grid-container .half-hour-label {
-    font-size: 10px;
-    text-align: right;
-    padding-right: 5px;
-    color: #888;
-    align-self: center;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Use fractions to ensure it fills its parent's width */
+    gap: 1px;
+    grid-auto-rows: 30px;
 }
 
 .event {
@@ -65,7 +73,9 @@
     height: 30px;
 }
 
+
 .notification-tray {
+    width: 200px;
     flex-basis: 200px; /* This sets a fixed width for the sidebar */
     background-color: #f0f0f0;
     overflow-y: auto;
@@ -75,16 +85,17 @@
     padding: 5px;
 }
 
+
 .notification-tray button {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: #0077CC;
     color: darkgray;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
+    margin: 10px 0;
 }
 
 .notification-tray button:hover {
