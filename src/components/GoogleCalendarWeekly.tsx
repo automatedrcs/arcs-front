@@ -28,7 +28,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (
-                    <div key={index} className="grid-item-day">
+                    <div key={index} className="grid-item-day" style={{gridColumn: index + 2}}> {/* Offset by one column */}
                         {day}
                     </div>
                 ))}
@@ -37,7 +37,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         <div className="half-hour-label" key={index}>
                             {index % 2 === 0 ? `${Math.floor(index/2)}:00` : `${Math.floor(index/2)}:30`}
                         </div>
-                        <div className="tick-line" style={{top: `${index * 30}px`}}></div> {/* Add the tick line */}
+                        <div className="tick-line" style={{top: `${index * 30}px`}}></div>
                     </>
                 ))}
                 {events.map((event: GoogleCalendarEventData) => (
