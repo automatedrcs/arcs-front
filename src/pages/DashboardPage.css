@@ -15,9 +15,9 @@
     justify-content: flex-start; /* This ensures content is aligned to the left */
 }
 
-
 .google-calendar-weekly {
-    width: calc(100% - 265px); /* Minor adjustment to fit inside the parent */
+    width: calc(100% - 265px);
+    flex-grow: 1; /* Allow it to grow and fill available space */
     overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
@@ -51,24 +51,26 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 30px repeat(7, 1fr); 
-    gap: 1px; 
+    grid-template-columns: 30px repeat(7, 1fr);
+    gap: 1px;
     grid-auto-rows: 30px;
     position: relative;
-    width: 100%;  /* Ensuring it takes full available width */
+    width: 100%;
 }
 
 .grid-container .grid-item-day {
     text-align: center;
     grid-row: 1 / span 48;
-    grid-column-start: 2; /* Adjust to start after the half-hour label column */
+    grid-column: span 1; 
 }
+
 
 .half-hour-label {
     color: gray;
-    font-size: 10px; /* Make the font tiny */
+    font-size: 10px;
     text-align: right;
-    padding-right: 5px; /* Little space to right-align within the label box */
+    padding-right: 5px;
+    grid-column: 1; /* This ensures it always occupies the first column */
 }
 
 .tick-line {
@@ -111,7 +113,6 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
-    margin: 5px;  
     display: inline-block;
     text-align: center;
 }
