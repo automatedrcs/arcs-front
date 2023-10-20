@@ -7,7 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   color: black;
-  font-family: Arial, sans-serif;
+  font-family: Calibri;
   overflow: hidden; /* Added to remove the scrollbar space at the bottom */
 }
 
