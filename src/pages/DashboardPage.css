@@ -30,6 +30,15 @@
     padding: 0 5px;
 }
 
+.google-calendar-weekly::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.google-calendar-weekly::-webkit-scrollbar-thumb {
+    background-color: #D0ECFF; /* Light blue color for the scrollbar */
+    border-radius: 4px;
+}
+
 .week-navigation {
     grid-column: span 7;
     display: flex;
@@ -56,21 +65,22 @@
     grid-auto-rows: 30px;
     position: relative;
     width: 100%;
+    justify-items: stretch;
 }
 
 .grid-container .grid-item-day {
     text-align: center;
-    grid-row: 1 / span 48;
-    grid-column: span 1; 
+    grid-row: 1;
+    grid-column: auto; /* Removes explicit column span */
 }
-
 
 .half-hour-label {
     color: gray;
     font-size: 10px;
     text-align: right;
     padding-right: 5px;
-    grid-column: 1; /* This ensures it always occupies the first column */
+    grid-column: 1;
+    grid-row: auto;
 }
 
 .tick-line {
@@ -93,7 +103,7 @@
 }
 
 .notification-tray {
-    width: 260px;
+    width: 200px;
     height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
@@ -101,7 +111,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Horizontally center children */
+    align-items: center; 
 }
 
 .notification-tray button {
@@ -113,8 +123,10 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
+    margin: 5px;
     display: inline-block;
     text-align: center;
+    text-indent: 0;
 }
 
 .notification-tray h2 {
