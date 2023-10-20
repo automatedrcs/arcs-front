@@ -30,6 +30,7 @@
     border-bottom: 5px solid #D0ECFF;
     box-sizing: border-box;
     padding: 0;
+    overflow: hidden;
 }
 
 .google-calendar-weekly::-webkit-scrollbar {
@@ -70,8 +71,19 @@
     gap: 1px;
     grid-auto-rows: 30px;
     position: relative;
-    width: 100%; /* This ensures the grid takes the full width of its parent */
+    width: 100%; /* Ensures full width */
+    height: 100%; /* Ensures full height */
+    overflow-y: auto; /* Makes it scrollable */
     justify-items: stretch;
+}
+
+.grid-container::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.grid-container::-webkit-scrollbar-thumb {
+    background-color: #D0ECFF; 
+    border-radius: 4px;
 }
 
 .grid-container .grid-item-day {
