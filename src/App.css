@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   color: black;
   font-family: Calibri;
-  overflow: hidden; /* Added to remove the scrollbar space at the bottom */
+  overflow: hidden;
 }
 
 *, *::before, *::after {

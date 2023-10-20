@@ -11,6 +11,7 @@
 }
 
 .dashboard-content {
+    border: 1px solid red;
     display: flex;
     height: 100%;
     justify-content: flex-start; /* This ensures content is aligned to the left */
@@ -27,7 +28,7 @@
     border-right: 5px solid #D0ECFF;
     border-bottom: 5px solid #D0ECFF;
     box-sizing: border-box;
-    padding: 0 5px;
+    padding: 0;
 }
 
 .google-calendar-weekly::-webkit-scrollbar {
