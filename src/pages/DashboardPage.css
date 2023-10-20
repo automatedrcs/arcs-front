@@ -16,14 +16,16 @@
 }
 
 .google-calendar-weekly {
-    flex-grow: 1; /* take up the remaining space */
+    flex-grow: 1;
     overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 10px;
-    border: 5px solid #D0ECFF;
-    box-sizing: border-box; /* makes sure the border is inside the calendar's container */
+    border-left: 5px solid #D0ECFF;
+    border-right: 5px solid #D0ECFF;
+    border-bottom: 5px solid #D0ECFF;
+    box-sizing: border-box;
 }
 
 .week-navigation {
@@ -86,12 +88,12 @@
 }
 
 .notification-tray {
-    width: 200px; /* fixed width of the tray */
+    width: 260px; /* updated width */
     height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
     padding: 10px;
-    box-sizing: border-box; /* ensures the padding and scroll are inside the 200px */
+    box-sizing: border-box;
 }
 
 .notification-tray button {
@@ -103,7 +105,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
-    margin: 2.5px 0; /* Half of the desired padding for equidistant spacing */
+    margin: 5px 0; /* updated margin for proper spacing */
 }
 
 .notification-tray h2 {
