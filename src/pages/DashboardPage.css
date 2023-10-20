@@ -10,12 +10,12 @@
 }
 
 .dashboard-content {
-    display: block;
+    display: flex;
     height: 100%;
 }
 
 .google-calendar-weekly {
-    width: calc(100% - 10px); /* Minor adjustment to fit inside the parent */
+    width: calc(100% - 265px); /* Minor adjustment to fit inside the parent */
     overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
@@ -90,7 +90,7 @@
 
 .notification-tray {
     position: absolute;
-    width: 200px;  /* changed width */
+    width: 260px;  /* changed width */
     height: 100%;
     background-color: #f0f0f0;
     overflow-y: auto;
