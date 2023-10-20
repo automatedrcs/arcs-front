@@ -46,6 +46,7 @@ const DashboardPage: React.FC = () => {
         <div className="dashboard-page">
             {isLoading ? <p>Loading...</p> : (
                 <div className="dashboard-content"> {/* Wrapping div for the calendar and notification tray */}
+                    <NotificationTray /> {/* NotificationTray component */}
                     {calendarEvents ? 
                     <GoogleCalendarWeekly 
                         events={calendarEvents}
@@ -55,7 +56,6 @@ const DashboardPage: React.FC = () => {
                     :
                     <ConnectGoogleCalendarButton />
                     }
-                    <NotificationTray /> {/* NotificationTray component */}
                 </div>
             )}
         </div>
