@@ -16,12 +16,12 @@
 }
 
 .google-calendar-weekly {
-    flex-grow: 1; 
+    flex-grow: 1;
     overflow-y: auto;
     background-color: #f0f0f0;
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 10px;
+    gap: 10px; /* This will ensure padding between the navigation buttons and the grid */
     border: 5px solid #D0ECFF;
 }
 
@@ -32,6 +32,7 @@
     align-items: center;
     background-color: #D0ECFF;
     border-bottom: 1px solid #d0d0d0;
+    padding: 10px 0; /* Added to provide the same padding on top */
 }
 
 .week-navigation button {
@@ -39,28 +40,20 @@
     height: 40px;
     border: none;
     cursor: pointer;
-    font-size: 16px; /* This can be adjusted if necessary */
+    font-size: 16px;
     transition: background-color 0.3s;
 }
 
 .grid-container {
     display: grid;
-    /* Removed any gaps to ensure the grid fits perfectly */
-    grid-template-columns: repeat(7, calc((100% - 5px) / 7)); /* minus 5px to account for the total grid gap */
-    gap: 1px; /* Introducing a minor gap between cells for visual clarity */
-    grid-auto-rows: 30px; /* This sets each grid row to 30px height */
+    grid-template-columns: repeat(7, 1fr); /* Use fractions to ensure it fills its parent's width */
+    gap: 1px; /* Minor gap between cells */
+    grid-auto-rows: 30px;
 }
 
 .grid-container .grid-item-day {
     text-align: center;
-    grid-row: span 48; /* This ensures each day label spans the entire day */
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* Use fractions to ensure it fills its parent's width */
-    gap: 1px;
-    grid-auto-rows: 30px;
+    grid-row: span 48;
 }
 
 .event {
@@ -73,18 +66,14 @@
     height: 30px;
 }
 
-
 .notification-tray {
-    width: 200px;
-    flex-basis: 200px; /* This sets a fixed width for the sidebar */
     background-color: #f0f0f0;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5px;
+    padding: 10px 5px; /* Adjusted to provide equidistant spacing for the first and last buttons */
 }
-
 
 .notification-tray button {
     width: 40px;
@@ -95,7 +84,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
-    margin: 10px 0;
+    margin: 5px 0; /* Adjusted for equidistant spacing */
 }
 
 .notification-tray button:hover {
