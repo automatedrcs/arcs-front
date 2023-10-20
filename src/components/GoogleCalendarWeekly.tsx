@@ -32,6 +32,11 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         {day}
                     </div>
                 ))}
+                {Array.from({ length: 48 }).map((_, index) => (
+                    <div className="half-hour-label" key={index}>
+                        {index % 2 === 0 ? `${Math.floor(index/2)}:00` : `${Math.floor(index/2)}:30`}
+                    </div>
+                ))}
                 {events.map((event: GoogleCalendarEventData) => (
                     <EventComponent key={event.id} {...event} />
                 ))}

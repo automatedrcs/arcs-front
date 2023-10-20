@@ -2,12 +2,13 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: calc(100vh - 50px); /* Subtract the navbar's height */
   width: 100vw;
   display: flex;
   flex-direction: column;
   color: black;
   font-family: Arial, sans-serif;
+  overflow: hidden; /* Added to remove the scrollbar space at the bottom */
 }
 
 *, *::before, *::after {
