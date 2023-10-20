@@ -3,7 +3,7 @@
 .dashboard-page {
     display: flex;
     height: 100%;
-    width: 100vw;
+    width: 100%;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -39,6 +39,10 @@
     border-radius: 4px;
 }
 
+.google-calendar-weekly, .google-calendar-weekly * {
+    box-sizing: border-box;
+}
+
 .week-navigation {
     grid-column: span 7;
     display: flex;
@@ -72,6 +76,10 @@
     text-align: center;
     grid-row: 1;
     grid-column: span 1 / auto;
+}
+
+.grid-container > * {
+    overflow: hidden;
 }
 
 .half-hour-label {
