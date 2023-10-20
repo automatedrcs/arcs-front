@@ -12,7 +12,6 @@
 .dashboard-content {
     display: block;
     height: 100%;
-    margin-left: 200px;  /* space left for the notification tray */
 }
 
 .google-calendar-weekly {
@@ -56,6 +55,7 @@
     position: relative;
     width: 100%;  /* Ensuring it takes full available width */
 }
+
 .grid-container .grid-item-day {
     text-align: center;
     grid-row: 1 / span 48;
