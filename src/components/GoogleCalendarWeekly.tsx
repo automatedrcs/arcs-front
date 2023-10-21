@@ -1,5 +1,3 @@
-// components/GoogleCalendarWeekly.tsx
-
 import React from 'react';
 import EventComponent from './GoogleCalendarEvent';
 import { GoogleCalendarEventData, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
@@ -19,6 +17,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+    // Sort events chronologically
+    const sortedEvents = [...events].sort((a, b) => new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime());
+
     return (
         <div className="google-calendar-weekly">
             <div className="week-navigation">
@@ -28,19 +29,11 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (
-                    <div key={index} className="grid-item-day" style={{gridColumn: index + 2}}> {/* Offset by one column */}
+                    <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}> {/* Adjusted gridColumn */}
                         {day}
                     </div>
                 ))}
-                {Array.from({ length: 48 }).map((_, index) => (
-                    <>
-                        <div className="half-hour-label" key={index}>
-                            {index % 2 === 0 ? `${Math.floor(index/2)}:00` : `${Math.floor(index/2)}:30`}
-                        </div>
-                        <div className="tick-line" style={{top: `${index * 30}px`}}></div>
-                    </>
-                ))}
-                {events.map((event: GoogleCalendarEventData) => (
+                {sortedEvents.map((event: GoogleCalendarEventData) => (
                     <EventComponent key={event.id} {...event} />
                 ))}
             </div>

@@ -100,25 +100,6 @@
     overflow: hidden;
 }
 
-.half-hour-label {
-    color: gray;
-    font-size: 10px;
-    text-align: right;
-    padding-right: 5px;
-    grid-column: 1;
-    grid-row: auto;
-}
-
-.tick-line {
-    position: absolute;
-    left: calc(30px + 8px); 
-    right: 8px;
-    width: calc(100% - 30px);
-    height: 1px;
-    background-color: gray;
-    opacity: 0.5;
-}
-
 .event {
     background-color: #0077CC;
     padding: 5px;

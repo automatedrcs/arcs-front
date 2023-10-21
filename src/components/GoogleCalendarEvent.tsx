@@ -1,5 +1,3 @@
-// components/GoogleCalendarEvent.tsx
-
 import React from 'react';
 import { GoogleCalendarEventData } from '../types/GoogleTypes';
 
@@ -18,7 +16,7 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventData> = ({ id, start, end
             style={{
                 top: `${(eventStartMinutes / minutesInADay) * 100}%`,
                 height: `${((eventEndMinutes - eventStartMinutes) / minutesInADay) * 100}%`,
-                gridColumn: `${daysOfWeek.indexOf(eventStartTime.toLocaleDateString('en-US', { weekday: 'short' })) + 1}`,
+                gridColumn: `${daysOfWeek.indexOf(eventStartTime.toLocaleDateString('en-US', { weekday: 'short' })) + 2}`, // Adjusted gridColumn
             }}
         >
             {summary}
