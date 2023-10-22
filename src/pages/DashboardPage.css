@@ -12,19 +12,19 @@
 
 .dashboard-content {
     display: flex;
-    height: calc(100vh - 50px); /* Adjusted to subtract the navbar's height */
+    height: calc(100vh - 50px);
     width: 100%;
     overflow: hidden;
 }
 
 .google-calendar-weekly {
-    flex: 1;  /* This will make it take the entire space minus the notification-tray width */
+    flex: 1;
     background-color: #f0f0f0;
     grid-template-rows: auto 1fr;
     border-left: 5px solid #D0ECFF;
     border-right: 5px solid #D0ECFF;
     border-bottom: 5px solid #D0ECFF;
-    overflow-y: auto;  /* Make it scrollable */
+    overflow-y: auto;
     box-sizing: border-box;
     padding: 0;
     display: flex;
@@ -36,7 +36,7 @@
 }
 
 .google-calendar-weekly::-webkit-scrollbar-thumb {
-    background-color: #D0ECFF; /* Light blue color for the scrollbar */
+    background-color: #D0ECFF;
     border-radius: 4px;
 }
 
@@ -46,7 +46,7 @@
 
 .google-calendar-weekly .grid-container {
     width: 100%;
-    max-width: none; /* Removes any possible max-width */
+    max-width: none;
 }
 
 .week-navigation {
@@ -100,29 +100,32 @@
 }
 
 .event {
-    height: auto; /* Make the height auto so that it can expand */
+    width: 100%;                 /* take up full column width */
+    border-radius: 4px;          /* rounded corners */
+    height: auto;
+    padding: 2px 4px;           /* padding for top and bottom margin */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    white-space: normal; /* Wrap the text to the next line */
+    white-space: normal;
     line-height: 1.2;
-    font-size: 10px; /* Reduce the font size to fit inside 100px column width */
-    min-width: 100px; /* Minimum width of the event */
+    font-size: 10px;
     background-color: #483D8B;
 }
 
 .event-title {
+    font-size: 10px;             /* adjust font size as needed */
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 2;       /* title takes up two lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 5px; /* Little space before the time window */
+    margin-bottom: 4px;
 }
 
 .event-time-window {
-    font-size: 8px; /* Slightly smaller font for the time window */
+    font-size: 12px;             /* slightly bigger than the title text */
 }
 
 .notification-tray {
@@ -134,8 +137,9 @@
     overflow-y: auto;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    align-items: center; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
 }
 
 .notification-tray button {
@@ -148,12 +152,12 @@
     transition: background-color 0.3s;
     font-size: 7px;
     margin: 5px;
-    display: flex; /* change from inline-block to flex */
-    align-items: center; /* vertically center the content */
-    justify-content: center; /* horizontally center the content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     text-indent: 0;
-    padding: 0; /* set padding to 0 to ensure content is centered */
+    padding: 0;
 }
 
 .notification-tray h2 {
