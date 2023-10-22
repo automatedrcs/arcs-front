@@ -102,6 +102,8 @@
     border-radius: 10px;
     height: auto;
     padding: 2px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     white-space: nowrap;          /* Changed from 'normal' to prevent wrapping */
