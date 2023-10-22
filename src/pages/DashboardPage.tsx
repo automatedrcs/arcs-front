@@ -1,8 +1,6 @@
-// pages/DashboardPage.tsx
-
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
-import NotificationTray from '../components/NotificationTray'; // import NotificationTray component
+import NotificationTray from '../components/NotificationTray';
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
 import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';
@@ -11,13 +9,13 @@ import './DashboardPage.css';
 const DashboardPage: React.FC = () => {
     const userContext = useContext(UserContext);
     const userUUID = userContext?.userUUID;
+    const now = new Date();
+    const [currentWeekStartDate, setCurrentWeekStartDate] = useState(new Date(now.setDate(now.getDate() - now.getDay())));
 
-    const [currentWeekStartDate, setCurrentWeekStartDate] = useState(new Date());
     const [calendarEvents, setCalendarEvents] = useState(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
+    
     useEffect(() => {
-        console.log("in useEffect, appAccessToken: ");
         if (userUUID) {
             fetchUserCalendarEvents(userUUID, currentWeekStartDate);
         }
@@ -45,14 +43,14 @@ const DashboardPage: React.FC = () => {
     return (
         <div className="dashboard-page">
             {isLoading ? <p>Loading...</p> : (
-                <div className="dashboard-content"> {/* Wrapping div for the calendar and notification tray */}
-                    <NotificationTray /> {/* NotificationTray component */}
+                <div className="dashboard-content">
+                    <NotificationTray />
                     {calendarEvents ? 
                     <GoogleCalendarWeekly 
                         events={calendarEvents}
                         weekStartDate={currentWeekStartDate}
-                        onChangeWeek={setCurrentWeekStartDate}
-                    /> 
+                        onChangeWeek={date => setCurrentWeekStartDate(date)}
+                    />
                     :
                     <ConnectGoogleCalendarButton />
                     }

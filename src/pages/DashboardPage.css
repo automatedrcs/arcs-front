@@ -12,9 +12,8 @@
 
 .dashboard-content {
     display: flex;
-    height: 100%;
+    height: calc(100vh - 50px); /* Adjusted to subtract the navbar's height */
     width: 100%;
-    max-width: none;
     overflow: hidden;
 }
 
