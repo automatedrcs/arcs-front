@@ -46,7 +46,7 @@ button.active {
 
 .navbar {
   height: 50px;
-  background-color: #282840;
+  background: linear-gradient(90deg, #282840, #232334); /* subtle gradient for depth */
   display: flex;
   align-items: center;
   justify-content: space-between;

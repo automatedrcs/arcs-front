@@ -24,7 +24,7 @@
   padding: 0; /* Remove padding */
   box-shadow: none; /* Remove shadow */
   background-color: transparent; /* Transparent background */
-  border: 1px solid #4A6FA5;
+  border: none;
 } 
 
 button {
