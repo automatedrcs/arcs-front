@@ -1,8 +1,8 @@
+// components/GoogleCalendarWeekly.tsx
 import React from 'react';
 import EventComponent from './GoogleCalendarEvent';
 import { GoogleCalendarEventData, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
 
-// GoogleCalendarWeekly.tsx
 const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, weekStartDate, onChangeWeek }) => {
     const handlePreviousWeek = () => {
         const newStartDate = new Date(weekStartDate);
@@ -19,8 +19,6 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     const endDate = new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000);
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-    // Sort events chronologically
     const sortedEvents = [...events].sort((a, b) => new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime());
 
     return (
@@ -32,7 +30,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (
-                    <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}> {/* Adjusted gridColumn */}
+                    <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}>
                         {day}
                     </div>
                 ))}
