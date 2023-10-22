@@ -69,10 +69,10 @@
 .grid-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 30px auto;
     grid-auto-rows: minmax(60px, auto);
     width: 100%;
     overflow-y: auto;
-    padding-top: 30px;
     position: relative;
 }
 
@@ -88,6 +88,8 @@
 .grid-container .grid-item-day {
     text-align: center;
     position: sticky;
+    grid-row: 1;
+    top: 0;
     background-color: #1E1E2E;
     z-index: 2;
 }
