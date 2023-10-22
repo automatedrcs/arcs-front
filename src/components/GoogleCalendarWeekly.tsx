@@ -21,6 +21,10 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const sortedEvents = [...events].sort((a, b) => new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime());
 
+    const getDayOfWeek = (date: Date) => {
+        return date.getDay();
+    };
+
     return (
         <div className="google-calendar-weekly">
             <div className="week-navigation">
@@ -34,9 +38,16 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         {day}
                     </div>
                 ))}
-                {sortedEvents.map((event: GoogleCalendarEventData) => (
-                    <EventComponent key={event.id} {...event} />
-                ))}
+                {sortedEvents.map((event: GoogleCalendarEventData) => {
+                    const dayColumn = getDayOfWeek(new Date(event.start.dateTime)) + 1;  // +1 because grid is 1-based index
+                    return (
+                        <EventComponent 
+                            key={event.id} 
+                            {...event} 
+                            style={{ gridColumn: dayColumn, gridRow: 'auto' }}  // Place in the appropriate column and let them stack naturally
+                        />
+                    );
+                })}
             </div>
         </div>
     );

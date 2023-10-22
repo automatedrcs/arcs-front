@@ -1,7 +1,8 @@
 import React from 'react';
-import { GoogleCalendarEventData } from '../types/GoogleTypes';
+import { GoogleCalendarEventProps } from '../types/GoogleTypes';
 
-const GoogleCalendarEvent: React.FC<GoogleCalendarEventData> = ({ id, start, end, summary }) => {
+const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({ id, start, end, summary, style }) => {
+
     const eventStartTime = new Date(start.dateTime);
     const eventEndTime = new Date(end.dateTime);
 
@@ -12,7 +13,7 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventData> = ({ id, start, end
     const timeWindow = `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`;
 
     return (
-        <div key={id} className="event">
+        <div key={id} className="event" style={style}>
             <div className="event-title">{summary}</div>
             <div className="event-time-window">{timeWindow}</div>
         </div>
