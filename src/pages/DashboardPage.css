@@ -67,15 +67,13 @@
 }
 
 .grid-container {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 30px auto;
-    grid-auto-rows: 60px;
+    grid-auto-rows: minmax(60px, auto);
     width: 100%;
-    box-sizing: border-box;
-    flex-grow: 1;
     overflow-y: auto;
+    padding-top: 30px;
+    position: relative;
 }
 
 .grid-container::-webkit-scrollbar {
@@ -90,7 +88,10 @@
 .grid-container .grid-item-day {
     text-align: center;
     grid-row: 1;
-    grid-column: span 1 / auto;
+    position: sticky;
+    top: 0;
+    background-color: #1E1E2E;
+    z-index: 2;
 }
 
 .grid-container > * {
