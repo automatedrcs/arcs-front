@@ -104,31 +104,30 @@
     width: 100%;
     border-radius: 10px;
     height: auto;
-    padding: 4px 2px;           /* Increased padding for top and bottom to provide gap */
+    padding: 4px 2px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    white-space: normal;
+    white-space: nowrap;          /* Changed from 'normal' to prevent wrapping */
     line-height: 1.2;
     font-size: 10px;
     max-height: 60px;
     background-color: #483D8B;
-    margin-bottom: 4px;         /* Added a margin for separation */
+    margin-bottom: 4px;
 }
 
 .event-title {
     font-size: 10px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;         /* Prevent wrapping */
     overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 4px;
+    text-overflow: ellipsis;     /* Use ellipsis when content overflows */
+    max-width: 100%;             /* Ensure it doesn't overflow the parent width */
+    margin-bottom: 2px;
 }
 
 .event-time-window {
-    font-size: 12px;             /* slightly bigger than the title text */
+    font-size: 12px;
 }
 
 .notification-tray {
@@ -155,7 +154,7 @@
     transition: background-color 0.3s;
     font-size: 7px;
     margin: 5px;
-    display: flex;
+    display: inline-flex;         /* Changed to 'inline-flex' for horizontal alignment */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -165,21 +164,8 @@
 
 .notification-tray h2 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
+    margin-top: 4px;
     color: black;
-    width: 100%;
-}
-
-.notification-tray > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.notification-tray > div > div.notification-buttons {
-    display: flex;
-    justify-content: center;
     width: 100%;
 }
