@@ -1,12 +1,9 @@
 // components/NotificationTray.tsx
 function NotificationTray() {
-    // Removed filterType and setFilterType
-
     return (
         <div className="notification-tray">
             <h2>Notifications</h2>
-            <div>
-                {/* Removed the onClick handlers since they were setting filterType */}
+            <div className="notification-buttons">
                 <button>Scheduled</button>
                 <button>Reschedule</button>
                 <button>Pending</button>
