@@ -24,9 +24,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     return (
         <div className="google-calendar-weekly">
             <div className="week-navigation">
-                <button onClick={handlePreviousWeek}>&larr;</button>
+                <button onClick={handlePreviousWeek}>&larr; Prev</button> {/* Change text for better spacing */}
                 <span>{weekStartDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</span>
-                <button onClick={handleNextWeek}>&rarr;</button>
+                <button onClick={handleNextWeek}>Next &rarr;</button> {/* Change text for better spacing */}
             </div>
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (

@@ -11,13 +11,9 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventData> = ({ id, start, end
 
     const timeWindow = `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`;
 
-    const truncatedSummary = summary.length > 27 
-        ? `${summary.substring(0, 24)}...`
-        : summary;
-
     return (
         <div key={id} className="event">
-            <div className="event-title">{truncatedSummary}</div>
+            <div className="event-title">{summary}</div>
             <div className="event-time-window">{timeWindow}</div>
         </div>
     );
