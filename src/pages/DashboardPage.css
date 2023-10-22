@@ -87,9 +87,7 @@
 
 .grid-container .grid-item-day {
     text-align: center;
-    grid-row: 1;
     position: sticky;
-    top: 0;
     background-color: #1E1E2E;
     z-index: 2;
 }

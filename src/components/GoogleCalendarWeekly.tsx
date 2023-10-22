@@ -25,15 +25,14 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
         return date.getDay();
     };
 
+
     let currentRow = 2;
+    let lastDayColumn = -1; // Initialize with an invalid value to ensure the first event doesn't match
 
     return (
         <div className="google-calendar-weekly">
-            <div className="week-navigation">
-                <button onClick={handlePreviousWeek}>&larr; Prev</button>
-                <span>{weekStartDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</span>
-                <button onClick={handleNextWeek}>Next &rarr;</button>
-            </div>
+            {/* ... navigation buttons and week date display ... */}
+            
             <div className="grid-container">
                 {daysOfWeek.map((day, index) => (
                     <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}>
@@ -42,13 +41,21 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                 ))}
                 {sortedEvents.map((event: GoogleCalendarEventData) => {
                     const dayColumn = getDayOfWeek(new Date(event.start.dateTime)) + 1;
-                    let eventRow = currentRow;
-                    currentRow += 1;
+                    
+                    // Check if dayColumn is different from the last event's column.
+                    // If true, reset currentRow.
+                    if (dayColumn !== lastDayColumn) {
+                        currentRow = 2;
+                        lastDayColumn = dayColumn;
+                    } else {
+                        currentRow += 1;
+                    }
+
                     return (
                         <EventComponent 
                             key={event.id} 
                             {...event} 
-                            style={{ gridColumn: dayColumn, gridRow: eventRow }}
+                            style={{ gridColumn: dayColumn, gridRow: currentRow }}
                         />
                     );
                 })}
