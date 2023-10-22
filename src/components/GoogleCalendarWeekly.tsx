@@ -19,7 +19,19 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     const endDate = new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000);
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const sortedEvents = [...events].sort((a, b) => new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime());
+    const sortedEvents = [...events].sort((a, b) => {
+        const isAllDayA = !a.start.dateTime;
+        const isAllDayB = !b.start.dateTime;
+
+        if (isAllDayA && !isAllDayB) {
+            return -1; // a is all-day, so it comes first
+        } else if (!isAllDayA && isAllDayB) {
+            return 1; // b is all-day, so it comes first
+        }
+
+        // Compare start times for non-all-day events
+        return new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime();
+    });
     
     const getDayOfWeek = (date: Date) => {
         return date.getDay();

@@ -1,3 +1,4 @@
+// pages/DashboardPage.tsx
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
 import NotificationTray from '../components/NotificationTray';

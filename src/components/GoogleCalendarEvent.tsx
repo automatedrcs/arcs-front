@@ -1,3 +1,4 @@
+// components/GoogleCalendarEvent.tsx
 import React from 'react';
 import { GoogleCalendarEventProps } from '../types/GoogleTypes';
 
@@ -6,12 +7,17 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({ id, start, en
     const eventStartTime = new Date(start.dateTime);
     const eventEndTime = new Date(end.dateTime);
 
-    const formatTime = (date: Date) => {
-        const timeString = date.toLocaleTimeString([], { hour12: true, hour: 'numeric', minute: '2-digit' });
-        return timeString.toLowerCase();
+    const formatTime = (date: Date, isAllDay: boolean) => {
+        if (isAllDay) {
+            return "All Day";
+        } else {
+            const timeString = date.toLocaleTimeString([], { hour12: true, hour: 'numeric', minute: '2-digit' });
+            return timeString.toLowerCase();
+        }
     };
     
-    const timeWindow = `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`;
+    const isAllDay = !start.dateTime;
+    const timeWindow = formatTime(eventStartTime, isAllDay) + (isAllDay ? "" : ` - ${formatTime(eventEndTime, isAllDay)}`);
 
     return (
         <div key={id} className="event" style={style}>
