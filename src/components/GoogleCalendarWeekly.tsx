@@ -32,7 +32,10 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
         // Compare start times for non-all-day events
         return new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime();
     });
-    
+
+    const allDayEvents = sortedEvents.filter(event => !event.start.dateTime); // Filter all-day events
+    const timeEvents = sortedEvents.filter(event => !!event.start.dateTime); // Filter non-all-day events
+
     const getDayOfWeek = (date: Date) => {
         return date.getDay();
     };
@@ -53,9 +56,20 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         {day}
                     </div>
                 ))}
-                {sortedEvents.map((event: GoogleCalendarEventData) => {
+
+                {/* Render all-day events */}
+                {allDayEvents.map((event: GoogleCalendarEventData) => (
+                    <EventComponent
+                        key={event.id}
+                        {...event}
+                        style={{ gridColumn: getDayOfWeek(new Date(event.start.date)), gridRow: 2 }}
+                    />
+                ))}
+
+                {/* Render non-all-day events */}
+                {timeEvents.map((event: GoogleCalendarEventData) => {
                     const dayColumn = getDayOfWeek(new Date(event.start.dateTime)) + 1;
-                    
+
                     if (dayColumn !== lastDayColumn) {
                         currentRow = 2;
                         lastDayColumn = dayColumn;
@@ -64,9 +78,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                     }
 
                     return (
-                        <EventComponent 
-                            key={event.id} 
-                            {...event} 
+                        <EventComponent
+                            key={event.id}
+                            {...event}
                             style={{ gridColumn: dayColumn, gridRow: currentRow }}
                         />
                     );
