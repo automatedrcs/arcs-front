@@ -1,3 +1,5 @@
+/* pages/EntryPage */
+
 .entry-page {
   width: 100%;
   max-width: 400px; /* Adjust the width of the cards */
@@ -5,7 +7,7 @@
   padding: 20px;
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  background-color: #D0ECFF;
+  background-color: #282840;
   text-align: center;
   margin-top: 5vh;
 }
@@ -22,9 +24,9 @@
   padding: 0; /* Remove padding */
   box-shadow: none; /* Remove shadow */
   background-color: transparent; /* Transparent background */
+  border: 1px solid #4A6FA5;
 } 
 
-/* Buttons styling */
 button {
   align-self: center; /* Center button if the parent is a flex container */
 }
