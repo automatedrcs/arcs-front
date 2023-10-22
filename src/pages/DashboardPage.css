@@ -109,6 +109,7 @@
     line-height: 1.2;
     font-size: 10px; /* Reduce the font size to fit inside 100px column width */
     min-width: 100px; /* Minimum width of the event */
+    background-color: #483D8B;
 }
 
 .event-title {
