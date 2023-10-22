@@ -7,14 +7,10 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({ id, start, en
     const eventEndTime = new Date(end.dateTime);
 
     const formatTime = (date: Date) => {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let formattedMinutes = minutes < 10 ? `0${minutes}` : minutes.toString();
-    
-        return `${hours}:${formattedMinutes}`;
+        const timeString = date.toLocaleTimeString([], { hour12: true, hour: 'numeric', minute: '2-digit' });
+        return timeString.toLowerCase();
     };
     
-
     const timeWindow = `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`;
 
     return (
