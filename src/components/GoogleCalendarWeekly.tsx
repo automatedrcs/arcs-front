@@ -19,29 +19,43 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     const endDate = new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000);
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const sortedEvents = [...events].sort((a, b) => {
-        const isAllDayA = !a.start.dateTime;
-        const isAllDayB = !b.start.dateTime;
 
-        if (isAllDayA && !isAllDayB) {
-            return -1; // a is all-day, so it comes first
-        } else if (!isAllDayA && isAllDayB) {
-            return 1; // b is all-day, so it comes first
+    // Separate events into all-day and timed events
+    const allDayEvents: GoogleCalendarEventData[] = [];
+    const timeEvents: GoogleCalendarEventData[] = [];
+    
+    events.forEach((event) => {
+        if (event.start.dateTime) {
+            timeEvents.push(event);
+        } else {
+            allDayEvents.push(event);
         }
-
-        // Compare start times for non-all-day events
-        return new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime();
     });
-
-    const allDayEvents = sortedEvents.filter(event => !event.start.dateTime); // Filter all-day events
-    const timeEvents = sortedEvents.filter(event => !!event.start.dateTime); // Filter non-all-day events
 
     const getDayOfWeek = (date: Date) => {
         return date.getDay();
     };
 
+    const renderEventsForDay = (dayIndex: number) => {
+        const eventsForDay = timeEvents.filter((event) => {
+            const dayOfWeek = getDayOfWeek(new Date(event.start.dateTime));
+            return dayOfWeek === dayIndex;
+        });
+
+        if (allDayEvents.length > 0 && dayIndex === daysOfWeek.indexOf(weekStartDate.toLocaleDateString())) {
+            eventsForDay.unshift(...allDayEvents);
+        }
+
+        return eventsForDay.map((event: GoogleCalendarEventData) => (
+            <EventComponent
+                key={event.id}
+                {...event}
+                style={{ gridColumn: dayIndex + 1, gridRow: currentRow }}
+            />
+        ));
+    };
+
     let currentRow = 2;
-    let lastDayColumn = -1;
 
     return (
         <div className="google-calendar-weekly">
@@ -54,37 +68,9 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                 {daysOfWeek.map((day, index) => (
                     <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}>
                         {day}
+                        {renderEventsForDay(index)}
                     </div>
                 ))}
-
-                {/* Render all-day events */}
-                {allDayEvents.map((event: GoogleCalendarEventData) => (
-                    <EventComponent
-                        key={event.id}
-                        {...event}
-                        style={{ gridColumn: getDayOfWeek(new Date(event.start.date)), gridRow: 2 }}
-                    />
-                ))}
-
-                {/* Render non-all-day events */}
-                {timeEvents.map((event: GoogleCalendarEventData) => {
-                    const dayColumn = getDayOfWeek(new Date(event.start.dateTime)) + 1;
-
-                    if (dayColumn !== lastDayColumn) {
-                        currentRow = 2;
-                        lastDayColumn = dayColumn;
-                    } else {
-                        currentRow += 1;
-                    }
-
-                    return (
-                        <EventComponent
-                            key={event.id}
-                            {...event}
-                            style={{ gridColumn: dayColumn, gridRow: currentRow }}
-                        />
-                    );
-                })}
             </div>
         </div>
     );
