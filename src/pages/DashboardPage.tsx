@@ -25,7 +25,12 @@ const DashboardPage: React.FC = () => {
     const fetchUserCalendarEvents = (userId: string, startDate: Date) => {
         const endDate = new Date(startDate);
         endDate.setDate(endDate.getDate() + 6);
-        const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
+        
+        // Adjust the start time to include events that have occurred this week
+        const adjustedStartDate = new Date(currentWeekStartDate);
+        adjustedStartDate.setDate(adjustedStartDate.getDate() - 7);
+        
+        const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${adjustedStartDate.toISOString()}&end_time=${endDate.toISOString()}`;
         fetch(calendarApiEndpoint)
         .then(response => {
             if (!response.ok) throw new Error('Error fetching Google calendar events.');

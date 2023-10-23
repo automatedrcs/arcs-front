@@ -99,7 +99,7 @@
 }
 
 .event {
-    width: 100%;
+    width: calc(100% - 4px); /* Adjusted width with margin */
     border-radius: 10px;
     height: auto;
     padding: 2px;
@@ -111,7 +111,7 @@
     line-height: 1.2;
     font-size: 10px;
     background-color: #483D8B;
-    margin: 2px 2px;
+    margin: 2px; /* Added margin between events */
 }
 
 .event-title {
