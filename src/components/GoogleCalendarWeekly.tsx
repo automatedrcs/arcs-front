@@ -64,7 +64,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
                     if (isAllDay) {
                         // For all-day events, calculate the day based on the date
-                        const eventDate = new Date(event.start.date);
+                        const eventDate = new Date(event.start.date!); // Use 'date' property here
                         dayColumn = getDayOfWeek(eventDate) + 1;
                     } else {
                         // For non-all-day events, calculate the day based on dateTime
@@ -79,6 +79,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         currentRow += 1;
                     }
 
+                    // Use GoogleCalendarEventProps here
                     return (
                         <EventComponent 
                             key={event.id} 
