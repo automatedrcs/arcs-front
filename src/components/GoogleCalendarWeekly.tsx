@@ -1,4 +1,3 @@
-// components/GoogleCalendarWeekly.tsx
 import React from 'react';
 import EventComponent from './GoogleCalendarEvent';
 import { GoogleCalendarEventData, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
@@ -25,7 +24,15 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
     // Group events by day
     events.forEach((event) => {
-        const day = event.start.dateTime ? new Date(event.start.dateTime).toDateString() : event.start.date;
+        // Check if event.start.dateTime is present
+        if (!event.start.dateTime) {
+            // Handle the case where start.dateTime is missing
+            // You can provide a fallback behavior or skip the event
+            return;
+        }
+
+        const day = new Date(event.start.dateTime).toDateString();
+
         if (!eventsByDay[day]) {
             eventsByDay[day] = [];
         }
