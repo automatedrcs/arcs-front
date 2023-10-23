@@ -1,3 +1,4 @@
+// components/GoogleCalendarWeekly.tsx
 import React from 'react';
 import EventComponent from './GoogleCalendarEvent';
 import { GoogleCalendarEventData, GoogleCalendarWeeklyProps } from '../types/GoogleTypes';
@@ -24,26 +25,28 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
     // Group events by day
     events.forEach((event) => {
-        let day = "";
+        let day = '';
         // Check if event.start.dateTime is present
         if (event.start.dateTime) {
-            // Handle the case where start.dateTime is missing
-            // You can provide a fallback behavior or skip the event
-            console.log("dateTime missing for event");
             day = new Date(event.start.dateTime).toDateString();
-        }
-        else if (event.start.date) {
-            console.log("date present in event");
-            day = new Date(event.start.dateTime).toDateString();
-        }
-        else {
-            console.log("no date nor dateTime");
+        } else if (event.start.date) {
+            day = new Date(event.start.date).toDateString();
+        } else {
+            console.log('no date nor dateTime for event');
         }
 
         if (!eventsByDay[day]) {
             eventsByDay[day] = [];
         }
         eventsByDay[day].push(event);
+    });
+
+    // Create a mapping between the index and the full date string
+    const indexToDateMapping: { [key: number]: string } = {};
+    daysOfWeek.forEach((day, index) => {
+        const currentDate = new Date(weekStartDate);
+        currentDate.setDate(currentDate.getDate() + index);
+        indexToDateMapping[index] = currentDate.toDateString();
     });
 
     return (
@@ -59,7 +62,7 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                         {day}
                         
                         {/* Render events for the current day */}
-                        {eventsByDay[weekStartDate.toDateString()]?.map((event: GoogleCalendarEventData, eventIndex) => (
+                        {eventsByDay[indexToDateMapping[index]]?.map((event: GoogleCalendarEventData, eventIndex) => (
                             <EventComponent
                                 key={event.id}
                                 {...event}
