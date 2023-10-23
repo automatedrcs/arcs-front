@@ -1,3 +1,4 @@
+// components/GoogleCalendarEvent.tsx
 import React from 'react';
 import { GoogleCalendarEventProps } from '../types/GoogleTypes';
 

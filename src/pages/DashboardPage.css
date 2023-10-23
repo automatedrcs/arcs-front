@@ -110,7 +110,6 @@
     white-space: nowrap;          /* Changed from 'normal' to prevent wrapping */
     line-height: 1.2;
     font-size: 10px;
-    max-height: 60px;
     background-color: #483D8B;
     margin: 2px 2px;
 }
