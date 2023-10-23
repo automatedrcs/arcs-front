@@ -59,16 +59,16 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                 <button onClick={handleNextWeek}>Next &rarr;</button>
             </div>
             <div className="grid-container">
-                {daysOfWeek.map((day, index) => (
-                    <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}>
+                {daysOfWeek.map((day, columnIndex) => (
+                    <div key={columnIndex} className="grid-item-day" style={{ gridColumn: columnIndex + 1 }}>
                         {day}
                         
                         {/* Render events for the current day */}
-                        {eventsByDay[indexToDateMapping[index]]?.map((event: GoogleCalendarEventData, eventIndex) => (
+                        {eventsByDay[indexToDateMapping[columnIndex]]?.map((event: GoogleCalendarEventData, eventIndex) => (
                             <EventComponent
                                 key={event.id}
                                 {...event}
-                                style={{ gridColumn: index + 1, gridRow: eventIndex + 2 }}
+                                style={{ gridColumn: columnIndex + 1, gridRow: eventIndex + 2 }}
                             />
                         ))}
                     </div>
