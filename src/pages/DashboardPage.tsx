@@ -1,9 +1,11 @@
 // pages/DashboardPage.tsx
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
+import GoogleCalendarMonthly from '../components/GoogleCalendarMonthly'; // Import the Monthly Calendar component
 import NotificationTray from '../components/NotificationTray';
 import { apiUrl } from '../config';
 import { UserContext } from '../contexts/UserContext';
+import { GoogleCalendarEventData } from '../types/GoogleTypes';
 import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';
 import './DashboardPage.css';
 
@@ -13,9 +15,13 @@ const DashboardPage: React.FC = () => {
     const now = new Date();
     const [currentWeekStartDate, setCurrentWeekStartDate] = useState(new Date(now.setDate(now.getDate() - now.getDay())));
 
-    const [calendarEvents, setCalendarEvents] = useState(null);
+    // Initialize calendarEvents as an empty array with the correct type
+    const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEventData[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     
+    // Add state to track the selected view (weekly or monthly)
+    const [selectedView, setSelectedView] = useState<'weekly' | 'monthly'>('weekly');
+
     useEffect(() => {
         if (userUUID) {
             fetchUserCalendarEvents(userUUID, currentWeekStartDate);
@@ -51,15 +57,38 @@ const DashboardPage: React.FC = () => {
             {isLoading ? <p>Loading...</p> : (
                 <div className="dashboard-content">
                     <NotificationTray />
-                    {calendarEvents ? 
-                    <GoogleCalendarWeekly 
-                        events={calendarEvents}
-                        weekStartDate={currentWeekStartDate}
-                        onChangeWeek={date => setCurrentWeekStartDate(date)}
-                    />
-                    :
+                    <div className="calendar-switch">
+                        {/* Add buttons to switch between weekly and monthly views */}
+                        <button
+                            className={selectedView === 'weekly' ? 'active' : ''}
+                            onClick={() => setSelectedView('weekly')}
+                        >
+                            Weekly
+                        </button>
+                        <button
+                            className={selectedView === 'monthly' ? 'active' : ''}
+                            onClick={() => setSelectedView('monthly')}
+                        >
+                            Monthly
+                        </button>
+                    </div>
+                    {selectedView === 'weekly' ? (
+                        <GoogleCalendarWeekly 
+                            events={calendarEvents}
+                            weekStartDate={currentWeekStartDate}
+                            onChangeWeek={date => setCurrentWeekStartDate(date)}
+                        />
+                    ) : (
+                        <GoogleCalendarMonthly
+                            events={calendarEvents}
+                        />
+                    )}
+                </div>
+            )}
+            {/* Display ConnectGoogleCalendarButton if calendarEvents is empty */}
+            {calendarEvents.length === 0 && (
+                <div className="connect-calendar-button">
                     <ConnectGoogleCalendarButton />
-                    }
                 </div>
             )}
         </div>
