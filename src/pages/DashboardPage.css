@@ -6,7 +6,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: #1E1E2E;
+    background-color: #192635;
     overflow: hidden;
 }
 
@@ -19,7 +19,7 @@
 
 .google-calendar-weekly {
     flex: 1;
-    background-color: #1E1E2E;
+    background-color: #192635;
     grid-template-rows: auto 1fr;
     overflow-y: auto;
     box-sizing: border-box;
@@ -51,7 +51,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #282840;
+    background-color: #0F1624;
     padding: 10px 0;
     flex-shrink: 0;
 }
@@ -64,6 +64,8 @@
     font-size: 16px;
     transition: background-color 0.3s;
     margin: 2px 2px;
+    background-color: #4A6FA5;
+    color: #D9DADF;
 }
 
 .grid-container {
@@ -89,9 +91,10 @@
     position: sticky;
     grid-row: 1;
     top: 0;
-    background-color: #1E1E2E;
+    background-color: #192635;
     z-index: 2;
     height: 30px;
+    color: #D9DADF;
 }
 
 .grid-container > * {
@@ -99,7 +102,7 @@
 }
 
 .event {
-    width: calc(100% - 4px); /* Adjusted width with margin */
+    width: calc(100% - 4px);
     border-radius: 10px;
     height: auto;
     padding: 2px;
@@ -107,20 +110,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    white-space: nowrap;          /* Changed from 'normal' to prevent wrapping */
+    white-space: nowrap;
     line-height: 1.2;
     font-size: 10px;
-    background-color: #483D8B;
-    margin: 2px; /* Added margin between events */
+    background-color: #2D3D61;
+    margin: 2px;
 }
 
 .event-title {
     font-size: 10px;
-    white-space: nowrap;         /* Prevent wrapping */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;     /* Use ellipsis when content overflows */
-    max-width: 100%;             /* Ensure it doesn't overflow the parent width */
+    text-overflow: ellipsis;
+    max-width: 100%;
     margin-bottom: 2px;
+    color: #D9DADF;
 }
 
 .event-time-window {
@@ -132,7 +136,7 @@
     flex-grow: 0;
     width: 240px;
     height: 100%;
-    background-color: #282840;
+    background-color: #0F1624;
     overflow-y: auto;
     box-sizing: border-box;
     display: flex;
@@ -145,13 +149,13 @@
     width: 40px;
     height: 40px;
     background-color: #4A6FA5;
-    color: darkgray;
+    color: #D9DADF;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 7px;
     margin: 5px;
-    display: inline-flex;         /* Changed to 'inline-flex' for horizontal alignment */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;

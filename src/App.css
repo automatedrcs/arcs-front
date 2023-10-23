@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  height: calc(100vh - 50px); /* Subtract the navbar's height */
+  height: calc(100vh - 50px);
   width: 100vw;
   display: flex;
   flex-direction: column;
