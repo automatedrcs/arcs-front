@@ -19,7 +19,24 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
     const endDate = new Date(weekStartDate.getTime() + 6 * 24 * 60 * 60 * 1000);
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const sortedEvents = [...events].sort((a, b) => new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime());
+    const sortedEvents = [...events].sort((a, b) => {
+        const isAllDayA = !a.start.dateTime;
+        const isAllDayB = !b.start.dateTime;
+
+        if (isAllDayA && !isAllDayB) {
+            return -1; // a is all-day, so it comes first
+        } else if (!isAllDayA && isAllDayB) {
+            return 1; // b is all-day, so it comes first
+        }
+
+        // Compare start times for non-all-day events
+        return new Date(a.start.dateTime).getTime() - new Date(b.start.dateTime).getTime();
+    });
+
+    const isAllDayEvent = (event: GoogleCalendarEventData) => {
+        // Check if the event has no specific time (i.e., all-day event)
+        return !event.start.dateTime;
+    };
     
     const getDayOfWeek = (date: Date) => {
         return date.getDay();
@@ -42,8 +59,19 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                     </div>
                 ))}
                 {sortedEvents.map((event: GoogleCalendarEventData) => {
-                    const dayColumn = getDayOfWeek(new Date(event.start.dateTime)) + 1;
-                    
+                    const isAllDay = isAllDayEvent(event);
+                    let dayColumn;
+
+                    if (isAllDay) {
+                        // For all-day events, calculate the day based on the date
+                        const eventDate = new Date(event.start.date);
+                        dayColumn = getDayOfWeek(eventDate) + 1;
+                    } else {
+                        // For non-all-day events, calculate the day based on dateTime
+                        const eventDate = new Date(event.start.dateTime);
+                        dayColumn = getDayOfWeek(eventDate) + 1;
+                    }
+
                     if (dayColumn !== lastDayColumn) {
                         currentRow = 2;
                         lastDayColumn = dayColumn;
