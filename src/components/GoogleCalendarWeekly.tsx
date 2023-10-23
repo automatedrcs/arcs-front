@@ -20,42 +20,17 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    // Separate events into all-day and timed events
-    const allDayEvents: GoogleCalendarEventData[] = [];
-    const timeEvents: GoogleCalendarEventData[] = [];
-    
+    // Create a dictionary to hold events for each day
+    const eventsByDay: { [key: string]: GoogleCalendarEventData[] } = {};
+
+    // Group events by day
     events.forEach((event) => {
-        if (event.start.dateTime) {
-            timeEvents.push(event);
-        } else {
-            allDayEvents.push(event);
+        const day = event.start.dateTime ? new Date(event.start.dateTime).toDateString() : event.start.date;
+        if (!eventsByDay[day]) {
+            eventsByDay[day] = [];
         }
+        eventsByDay[day].push(event);
     });
-
-    const getDayOfWeek = (date: Date) => {
-        return date.getDay();
-    };
-
-    const renderEventsForDay = (dayIndex: number) => {
-        const eventsForDay = timeEvents.filter((event) => {
-            const dayOfWeek = getDayOfWeek(new Date(event.start.dateTime));
-            return dayOfWeek === dayIndex;
-        });
-
-        if (allDayEvents.length > 0 && dayIndex === daysOfWeek.indexOf(weekStartDate.toLocaleDateString())) {
-            eventsForDay.unshift(...allDayEvents);
-        }
-
-        return eventsForDay.map((event: GoogleCalendarEventData) => (
-            <EventComponent
-                key={event.id}
-                {...event}
-                style={{ gridColumn: dayIndex + 1, gridRow: currentRow }}
-            />
-        ));
-    };
-
-    let currentRow = 2;
 
     return (
         <div className="google-calendar-weekly">
@@ -68,7 +43,15 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
                 {daysOfWeek.map((day, index) => (
                     <div key={index} className="grid-item-day" style={{ gridColumn: index + 1 }}>
                         {day}
-                        {renderEventsForDay(index)}
+                        
+                        {/* Render events for the current day */}
+                        {eventsByDay[weekStartDate.toDateString()]?.map((event: GoogleCalendarEventData, eventIndex) => (
+                            <EventComponent
+                                key={event.id}
+                                {...event}
+                                style={{ gridColumn: index + 1, gridRow: eventIndex + 2 }}
+                            />
+                        ))}
                     </div>
                 ))}
             </div>
