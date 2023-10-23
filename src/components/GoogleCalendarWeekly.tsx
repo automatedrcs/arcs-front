@@ -24,14 +24,21 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
     // Group events by day
     events.forEach((event) => {
+        let day = "";
         // Check if event.start.dateTime is present
-        if (!event.start.dateTime) {
+        if (event.start.dateTime) {
             // Handle the case where start.dateTime is missing
             // You can provide a fallback behavior or skip the event
-            return;
+            console.log("dateTime missing for event");
+            day = new Date(event.start.dateTime).toDateString();
         }
-
-        const day = new Date(event.start.dateTime).toDateString();
+        else if (event.start.date) {
+            console.log("date present in event");
+            day = new Date(event.start.dateTime).toDateString();
+        }
+        else {
+            console.log("no date nor dateTime");
+        }
 
         if (!eventsByDay[day]) {
             eventsByDay[day] = [];
