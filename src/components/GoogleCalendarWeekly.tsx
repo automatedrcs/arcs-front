@@ -25,25 +25,27 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({ events, wee
 
     // Group events by day
     events.forEach((event) => {
-        let day = '';
         // Check if event.start.dateTime is present
         if (event.start.dateTime) {
-            day = new Date(event.start.dateTime).toDateString();
+            const day = new Date(event.start.dateTime).toDateString();
+            if (!eventsByDay[day]) {
+                eventsByDay[day] = [];
+            }
+            eventsByDay[day].push(event);
         } else if (event.start.date) {
-            day = new Date(event.start.date).toDateString();
+            const day = new Date(event.start.date).toDateString();
+            if (!eventsByDay[day]) {
+                eventsByDay[day] = [];
+            }
+            eventsByDay[day].push(event);
         } else {
             console.log('no date nor dateTime for event');
         }
-
-        if (!eventsByDay[day]) {
-            eventsByDay[day] = [];
-        }
-        eventsByDay[day].push(event);
     });
 
     // Create a mapping between the index and the full date string
     const indexToDateMapping: { [key: number]: string } = {};
-    daysOfWeek.forEach((day, index) => {
+    daysOfWeek.forEach((_, index) => {
         const currentDate = new Date(weekStartDate);
         currentDate.setDate(currentDate.getDate() + index);
         indexToDateMapping[index] = currentDate.toDateString();
