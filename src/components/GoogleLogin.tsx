@@ -5,7 +5,7 @@ import { apiUrl } from '../config';
 
 const GoogleLogin: React.FC = () => {
   const handleLogin = () => {
-    // Redirect to your backend's Google login endpoint
+    // Redirect to Google login endpoint
     window.location.href = apiUrl + "/authentication/google/login";
   };
 

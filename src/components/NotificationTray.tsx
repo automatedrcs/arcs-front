@@ -10,7 +10,7 @@ function NotificationTray() {
                 <button>All</button>
             </div>
             <ul>
-                {/* This is just a placeholder for the empty tray */}
+                {/* Placeholder for the notification tray elements*/}
             </ul>
         </div>
     );
