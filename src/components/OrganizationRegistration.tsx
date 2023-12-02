@@ -1,5 +1,4 @@
 // components/OrganizationRegistration.tsx
-
 import React, { useState } from 'react';
 import { apiUrl } from '../config';
 
@@ -7,8 +6,16 @@ const OrganizationRegistration: React.FC = () => {
   const [orgName, setOrgName] = useState('');
   const [orgEmail, setOrgEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegister = async () => {
+    // Basic validation
+    if (!orgName.trim() || !orgEmail.trim()) {
+      setMessage('Please fill in all fields.');
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const response = await fetch(apiUrl + "/organization", {
         method: 'POST',
@@ -20,6 +27,9 @@ const OrganizationRegistration: React.FC = () => {
         const data = await response.json();
         setMessage('Organization registered successfully!');
         console.log("response data: ", data);
+        // Clear fields on successful registration
+        setOrgName('');
+        setOrgEmail('');
       } else {
         const errorData = await response.json();
         setMessage(errorData.error || 'Error registering organization.');
@@ -27,6 +37,8 @@ const OrganizationRegistration: React.FC = () => {
     } catch (err) {
       console.error("Error registering organization: ", err);
       setMessage('An error occurred while registering the organization.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -45,7 +57,9 @@ const OrganizationRegistration: React.FC = () => {
         value={orgEmail}
         onChange={(e) => setOrgEmail(e.target.value)}
       />
-      <button onClick={handleRegister}>Register</button>
+      <button onClick={handleRegister} disabled={isSubmitting}>
+        {isSubmitting ? 'Registering...' : 'Register'}
+      </button>
       {message && <div>{message}</div>}
     </div>
   );
