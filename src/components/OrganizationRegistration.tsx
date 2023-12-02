@@ -20,7 +20,7 @@ const OrganizationRegistration: React.FC = () => {
       const response = await fetch(apiUrl + "/organization", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: orgName, data: { email: orgEmail } })
+        body: JSON.stringify({ name: orgName, email: orgEmail })
       });
       
       if (response.ok) {
