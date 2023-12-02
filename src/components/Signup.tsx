@@ -23,8 +23,8 @@ const Signup: React.FC = () => {
             const response = await fetch(apiUrl + '/user/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password, organization_email: orgEmail })
-            });
+                body: JSON.stringify({ username, email, password, organizationEmail: orgEmail }) // change to organizationEmail
+            });            
             if (response.ok) {
                 setSignupSuccess(true);
                 setTimeout(() => {
