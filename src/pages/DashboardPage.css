@@ -4,17 +4,29 @@
     display: flex;
     height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
     background-color: #192635;
-    overflow: hidden;
 }
 
 .dashboard-content {
     display: flex;
-    height: calc(100vh - 50px);
+    height: 100vh;
     width: 100%;
-    overflow: hidden;
+}
+
+.calendar-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 3rem;
+    padding: unset;
+}
+
+.controls-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem; 
 }
 
 .google-calendar-weekly {
@@ -26,6 +38,10 @@
     padding: 0;
     display: flex;
     flex-direction: column;
+    border: 1px solid red;
+    border-radius: 6px;
+    margin-bottom: 150px;
+    margin-right: 50px;
 }
 
 .google-calendar-weekly::-webkit-scrollbar {
@@ -51,21 +67,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0F1624;
+    /* background-color: #0F1624; */
     padding: 10px 0;
     flex-shrink: 0;
-}
 
-.week-navigation button {
-    width: 100px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    margin: 2px 2px;
-    background-color: #4A6FA5;
-    color: #D9DADF;
 }
 
 .grid-container {
@@ -90,11 +95,13 @@
     text-align: center;
     position: sticky;
     grid-row: 1;
-    top: 0;
+    top: 1rem;
     background-color: #192635;
     z-index: 2;
-    height: 30px;
+    height: 40px;
     color: #D9DADF;
+    border: 1px solid red;
+    border-radius: 4px;
 }
 
 .grid-container > * {
@@ -117,7 +124,7 @@
     margin: 2px;
 }
 
-.event-title {
+/* .event-title {
     font-size: 10px;
     white-space: nowrap;
     overflow: hidden;
@@ -125,11 +132,11 @@
     max-width: 100%;
     margin-bottom: 2px;
     color: #D9DADF;
-}
+} */
 
 .event-time-window {
     font-size: 12px;
-}
+} 
 
 .notification-tray {
     flex-shrink: 0;

@@ -13,3 +13,8 @@ export interface UserContextProps {
 export interface UserProviderProps {
     children: ReactNode;
 }
+
+export interface User {
+    uuid: string,
+    organizationId: string
+}
