@@ -50,7 +50,7 @@ const DashboardPage: React.FC = () => {
     // Add state to track the selected view (week or month)
     const [selectedView, setSelectedView] = useState<'Week' | 'Day'>('Day');
 
-    let {data: calendarEvents, isLoading, isError, error} = useQuery(
+    const {data: calendarEvents, isLoading, isError, error} = useQuery(
         ['calendarEvents', userUUID, currentWeekStartDate],
         () => fetchUserCalendarEvents(userUUID!, currentWeekStartDate),
         {

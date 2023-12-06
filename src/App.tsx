@@ -1,7 +1,7 @@
 // App.tsx
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { UserProvider } from './contexts/UserContext';
 import EntryPage from './pages/EntryPage';
 import DashboardPage from './pages/DashboardPage';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SegmentedControl.css'
 
 // Define the props for the component, if any

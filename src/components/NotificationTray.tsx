@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import './NotificationTray.css'
 
-const NotificationTray : React.FC = ({}) => {
+const NotificationTray : React.FC = () => {
 
     const [selectedNotificationView, setSelectedNotificationView] = useState('All')
 

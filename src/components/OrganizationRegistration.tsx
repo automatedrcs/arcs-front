@@ -16,30 +16,26 @@ const OrganizationRegistration: React.FC = () => {
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // setTimeout(() => {
-    //   setShowToast(true)
-    //   setToastVariant('success')
-    //   setMessage('Organization registered successfully!');
-    // }, 2000)
-    // try {
-    //   const response = await fetch(apiUrl + "/organization", {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name: orgName, data: { email: orgEmail } })
-    //   });
+    try {
+      const response = await fetch(apiUrl + "/organization", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: orgName, data: { email: orgEmail } })
+      });
       
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     setMessage('Organization registered successfully!');
-    //     console.log("response data: ", data);
-    //   } else {
-    //     const errorData = await response.json();
-    //     setMessage(errorData.error || 'Error registering organization.');
-    //   }
-    // } catch (err) {
-    //   console.error("Error registering organization: ", err);
-    //   setMessage('An error occurred while registering the organization.');
-    // }
+      if (response.ok) {
+        const data = await response.json();
+        setToastVariant('success')
+        setMessage('Organization registered successfully!');
+        console.log("response data: ", data);
+      } else {
+        const errorData = await response.json();
+        setMessage(errorData.error || 'Error registering organization.');
+      }
+    } catch (err) {
+      console.error("Error registering organization: ", err);
+      setMessage('An error occurred while registering the organization.');
+    }
   };
 
   return (

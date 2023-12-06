@@ -1,7 +1,6 @@
 // components/GoogleCalendarMonthly.tsx
 import React, { useState } from 'react';
 import { GoogleCalendarEventProps } from '../types/GoogleTypes';
-import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import './GoogleCalendarMonthly.css'
 
