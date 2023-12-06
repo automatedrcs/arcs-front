@@ -10,24 +10,29 @@ import AuthenticationErrorPage from './pages/AuthenticationErrorPage';
 import Navbar from './components/Navbar';
 import RequireLogin from './components/RequireLogin';
 import './App.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient()
 
 const App: React.FC = () => {
   return (
+    <QueryClientProvider client={queryClient}>
     <UserProvider>
       <Router>
         <AppContent />
       </Router>
     </UserProvider>
+    </QueryClientProvider>
   );
 };
 
 const AppContent: React.FC = () => {
-  const location = useLocation();
-  const showNavbar = location.pathname !== "/entry";
+  // const location = useLocation();
+  // const showNavbar = location.pathname !== "/entry";
 
   return (
     <>
-      {showNavbar && <Navbar />}
+       <Navbar />
       <Routes>
         <Route path="/entry" element={<EntryPage />} />
         

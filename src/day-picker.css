@@ -1,0 +1,22 @@
+
+
+.rdp-caption_label {
+    color: white;
+}
+
+.rdp-table {
+    color: #6C757D;
+}
+
+
+.rdp-day_selected {
+    background-color: #0D6EFD;
+}
+
+.rdp-day_selected:hover {
+    background-color: #0D6EFD;
+  }
+
+.rdp-nav_button {
+    color: white;
+}

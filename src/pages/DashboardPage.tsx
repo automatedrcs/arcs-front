@@ -1,97 +1,116 @@
 // pages/DashboardPage.tsx
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import GoogleCalendarWeekly from '../components/GoogleCalendarWeekly';
 import GoogleCalendarMonthly from '../components/GoogleCalendarMonthly'; // Import the Monthly Calendar component
 import NotificationTray from '../components/NotificationTray';
 import { apiUrl } from '../config';
-import { UserContext } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 import { GoogleCalendarEventData } from '../types/GoogleTypes';
 import ConnectGoogleCalendarButton from '../components/ConnectGoogleCalendarButton';
 import './DashboardPage.css';
+import axios, { isAxiosError } from 'axios';
+import { useQuery } from 'react-query';
+import SegmentedControl from '../components/SegmentedControl';
+import { auto } from "@popperjs/core";
+
+interface ApiError {
+    message: string;
+  }
+
+  const isApiError = (error: unknown): error is ApiError => {
+    return typeof error === 'object' && error !== null && 'message' in error;
+  };
+
+const fetchUserCalendarEvents = async (userId: string, startDate: Date) : Promise<GoogleCalendarEventData[]> => {
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 6);
+    
+    const adjustedStartDate = new Date(startDate);
+    adjustedStartDate.setDate(adjustedStartDate.getDate() - 7);
+  
+    const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${adjustedStartDate.toISOString()}&end_time=${endDate.toISOString()}`;
+
+    try {
+        const response = await axios.get<GoogleCalendarEventData[]>(calendarApiEndpoint)
+        return response.data
+    } catch (error){
+        if (isAxiosError(error) && error.response) {
+            throw {message: error.message || 'An error occurred'} as ApiError;
+        }
+        throw error
+    }
+  };
+  
+
 
 const DashboardPage: React.FC = () => {
-    const userContext = useContext(UserContext);
-    const userUUID = userContext?.userUUID;
+    const { userUUID } = useUserContext()
     const now = new Date();
     const [currentWeekStartDate, setCurrentWeekStartDate] = useState(new Date(now.setDate(now.getDate() - now.getDay())));
+    // Add state to track the selected view (week or month)
+    const [selectedView, setSelectedView] = useState<'Week' | 'Day'>('Day');
 
-    // Initialize calendarEvents as an empty array with the correct type
-    const [calendarEvents, setCalendarEvents] = useState<GoogleCalendarEventData[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    
-    // Add state to track the selected view (weekly or monthly)
-    const [selectedView, setSelectedView] = useState<'weekly' | 'monthly'>('weekly');
-
-    useEffect(() => {
-        if (userUUID) {
-            fetchUserCalendarEvents(userUUID, currentWeekStartDate);
+    let {data: calendarEvents, isLoading, isError, error} = useQuery(
+        ['calendarEvents', userUUID, currentWeekStartDate],
+        () => fetchUserCalendarEvents(userUUID!, currentWeekStartDate),
+        {
+            enabled: !!userUUID,
+            initialData: [],
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
         }
-    }, [userUUID, currentWeekStartDate]);    
+    );
 
-    const fetchUserCalendarEvents = (userId: string, startDate: Date) => {
-        const endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 6);
-        
-        // Adjust the start time to include events that have occurred this week
-        const adjustedStartDate = new Date(currentWeekStartDate);
-        adjustedStartDate.setDate(adjustedStartDate.getDate() - 7);
-        
-        const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${adjustedStartDate.toISOString()}&end_time=${endDate.toISOString()}`;
-        fetch(calendarApiEndpoint)
-        .then(response => {
-            if (!response.ok) throw new Error('Error fetching Google calendar events.');
-            return response.json();
-        })
-        .then(data => {
-            setCalendarEvents(data);
-            setIsLoading(false);
-        })
-        .catch(error => {
-            console.log('Error fetching calendar events:', error.message);
-            setIsLoading(false);
-        });
-    };
-    
     return (
-        <div className="dashboard-page">
-            {isLoading ? <p>Loading...</p> : (
-                <div className="dashboard-content">
-                    <NotificationTray />
-                    <div className="calendar-switch">
-                        {/* Add buttons to switch between weekly and monthly views */}
-                        <button
-                            className={selectedView === 'weekly' ? 'active' : ''}
-                            onClick={() => setSelectedView('weekly')}
-                        >
-                            Weekly
-                        </button>
-                        <button
-                            className={selectedView === 'monthly' ? 'active' : ''}
-                            onClick={() => setSelectedView('monthly')}
-                        >
-                            Monthly
-                        </button>
-                    </div>
-                    {selectedView === 'weekly' ? (
-                        <GoogleCalendarWeekly 
-                            events={calendarEvents}
-                            weekStartDate={currentWeekStartDate}
-                            onChangeWeek={date => setCurrentWeekStartDate(date)}
-                        />
-                    ) : (
-                        <GoogleCalendarMonthly
-                            events={calendarEvents}
-                        />
-                    )}
-                </div>
-            )}
-            {/* Display ConnectGoogleCalendarButton if calendarEvents is empty */}
-            {calendarEvents.length === 0 && (
-                <div className="connect-calendar-button">
-                    <ConnectGoogleCalendarButton />
-                </div>
-            )}
+      <> 
+        {isLoading ? (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
+        ) : 
+        (
+        <div className="dashboard-page">
+          <div className="dashboard-content">
+            <NotificationTray />
+            <div className="calendar-container">
+              {isError && (
+              <div className="alert alert-danger alert-dismissible fade show m-3 "role="alert">{isApiError(error)? error.message: 'An error occured'}
+              <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              )}
+              <div className="controls-container">
+                <SegmentedControl 
+                  selectedView={selectedView}
+                  setSelectedView={setSelectedView}
+              />
+              <div style={{marginRight:auto}}></div>
+              {calendarEvents && calendarEvents.length === 0 && (
+                  <ConnectGoogleCalendarButton />
+              )}
+            </div>
+            {calendarEvents && (
+            <>
+              {selectedView === 'Week' && (
+                <GoogleCalendarWeekly 
+                  events={calendarEvents}
+                  weekStartDate={currentWeekStartDate}
+                  onChangeWeek={date => setCurrentWeekStartDate(date)}
+                />
+              )}
+              {selectedView === 'Day' && (
+                <GoogleCalendarMonthly
+                  events={calendarEvents}
+                />
+              )}
+            </>
+            )}
+            </div>
+          </div>
+        </div>
+         )}
+      </>
     );
 }
 

@@ -7,16 +7,15 @@ import OrganizationRegistration from '../components/OrganizationRegistration'; /
 import './EntryPage.css';
 
 const EntryPage: React.FC = () => {
-  console.log("Rendering EntryPage");
-
+  
   const [showSection, setShowSection] = useState('login'); // using string for better scalability
+  
   return (
-    <div className="entry-page">
-      <h2>ARCS</h2>
-      <div className="toggle-container">
-        <button onClick={() => setShowSection('login')} className={showSection === 'login' ? 'active' : ''}>Login</button>
-        <button onClick={() => setShowSection('signup')} className={showSection === 'signup' ? 'active' : ''}>Signup</button>
-        <button onClick={() => setShowSection('org')} className={showSection === 'org' ? 'active' : ''}>Register Organization</button> {/* Add button for organization registration */}
+    <div className="container-fluid">
+      <div className="btn-group mb-3 mt-3">
+        <button onClick={() => setShowSection('login')} className={showSection === 'login' ? 'btn btn-outline-primary active' : 'btn btn-outline-primary'}>Login</button>
+        <button onClick={() => setShowSection('signup')} className={showSection === 'signup' ? 'btn btn-outline-primary active' : 'btn btn-outline-primary'}>Signup</button>
+        <button onClick={() => setShowSection('org')} className={showSection === 'org' ? 'btn btn-outline-primary active' : 'btn btn-outline-primary'}>Register Organization</button>
       </div>
       {showSection === 'login' ? (
         <Login />

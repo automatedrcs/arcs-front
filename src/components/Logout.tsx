@@ -1,20 +1,19 @@
 // src/components/Logout/Logout.tsx
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 
 const LogoutButton: React.FC = () => {
-  const userContext = useContext(UserContext);
+  const {logout} = useUserContext();
   const navigate = useNavigate();
 
 
   const handleLogout = async () => {
-      userContext?.logout?.();
-
+      logout();
       navigate("/entry");
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return <button className='btn btn-danger rounded-button me-3' onClick={handleLogout}>Logout</button>;
 };
 
 export default LogoutButton;

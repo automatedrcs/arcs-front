@@ -16,7 +16,6 @@ const Signup: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Submit button clicked!");
         setLoading(true);
 
         try {
@@ -42,56 +41,62 @@ const Signup: React.FC = () => {
     };
 
     return (
-        <div className="signup">
-            <h2>Sign Up</h2>
+        <div className="container-fluid">
+            <h3 className="text-dark">Sign Up</h3>
             {signupSuccess && <p className="success">Signup successful. Redirecting to login...</p>}
             {error && <p className="error">{error}</p>}
             {loading && <p>Loading...</p>}
             {!signupSuccess && (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Username:</label>
+                <form onSubmit={handleSubmit} autoComplete="off">
+                    <div className="mb-2">
+                    <label htmlFor="username" className="form-label">Username</label>
                         <input
                             type="text"
                             value={username}
+                            className="form-control"
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>
-                    <div>
-                        <label>Email:</label>
+                    <div className="mb-2">
+                    <label htmlFor="email" className="form-label">Email</label>
                         <input
                             type="email"
                             value={email}
+                            className="form-control"
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            autoComplete="off"
                         />
                     </div>
-                    <div>
-                        <label>Password:</label>
+                    <div className="mb-2">
+                    <label htmlFor="password" className="form-label">Password</label>
                         <input
                             type="password"
                             value={password}
+                            className="form-control"
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            autoComplete="new-password"
                         />
                     </div>
-                    <div>
-                        <label>Organization Email:</label>
+                    <div className="mb-2">
+                    <label htmlFor="orgEmail" className="form-label">Organizaton email</label>
                         <input
                             type="email"
                             value={orgEmail}
+                            className="form-control"
                             onChange={(e) => setOrgEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <button type="submit" disabled={loading}>Sign Up</button>
+                        <button type="submit" className="btn btn-secondary" disabled={loading}>Sign Up</button>
                     </div>
                 </form>
             )}
-            <div>
-                <a href="/login">Already have an account? Log in</a>
+            <div className="mt-3">
+                <a className="btn btn-secondary" href="/login" role="button">Already have an account? Log in</a>
             </div>
         </div>
     );

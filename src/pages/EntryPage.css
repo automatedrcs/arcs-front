@@ -1,11 +1,12 @@
 /* pages/EntryPage */
 
-.entry-page {
+
+/* .entry-page {  
   width: 100%;
-  max-width: 400px; /* Adjust the width of the cards */
-  margin: 10vh auto; /* vertical centering trick */
+  max-width: 400px; 
+  margin: 10vh auto;
   padding: 20px;
-  border-radius: 10px; /* Rounded corners */
+  border-radius: 10px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   background-color: #282840;
   text-align: center;
@@ -20,13 +21,13 @@
 }
 
 .login, .signup, .OrganizationRegistration {
-  margin: 0;  /* Remove auto margins */
-  padding: 0; /* Remove padding */
-  box-shadow: none; /* Remove shadow */
-  background-color: transparent; /* Transparent background */
+  margin: 0;  
+  padding: 0;
+  box-shadow: none; 
+  background-color: transparent;
   border: none;
-} 
+}  */
 
-button {
-  align-self: center; /* Center button if the parent is a flex container */
-}
+/* button {
+  align-self: center;
+} */

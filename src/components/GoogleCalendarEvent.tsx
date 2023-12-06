@@ -25,8 +25,8 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({ id, start, en
 
     return (
         <div key={id} className="event" style={style}>
-            <div className="event-title">{summary}</div>
-            {timeWindow && <div className="event-time-window">{timeWindow}</div>}
+            <div className="fs-6 text-white">{summary}</div>
+            {timeWindow && <div className="event-time-window text-light">{timeWindow}</div>}
         </div>
     );
 };
