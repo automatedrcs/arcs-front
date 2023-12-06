@@ -1,5 +1,4 @@
 // components/OrganizationRegistration.tsx
-
 import React, { useState } from 'react';
 import { apiUrl } from '../config';
 import ToastNotification from "./ToastNotification";
