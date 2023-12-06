@@ -7,9 +7,9 @@ import OrganizationRegistration from '../components/OrganizationRegistration'; /
 import './EntryPage.css';
 
 const EntryPage: React.FC = () => {
-  console.log("Rendering EntryPage");
-
+  
   const [showSection, setShowSection] = useState('login'); // using string for better scalability
+  
   return (
     <div className="container-fluid">
       <div className="btn-group mb-3 mt-3">

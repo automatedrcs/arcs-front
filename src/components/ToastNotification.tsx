@@ -4,7 +4,7 @@ import Toast from 'react-bootstrap/Toast';
 
 type MyToastProps = {
   show: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   message: string;
   variant: string; // toast variant
 };
@@ -19,7 +19,7 @@ const ToastNotification: React.FC<MyToastProps> = ({ show, onClose, message, var
         show={show} 
         onClose={onClose} 
         delay={5000} 
-        autohide
+        autohide={true}
         animation={true}
         bg={variant}
         className="p-3"

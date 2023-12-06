@@ -25,7 +25,7 @@ const Login: React.FC = () => {
                 password: password
             }
             const response = await axios.post(`${apiUrl}/user/login`, data)
-            if (response.status === 200 && response.data.message === "Logged in successfully") {
+            if (response.status === 201) {
                 setUserData(response.data.userUUID, response.data.organizationId);  // use the correct keys
                 navigate('/dashboard');
             }

@@ -50,7 +50,7 @@ const DashboardPage: React.FC = () => {
     // Add state to track the selected view (week or month)
     const [selectedView, setSelectedView] = useState<'Week' | 'Day'>('Day');
 
-    const {data: calendarEvents, isLoading, isError, error} = useQuery(
+    let {data: calendarEvents, isLoading, isError, error} = useQuery(
         ['calendarEvents', userUUID, currentWeekStartDate],
         () => fetchUserCalendarEvents(userUUID!, currentWeekStartDate),
         {
@@ -60,17 +60,26 @@ const DashboardPage: React.FC = () => {
             refetchOnReconnect: false,
         }
     );
-    
+
     return (
-        <div className="dashboard-page">
+      <> 
         {isLoading ? (
-          <p>Loading...</p>
-        ) : isError ? (
-          <p>Error: {isApiError(error) ? error.message : 'An uknown error occureed'}</p>
-        ) : (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        ) : 
+        (
+        <div className="dashboard-page">
           <div className="dashboard-content">
             <NotificationTray />
             <div className="calendar-container">
+              {isError && (
+              <div className="alert alert-danger alert-dismissible fade show m-3 "role="alert">{isApiError(error)? error.message: 'An error occured'}
+              <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              )}
               <div className="controls-container">
                 <SegmentedControl 
                   selectedView={selectedView}
@@ -99,8 +108,9 @@ const DashboardPage: React.FC = () => {
             )}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+         )}
+      </>
     );
 }
 
