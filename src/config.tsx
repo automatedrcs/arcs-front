@@ -1,6 +1,6 @@
 // config.tsx
 
-export const apiUrl = "https://arcs-api-service-ctl3t7ldeq-uc.a.run.app"
+export const apiUrl = import.meta.env.VITE_API_URL || "https://arcs-api-service-ctl3t7ldeq-uc.a.run.app"
 
 // https://arcs-back-service-ctl3t7ldeq-uc.a.run.app - Python
 

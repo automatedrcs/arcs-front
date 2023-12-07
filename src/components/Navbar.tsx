@@ -1,11 +1,12 @@
 // src/components/Navbar.tsx
 import React from 'react';
 import LogoutButton from './Logout';
-import { getUserFromLocalStorage } from '../utils/helpers';
+// import { getUserFromLocalStorage } from '../utils/helpers';
+import { useUserContext } from "../contexts/UserContext";
 
 const Navbar: React.FC = () => {
-  const user = getUserFromLocalStorage()
-  const isLoggedIn = user !== null
+  const { userUUID } = useUserContext()
+  const isLoggedIn = userUUID !== null
   
   return (
     <nav className="navbar bg-primary">
