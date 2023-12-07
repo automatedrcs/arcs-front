@@ -91,12 +91,12 @@ const Signup: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <button type="submit" className="btn btn-secondary" disabled={loading}>Sign Up</button>
+                        <button type="submit" className="btn btn-primary" disabled={loading}>Sign Up</button>
                     </div>
                 </form>
             )}
             <div className="mt-3">
-                <a className="btn btn-secondary" href="/login" role="button">Already have an account? Log in</a>
+                <a className="btn btn-primary" href="/login" role="button">Already have an account? Log in</a>
             </div>
         </div>
     );

@@ -15,6 +15,7 @@ import { auto } from "@popperjs/core";
 
 interface ApiError {
     message: string;
+    code: number;
   }
 
   const isApiError = (error: unknown): error is ApiError => {
@@ -28,14 +29,14 @@ const fetchUserCalendarEvents = async (userId: string, startDate: Date) : Promis
     const adjustedStartDate = new Date(startDate);
     adjustedStartDate.setDate(adjustedStartDate.getDate() - 7);
   
-    const calendarApiEndpoint = `${apiUrl}/calendar/events/user?user_id=${userId}&start_time=${adjustedStartDate.toISOString()}&end_time=${endDate.toISOString()}`;
+    const calendarApiEndpoint = `${apiUrl}/calendar/events/user?userId=${userId}&start_time=${adjustedStartDate.toISOString()}&end_time=${endDate.toISOString()}`;
 
     try {
         const response = await axios.get<GoogleCalendarEventData[]>(calendarApiEndpoint)
         return response.data
     } catch (error){
         if (isAxiosError(error) && error.response) {
-            throw {message: error.message || 'An error occurred'} as ApiError;
+            throw {message: error.response.data.message || 'An error occurred', code: error.response.status} as ApiError;
         }
         throw error
     }
@@ -76,7 +77,12 @@ const DashboardPage: React.FC = () => {
             <NotificationTray />
             <div className="calendar-container">
               {isError && (
-              <div className="alert alert-danger alert-dismissible fade show m-3 "role="alert">{isApiError(error)? error.message: 'An error occured'}
+              <div className="alert alert-danger alert-dismissible fade show m-3 "role="alert">{isApiError(error) && error.code === 403 && error.message}
+              <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              )}
+              {isError && isApiError(error) && error.code === 404 &&  (
+              <div className="alert alert-info alert-dismissible fade show m-3 "role="alert">No calendar events found
               <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               )}
