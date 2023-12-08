@@ -65,11 +65,9 @@ const DashboardPage: React.FC = () => {
     return (
       <> 
         {isLoading ? (
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border text-primary" role="status">
+            <div className="d-flex spinner-border text-primary" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
-        </div>
         ) : 
         (
         <div className="dashboard-page">
@@ -77,15 +75,15 @@ const DashboardPage: React.FC = () => {
             <NotificationTray />
             <div className="calendar-container">
               {isError && (
-              <div className="alert alert-danger alert-dismissible fade show m-3 "role="alert">{isApiError(error) && error.code === 403 && error.message}
+              <div className="alert alert-danger alert-dismissible fade show m-3 "role="alert">{isApiError(error) && `Error code:${error.code}, Error message:${error.message}`}
               <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               )}
-              {isError && isApiError(error) && error.code === 404 &&  (
+              {/* {!isError && calendarEvents&& calendarEvents.length === 0 &&  (
               <div className="alert alert-info alert-dismissible fade show m-3 "role="alert">No calendar events found
               <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-              )}
+              )} */}
               <div className="controls-container">
                 <SegmentedControl 
                   selectedView={selectedView}
