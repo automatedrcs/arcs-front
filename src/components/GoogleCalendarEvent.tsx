@@ -40,7 +40,7 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({
     <div key={id} className="event" style={style}>
       <div className="fs-6 text-black">{summary}</div>
       {timeWindow && (
-        <div className="event-time-window text-light">{timeWindow}</div>
+        <div className="event-time-window text-black">{timeWindow}</div>
       )}
     </div>
   );
