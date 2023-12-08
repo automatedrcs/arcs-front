@@ -2,33 +2,48 @@
 import React from 'react';
 import { GoogleCalendarEventProps } from '../types/GoogleTypes';
 
-const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({ id, start, end, summary, style }) => {
-    let eventStartTime = null;
-    let eventEndTime = null;
+const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({
+  id,
+  start,
+  end,
+  summary,
+  style,
+}) => {
+  let eventStartTime = null;
+  let eventEndTime = null;
 
-    if (start.dateTime) {
-        eventStartTime = new Date(start.dateTime);
-        eventEndTime = new Date(end.dateTime);
+  if (start.dateTime) {
+    eventStartTime = new Date(start.dateTime);
+    eventEndTime = new Date(end.dateTime);
+  }
+
+  const formatTime = (date: Date) => {
+    if (!isNaN(date.getTime())) {
+      return date
+        .toLocaleTimeString([], {
+          hour12: true,
+          hour: 'numeric',
+          minute: '2-digit',
+        })
+        .toLowerCase();
+    } else {
+      return '';
     }
+  };
 
-    const formatTime = (date: Date) => {
-        if (!isNaN(date.getTime())) {
-            return date.toLocaleTimeString([], { hour12: true, hour: 'numeric', minute: '2-digit' }).toLowerCase();
-        } else {
-            return '';
-        }
-    };
+  const timeWindow =
+    eventStartTime && eventEndTime
+      ? `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`
+      : '';
 
-    const timeWindow = eventStartTime && eventEndTime
-        ? `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`
-        : '';
-
-    return (
-        <div key={id} className="event" style={style}>
-            <div className="fs-6 text-white">{summary}</div>
-            {timeWindow && <div className="event-time-window text-light">{timeWindow}</div>}
-        </div>
-    );
+  return (
+    <div key={id} className="event" style={style}>
+      <div className="fs-6 text-black">{summary}</div>
+      {timeWindow && (
+        <div className="event-time-window text-light">{timeWindow}</div>
+      )}
+    </div>
+  );
 };
 
 export default GoogleCalendarEvent;

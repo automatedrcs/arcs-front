@@ -1,127 +1,128 @@
 /* DashboardPage.css */
 
 .dashboard-page {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    background-color: #192635;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: white;
 }
 
 .dashboard-content {
-    display: flex;
-    height: 100vh;
-    width: 100%;
+  display: flex;
+  height: 100vh;
+  width: 100%;
 }
 
 .calendar-container {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 3rem;
-    padding: unset;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 3rem;
+  padding: unset;
 }
 
 .controls-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .google-calendar-weekly {
-    flex: 1;
-    background-color: #192635;
-    grid-template-rows: auto 1fr;
-    overflow-y: auto;
-    box-sizing: border-box;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid red;
-    border-radius: 6px;
-    margin-bottom: 150px;
-    margin-right: 50px;
+  flex: 1;
+  background-color: white;
+  grid-template-rows: auto 1fr;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  border-radius: 6px;
+  margin-bottom: 150px;
+  margin-right: 50px;
 }
 
 .google-calendar-weekly::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
+  width: 8px; /* Width of the scrollbar */
 }
 
 .google-calendar-weekly::-webkit-scrollbar-thumb {
-    background-color: #4A6FA5;
-    border-radius: 4px;
+  background-color: #4a6fa5;
+  border-radius: 4px;
 }
 
-.google-calendar-weekly, .google-calendar-weekly * {
-    box-sizing: border-box;
+.google-calendar-weekly,
+.google-calendar-weekly * {
+  box-sizing: border-box;
 }
 
 .google-calendar-weekly .grid-container {
-    width: 100%;
-    max-width: none;
+  width: 100%;
+  max-width: none;
 }
 
 .week-navigation {
-    grid-column: span 7;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* background-color: #0F1624; */
-    padding: 10px 0;
-    flex-shrink: 0;
-
+  grid-column: span 7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #0F1624; */
+  padding: 10px 0;
+  flex-shrink: 0;
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: minmax(60px, auto);
-    width: 100%;
-    overflow-y: auto;
-    position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(60px, auto);
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
 }
 
 .grid-container::-webkit-scrollbar {
-    width: 8px; 
+  width: 8px;
 }
 
 .grid-container::-webkit-scrollbar-thumb {
-    background-color: #4A6FA5;
-    border-radius: 4px;
+  background-color: #4a6fa5;
+  border-radius: 4px;
 }
 
 .grid-container .grid-item-day {
-    text-align: center;
-    position: sticky;
-    grid-row: 1;
-    top: 1rem;
-    background-color: #192635;
-    z-index: 2;
-    height: 40px;
-    color: #D9DADF;
-    border: 1px solid red;
-    border-radius: 4px;
+  text-align: center;
+  position: sticky;
+  grid-row: 1;
+  top: 1rem;
+  /* background-color: #192635; */
+  z-index: 2;
+  height: 40px;
+  border: 1px solid red;
+  border-radius: 4px;
 }
 
 .grid-container > * {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .event {
-    width: calc(100% - 4px);
-    border-radius: 10px;
-    height: auto;
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    line-height: 1.2;
-    font-size: 10px;
-    background-color: #2D3D61;
-    margin: 2px;
+  width: calc(100% - 4px);
+  border-radius: 10px;
+  height: auto;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  line-height: 1.2;
+  font-size: 10px;
+  /* background-color: #2d3d61; */
+  border: 2px solid red;
+  border-radius: 8px;
+  margin: 2px;
 }
 
 /* .event-title {
@@ -135,45 +136,45 @@
 } */
 
 .event-time-window {
-    font-size: 12px;
-} 
+  font-size: 12px;
+}
 
 .notification-tray {
-    flex-shrink: 0;
-    flex-grow: 0;
-    width: 240px;
-    height: 100%;
-    background-color: #0F1624;
-    overflow-y: auto;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 240px;
+  height: 100%;
+  background-color: #0f1624;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
 }
 
 .notification-tray button {
-    width: 40px;
-    height: 40px;
-    background-color: #4A6FA5;
-    color: #D9DADF;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 7px;
-    margin: 5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    text-indent: 0;
-    padding: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #4a6fa5;
+  color: #d9dadf;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 7px;
+  margin: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-indent: 0;
+  padding: 0;
 }
 
 .notification-tray h2 {
-    text-align: center;
-    margin-bottom: 4px;
-    margin-top: 4px;
-    color: #D9DADF;
-    width: 100%;
+  text-align: center;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  color: #d9dadf;
+  width: 100%;
 }
