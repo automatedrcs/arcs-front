@@ -11,7 +11,7 @@ import './DashboardPage.css';
 import axios, { isAxiosError } from 'axios';
 import { useQuery } from 'react-query';
 import SegmentedControl from '../components/SegmentedControl';
-import { auto } from '@popperjs/core';
+import { startOfWeek } from 'date-fns';
 
 interface ApiError {
   message: string;
@@ -29,10 +29,7 @@ const fetchUserCalendarEvents = async (
   const endDate = new Date(startDate);
   endDate.setDate(endDate.getDate() + 6);
 
-  const adjustedStartDate = new Date(startDate);
-  adjustedStartDate.setDate(adjustedStartDate.getDate() - 7);
-
-  const calendarApiEndpoint = `${apiUrl}/calendar/events/user?userId=${userId}&start_time=${adjustedStartDate.toISOString()}&end_time=${endDate.toISOString()}`;
+  const calendarApiEndpoint = `${apiUrl}/calendar/events/user?userId=${userId}&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}`;
 
   try {
     const response =
@@ -53,7 +50,7 @@ const DashboardPage: React.FC = () => {
   const { userUUID } = useUserContext();
   const now = new Date();
   const [currentWeekStartDate, setCurrentWeekStartDate] = useState(
-    new Date(now.setDate(now.getDate() - now.getDay()))
+    startOfWeek(now)
   );
   // Add state to track the selected view (week or month)
   const [selectedView, setSelectedView] = useState<'Week' | 'Day'>('Day');
@@ -110,7 +107,7 @@ const DashboardPage: React.FC = () => {
                   selectedView={selectedView}
                   setSelectedView={setSelectedView}
                 />
-                <div style={{ marginRight: auto }}></div>
+                <div style={{ marginRight: 'auto' }}></div>
                 {calendarEvents && calendarEvents.length === 0 && (
                   <ConnectGoogleCalendarButton />
                 )}

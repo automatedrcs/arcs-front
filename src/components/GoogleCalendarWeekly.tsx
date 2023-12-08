@@ -1,6 +1,7 @@
 // components/GoogleCalendarWeekly.tsx
 import React from 'react';
 import EventComponent from './GoogleCalendarEvent';
+import { addDays, subDays } from 'date-fns';
 import {
   GoogleCalendarEventData,
   GoogleCalendarWeeklyProps,
@@ -12,14 +13,12 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({
   onChangeWeek,
 }) => {
   const handlePreviousWeek = () => {
-    const newStartDate = new Date(weekStartDate);
-    newStartDate.setDate(newStartDate.getDate() - 7);
+    const newStartDate = subDays(weekStartDate, 7);
     onChangeWeek(newStartDate);
   };
 
   const handleNextWeek = () => {
-    const newStartDate = new Date(weekStartDate);
-    newStartDate.setDate(newStartDate.getDate() + 7);
+    const newStartDate = addDays(weekStartDate, 7);
     onChangeWeek(newStartDate);
   };
 
@@ -47,16 +46,16 @@ const GoogleCalendarWeekly: React.FC<GoogleCalendarWeeklyProps> = ({
     <div className="google-calendar-weekly">
       <div className="week-navigation">
         <button
-          className="btn rounded-button btn-primary btn-lg"
+          className="btn rounded-button btn-primary btn-lg m-2"
           onClick={handlePreviousWeek}
         >
           &larr; Prev
         </button>
-        <span className="text-white">
+        <span className="text-black">
           {weekStartDate.toLocaleDateString()} - {endDate.toLocaleDateString()}
         </span>
         <button
-          className="btn rounded-button btn-primary btn-lg"
+          className="btn rounded-button btn-primary btn-lg m-2"
           onClick={handleNextWeek}
         >
           Next &rarr;
