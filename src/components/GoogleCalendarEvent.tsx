@@ -1,6 +1,7 @@
 // components/GoogleCalendarEvent.tsx
 import React from 'react';
 import { GoogleCalendarEventProps } from '../types/GoogleTypes';
+import { format } from 'date-fns';
 
 const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({
   id,
@@ -17,23 +18,9 @@ const GoogleCalendarEvent: React.FC<GoogleCalendarEventProps> = ({
     eventEndTime = new Date(end.dateTime);
   }
 
-  const formatTime = (date: Date) => {
-    if (!isNaN(date.getTime())) {
-      return date
-        .toLocaleTimeString([], {
-          hour12: true,
-          hour: 'numeric',
-          minute: '2-digit',
-        })
-        .toLowerCase();
-    } else {
-      return '';
-    }
-  };
-
   const timeWindow =
     eventStartTime && eventEndTime
-      ? `${formatTime(eventStartTime)} - ${formatTime(eventEndTime)}`
+      ? `${format(eventStartTime, 'p')} - ${format(eventEndTime, 'p')}`
       : '';
 
   return (

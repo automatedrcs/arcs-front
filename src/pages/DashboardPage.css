@@ -125,15 +125,10 @@
   margin: 2px;
 }
 
-/* .event-title {
-    font-size: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    margin-bottom: 2px;
-    color: #D9DADF;
-} */
+.event:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
 
 .event-time-window {
   font-size: 12px;
