@@ -15,8 +15,6 @@ import { startOfWeek } from 'date-fns';
 
 interface ApiError {
   message: string;
-  error: string;
-  reason: string;
   code: number;
 }
 
@@ -41,9 +39,7 @@ const fetchUserCalendarEvents = async (
     console.error(error);
     if (isAxiosError(error) && error.response) {
       throw {
-        message: error.response.data.error,
-        error: error.response.data.details.error,
-        reason: error.response.data.details.error_description,
+        message: error.response.data.message,
         code: error.response.status,
       } as ApiError;
     }
@@ -93,7 +89,7 @@ const DashboardPage: React.FC = () => {
                   role="alert"
                 >
                   {isApiError(error) &&
-                    `Error code: ${error.code} | Message: ${error.message} | Error: ${error.error} | Reason: ${error.reason}`}
+                    `Error code: ${error.code} | Message: ${error.message}`}
                   <button
                     type="button"
                     className="btn-close"
@@ -113,9 +109,7 @@ const DashboardPage: React.FC = () => {
                   setSelectedView={setSelectedView}
                 />
                 <div style={{ marginRight: 'auto' }}></div>
-                {calendarEvents && calendarEvents.length === 0 && (
-                  <ConnectGoogleCalendarButton />
-                )}
+                {isError && <ConnectGoogleCalendarButton />}
               </div>
               {calendarEvents && (
                 <>
